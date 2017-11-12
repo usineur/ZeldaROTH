@@ -538,15 +538,15 @@ void Carte::initName() {
     int zone = gpJeu->getZone();
     //message
     switch (zone-12) {
-        case 0 : gpJeu->affiche(image, "Forest Temple",128,25); break;
-        case 1 : gpJeu->affiche(image, "Water Temple",128,25); break;
-        case 2 : gpJeu->affiche(image, "Mountain Temple",128,25); break;
-        case 3 : gpJeu->affiche(image, "Desert Temple",128,25); break;
-        case 4 : gpJeu->affiche(image, "Dark Temple",128,25); break;
-        case 5 : gpJeu->affiche(image, "Fire Temple",128,25); break;
-        case 6 : gpJeu->affiche(image, "Ice Temple",128,25); break;
-        case 7 : gpJeu->affiche(image, "Hidden Temple",128,25); break;
-        case 8 : gpJeu->affiche(image, "Hyrule Castle",128,25); break;
+        case 0 : gpJeu->affiche(image, "Temple de la forêt",128,25); break;
+        case 1 : gpJeu->affiche(image, "Temple de l'eau",128,25); break;
+        case 2 : gpJeu->affiche(image, "Temple de la montagne",128,25); break;
+        case 3 : gpJeu->affiche(image, "Temple du désert",128,25); break;
+        case 4 : gpJeu->affiche(image, "Temple de l'ombre",128,25); break;
+        case 5 : gpJeu->affiche(image, "Temple du feu",128,25); break;
+        case 6 : gpJeu->affiche(image, "Temple de la glace",128,25); break;
+        case 7 : gpJeu->affiche(image, "Temple secret",128,25); break;
+        case 8 : gpJeu->affiche(image, "Château d'Hyrule",128,25); break;
     }
 }
 

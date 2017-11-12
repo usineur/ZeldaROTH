@@ -407,12 +407,12 @@ void Menu::drawStatut(SDL_Surface* gpScreen) {
     
     Joueur* gpJoueur = gpJeu->getJoueur();
     
-    gpJeu->affiche(gpScreen, "STATUS:", 148,20-dec);
+    gpJeu->affiche(gpScreen, "STATUT :", 148,20-dec);
     int v = gpJoueur->getVie();
     int vm = gpJoueur->getVieMax();
     if (v < 10) oss<<"0"; oss << v << "/";
     if (vm < 10) oss<<"0"; oss << vm;
-    gpJeu->affiche(gpScreen, "LIFE      : " + oss.str(), 148,36-dec+8);
+    gpJeu->affiche(gpScreen, "VIE       : " + oss.str(), 148,36-dec+8);
     
     int i = 52+8;
     
@@ -422,13 +422,13 @@ void Menu::drawStatut(SDL_Surface* gpScreen) {
         int mm = gpJoueur->getMagieMax();
         if (m < 10) oss<<"0"; oss << m << "/";
         if (mm < 10) oss<<"0"; oss << mm;
-        gpJeu->affiche(gpScreen, "MAGIC     : " + oss.str(), 148,i-dec);
+        gpJeu->affiche(gpScreen, "MAGIE     : " + oss.str(), 148,i-dec);
         i+=16;
     }
     
     oss.str("");
     oss << gpJoueur->getForce();
-    gpJeu->affiche(gpScreen, "STRENGTH  : " + oss.str(), 148,i-dec);
+    gpJeu->affiche(gpScreen, "FORCE     : " + oss.str(), 148,i-dec);
     i+=16;
     oss.str("");
     oss << gpJoueur->getDefense();
@@ -441,7 +441,7 @@ void Menu::drawStatut(SDL_Surface* gpScreen) {
     if (h < 10) oss<<"0"; oss << h << ":";
     if (m < 10) oss<<"0"; oss << m << ":";
     if (s < 10) oss<<"0"; oss << s;
-    gpJeu->affiche(gpScreen, "TIME      : " + oss.str(), 148,i-dec);
+    gpJeu->affiche(gpScreen, "TEMPS     : " + oss.str(), 148,i-dec);
 
     SDL_Rect src;
     SDL_Rect dst;
@@ -493,7 +493,7 @@ void Menu::drawStatut(SDL_Surface* gpScreen) {
 void Menu::drawCristaux(SDL_Surface* gpScreen) {
     int dec = 200-val;
     
-    gpJeu->affiche(gpScreen, "CRYSTALS:", 20,180+dec);
+    gpJeu->affiche(gpScreen, "CRISTAUX :", 20,180+dec);
     
     SDL_Rect src;
     SDL_Rect dst;

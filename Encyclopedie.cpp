@@ -66,7 +66,7 @@ void Encyclopedie::fond() {
     
     
     ostringstream os; os << (page+1);
-    gpJeu->affiche(image, "MONSTERS "+os.str(), 40, 17);
+    gpJeu->affiche(image, "MONSTRES "+os.str(), 40, 17);
     
     placeCadres();
     
