@@ -60,10 +60,12 @@ target_link_libraries(${VITA_APPNAME}
   ogg
   jpeg
   png
+  mikmod
   vita2d
   z
   SceAudio_stub
   SceCtrl_stub
+  SceCommonDialog_stub 
   SceDisplay_stub
   SceGxm_stub
   ScePower_stub
