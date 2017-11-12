@@ -1,4 +1,10 @@
-# Port of Zelda Time Return of the Hylian to PS Vita
+# Port of Zelda Time Return of the Hylian to PS Vita (French Version)
+
+# Why this fork ?
+The main goal was to have a french version of this game because i'm french :)$
+The second one was to correct some missing references on compilation files.$
+
+Thanks to usineur for his work and help.
 
 ## VPK
 Latest version is available [here](https://github.com/usineur/ZeldaROTH/releases).
