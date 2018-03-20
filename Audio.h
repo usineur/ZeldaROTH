@@ -38,7 +38,7 @@ class Audio {
         int previous_volume;
         int musiqueId;
         int specialId;
-#ifdef __PSP2__
+#ifdef __vita__
         char* mem;
         FILE* f;
 #endif

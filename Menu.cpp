@@ -282,7 +282,7 @@ void Menu::drawInventaire(SDL_Surface* gpScreen) {
     
     Joueur* gpJoueur = gpJeu->getJoueur();
     
-    gpJeu->affiche(gpScreen, "X", 20-dec,20);
+    gpJeu->afficheTexteAvecId(gpScreen, 300, 20-dec,20);
 
     SDL_Rect src;
     SDL_Rect dst;
@@ -407,12 +407,12 @@ void Menu::drawStatut(SDL_Surface* gpScreen) {
     
     Joueur* gpJoueur = gpJeu->getJoueur();
     
-    gpJeu->affiche(gpScreen, "STATUT :", 148,20-dec);
+    gpJeu->afficheTexteAvecId(gpScreen, 301, 148,20-dec);
     int v = gpJoueur->getVie();
     int vm = gpJoueur->getVieMax();
     if (v < 10) oss<<"0"; oss << v << "/";
     if (vm < 10) oss<<"0"; oss << vm;
-    gpJeu->affiche(gpScreen, "VIE       : " + oss.str(), 148,36-dec+8);
+    gpJeu->afficheTexteAvecId(gpScreen, 302, oss.str(), 148,36-dec+8);
     
     int i = 52+8;
     
@@ -422,17 +422,17 @@ void Menu::drawStatut(SDL_Surface* gpScreen) {
         int mm = gpJoueur->getMagieMax();
         if (m < 10) oss<<"0"; oss << m << "/";
         if (mm < 10) oss<<"0"; oss << mm;
-        gpJeu->affiche(gpScreen, "MAGIE     : " + oss.str(), 148,i-dec);
+        gpJeu->afficheTexteAvecId(gpScreen, 303, oss.str(), 148,i-dec);
         i+=16;
     }
     
     oss.str("");
     oss << gpJoueur->getForce();
-    gpJeu->affiche(gpScreen, "FORCE     : " + oss.str(), 148,i-dec);
+    gpJeu->afficheTexteAvecId(gpScreen, 304, oss.str(), 148,i-dec);
     i+=16;
     oss.str("");
     oss << gpJoueur->getDefense();
-    gpJeu->affiche(gpScreen, "DEFENSE   : " + oss.str(), 148,i-dec);
+    gpJeu->afficheTexteAvecId(gpScreen, 305, oss.str(), 148,i-dec);
     i+=16;
     oss.str("");
     int h = gpJoueur->getTemps(2);
@@ -441,14 +441,14 @@ void Menu::drawStatut(SDL_Surface* gpScreen) {
     if (h < 10) oss<<"0"; oss << h << ":";
     if (m < 10) oss<<"0"; oss << m << ":";
     if (s < 10) oss<<"0"; oss << s;
-    gpJeu->affiche(gpScreen, "TEMPS     : " + oss.str(), 148,i-dec);
+    gpJeu->afficheTexteAvecId(gpScreen, 306, oss.str(), 148,i-dec);
 
     SDL_Rect src;
     SDL_Rect dst;
     
     src.y=0; src.w=16; src.h=16; dst.y=136-dec;
     
-    //épée
+    //EpÃ©e
     if (gpJoueur->getEpee()) {
         src.x = 8 * (gpJoueur->getEpee()-1); dst.x=156;
         if (dst.y > -15) {
@@ -493,7 +493,7 @@ void Menu::drawStatut(SDL_Surface* gpScreen) {
 void Menu::drawCristaux(SDL_Surface* gpScreen) {
     int dec = 200-val;
     
-    gpJeu->affiche(gpScreen, "CRISTAUX :", 20,180+dec);
+    gpJeu->afficheTexteAvecId(gpScreen, 307, 20,180+dec);
     
     SDL_Rect src;
     SDL_Rect dst;

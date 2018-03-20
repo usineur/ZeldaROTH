@@ -73,7 +73,7 @@ class Keyboard {
         SDL_Event event;
         Uint8* keys;
         
-#ifdef __PSP2__
+#ifdef __vita__
         SDL_Joystick* joystick;
 #endif
 };

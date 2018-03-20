@@ -58,6 +58,8 @@ class Jeu {
         void setText(bool b);
         void ecrit(int id, bool cadre=true, bool anim=true, int x=8, int y=152, int w=304, int h=80);
         void affiche(SDL_Surface* gpScreen, std::string s, int x, int y);
+        void afficheTexteAvecId(SDL_Surface* gpScreen, int id, int x, int y);
+        void afficheTexteAvecId(SDL_Surface* gpScreen, int id, std::string s, int x, int y);
         bool isDonjon();
         bool isDehors();
         bool isGrotte();
@@ -98,7 +100,7 @@ class Jeu {
         void setVueHorz(int i);
         void setVueVert(int i);
         void replace(); //replace les ennemis, pnj, etc.
-        void poule(); //énerve les poules
+        void poule(); //ï¿½nerve les poules
         void permuteBloc(int val);
         void setKeyboard(Keyboard* kb);
         void setGenerique(Generique* gen);

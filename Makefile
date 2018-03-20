@@ -11,7 +11,7 @@ CC = g++
 RM = rm -f
 INSTALL_PROG = install -m 755 -s
 
-EXE = ZeldaROTH_US
+EXE = ZeldaROTH_FR
 
 OBJS = Audio.o Bouclier.o Caisse.o Carte.o Encyclopedie.o Ennemi.o Generique.o Jeu.o Joueur.o Keyboard.o Listable.o main.o Menu.o Monde.o Objet.o Personnage.o Pnj.o Projectile.o Snipe.o Statut.o Texte.o ZoneRect.o
 

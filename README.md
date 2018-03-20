@@ -7,7 +7,7 @@ The second one was to correct some missing references on compilation files.$
 Thanks to usineur for his work and help.
 
 ## VPK
-Latest version is available [here](https://github.com/usineur/ZeldaROTH/releases).
+Latest version is available [here](https://github.com/NicolasR/ZeldaROTH-French/releases).
 
 Note: saves can be found in `ux0:data/zroth/save` directory.
 
@@ -43,6 +43,9 @@ Note: saves can be found in `ux0:data/zroth/save` directory.
 Vincent Jouillat - Original game (http://www.zeldaroth.fr/us/zroth.php)
 
 ## Changelog:
+
+1.1b:
+- Added missing translations
 
 1.1:
 - Improve performances (Fix memory leaks, smoother animation)

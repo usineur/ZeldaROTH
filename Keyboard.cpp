@@ -43,7 +43,7 @@
 Keyboard::Keyboard(Jeu* jeu, Carte* carte, Encyclopedie* encycl, SDL_Surface* screen, int m) : 
     gpJeu(jeu), gpCarte(carte), gpEncyclopedie(encycl), mode(m), gFullScreen(1), 
     gpScreen(screen), tmp(0), tmpx(0), tmpc(0), tmpw(0), tmpt(0), tmpp(0), tmpm(0),
-#ifdef __PSP2__
+#ifdef __vita__
     ligne(0), colonne(0), ligneOption(2), volume(MIX_MAX_VOLUME), volson(32), ligneRecord(3), verrRun(0),
 #else
     ligne(0), colonne(0), ligneOption(2), volume(32), volson(32), ligneRecord(3), verrRun(0),
@@ -54,14 +54,14 @@ Keyboard::Keyboard(Jeu* jeu, Carte* carte, Encyclopedie* encycl, SDL_Surface* sc
     loadP();
     gpJeu->getAudio()->setVolume(volume);
     gpJeu->getAudio()->setVolson(volson);
-#ifdef __PSP2__
+#ifdef __vita__
     SDL_InitSubSystem(SDL_INIT_JOYSTICK);
     joystick = SDL_JoystickOpen(0);
 #endif
 }
 
 void Keyboard::saveP() {
-#ifdef __PSP2__
+#ifdef __vita__
     ofstream f("ux0:data/zroth/save/system.dat",ios::out | ios::binary);
 #else
     ofstream f("data/save/system.dat",ios::out | ios::binary);
@@ -74,7 +74,7 @@ void Keyboard::saveP() {
 }
 
 void Keyboard::loadP() {
-#ifdef __PSP2__
+#ifdef __vita__
     ifstream f("ux0:data/zroth/save/system.dat",ios::in | ios::binary);
 #else
     ifstream f("data/save/system.dat",ios::in | ios::binary);
@@ -108,7 +108,7 @@ void Keyboard::setMode(int i) {mode=i;}
 int Keyboard::gererClavier() {
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
-#ifdef __PSP2__
+#ifdef __vita__
             case SDL_JOYBUTTONDOWN:
             case SDL_JOYBUTTONUP:
                 if (joystick && pollKey(event) == -1) return -1;
@@ -134,7 +134,7 @@ void Keyboard::toggleFullScreen() {
 }
 
 int Keyboard::pollKey(SDL_Event event) {
-#ifdef __PSP2__
+#ifdef __vita__
     switch (event.jbutton.button) {
         case BTN_START :
 #else
@@ -144,11 +144,11 @@ int Keyboard::pollKey(SDL_Event event) {
             if (mode==0) { if (!gpJeu->getStop() && !gpJeu->getJoueur()->getImmo() 
             && gpJeu->getJoueur()->getVie()>0) 
                 gpJeu->ecrit(215);}
-#ifndef __PSP2__
+#ifndef __vita__
             else if (mode<8 || mode==9 || mode==15 || mode==16 || mode >18) return -1;
 #endif
             break;
-#ifdef __PSP2__
+#ifdef __vita__
         case BTN_SELECT :
 #else
         case SDLK_F1 :
@@ -156,7 +156,7 @@ int Keyboard::pollKey(SDL_Event event) {
             if (mode == 0) {mode = 17; gpJeu->getGenerique()->initAide1(); 
                 gpJeu->getAudio()->playSound(1);}
             break;
-#ifndef __PSP2__
+#ifndef __vita__
         case SDLK_F4 :
             if (event.key.keysym.mod & KMOD_ALT) return -1;
             break;
@@ -181,7 +181,7 @@ void Keyboard::pollKeys(Uint8* keys) {
             
             if ((keys[SDLK_RETURN] || buttonPressed(BTN_CROSS)) && tmp == 0) {
                 if (gpJoueur->getTypeAnim() == MORT) gpJoueur->revie();
-#ifndef __PSP2__
+#ifndef __vita__
                 else if (!gpJeu->getStop() && !gpJeu->getMenu()) gpJeu->setMenu(true);
 #endif
                 else if (gpJeu->getMenu()) gpJeu->setMenu(false);
@@ -189,7 +189,7 @@ void Keyboard::pollKeys(Uint8* keys) {
                 else leverJeter = 1;
                 tmp = 1;
             }
-#ifdef __PSP2__
+#ifdef __vita__
             if (buttonPressed(BTN_RIGHT) && !gpJeu->getStop() && !gpJeu->getMenu() && tmp == 0) {
                 gpJeu->setMenu(true);
                 tmp = 1;
@@ -244,7 +244,7 @@ void Keyboard::pollKeys(Uint8* keys) {
             if ((keys[SDLK_RIGHT] || stickPosition(LSTICK, STICK_RIGHT))) nbdir++;
             
             int vitesse;
-#ifdef __PSP2__
+#ifdef __vita__
             if (buttonPressed(BTN_LTRIGGER) && verrRun==0 && !gpJeu->getStop()) verrRun = 1;
             if (buttonPressed(BTN_RTRIGGER) && !gpJeu->getStop()) verrRun = 0;
 #endif
@@ -255,7 +255,7 @@ void Keyboard::pollKeys(Uint8* keys) {
             avance=0;
             
             //marche
-#ifdef __PSP2__
+#ifdef __vita__
             if (!stickPosition(RSTICK, STICK_LEFT) && !stickPosition(RSTICK, STICK_RIGHT) && !stickPosition(RSTICK, STICK_UP) && !stickPosition(RSTICK, STICK_DOWN) && (
 #else
             if (!keys[SDLK_LCTRL] && (
@@ -323,7 +323,7 @@ void Keyboard::pollKeys(Uint8* keys) {
                 }
             }
 
-#ifdef __PSP2__
+#ifdef __vita__
             if (!gpJoueur->getImmo()) {
                 if (stickPosition(RSTICK, STICK_LEFT) && gpJeu->getVueHorz()>-64)
                     gpJeu->setVueHorz(gpJeu->getVueHorz()-2);
@@ -363,7 +363,7 @@ void Keyboard::pollKeys(Uint8* keys) {
             }
             
             
-            //épée
+            //ï¿½pï¿½e
             if ((gpJoueur->getTypeAnim()==AUCUNE || gpJoueur->getTypeAnim()==MARCHE) 
             && !gpJoueur->getCharge() && gpJoueur->getEpee() && !gpJeu->getStop()
             && !gpJoueur->isLapin() && !gpJoueur->getImmo()) {
@@ -494,7 +494,7 @@ void Keyboard::pollKeys(Uint8* keys) {
             
             if (!(keys[SDLK_p] || buttonPressed(BTN_LEFT)) && tmpp) tmpp=0;
             
-            if ((keys[SDLK_m] || keys[SDLK_SEMICOLON] || buttonPressed(BTN_UP)) && gpJoueur->hasObjet(O_ENCYCL) // Entrer menu encyclopédie
+            if ((keys[SDLK_m] || keys[SDLK_SEMICOLON] || buttonPressed(BTN_UP)) && gpJoueur->hasObjet(O_ENCYCL) // Entrer menu encyclopï¿½die
             && !gpJeu->getStop() && gpJoueur->getVie()>0 && !tmpm) {
                 mode = 13;
                 gpJeu->getAudio()->playSound(1);
@@ -653,7 +653,7 @@ void Keyboard::pollKeys(Uint8* keys) {
             if ((keys[SDLK_RETURN] || buttonPressed(BTN_CROSS)) && tmp == 0) {
                 if (ligneVal==0) {
                     ostringstream oss; oss << (ligne+1);
-#ifdef __PSP2__
+#ifdef __vita__
                     remove(("ux0:data/zroth/save/roth" + oss.str() + ".dat").c_str());
 #else
                     remove(("data/save/roth" + oss.str() + ".dat").c_str());
@@ -831,7 +831,7 @@ void Keyboard::pollKeys(Uint8* keys) {
 }
 
 int Keyboard::buttonPressed(int i) {
-#ifdef __PSP2__
+#ifdef __vita__
     return SDL_JoystickGetButton(joystick, i);
 #else
     return 0;
@@ -839,7 +839,7 @@ int Keyboard::buttonPressed(int i) {
 }
 
 int Keyboard::stickPosition(int stick, int direction) {
-#ifdef __PSP2__
+#ifdef __vita__
     int axis;
     int axisValue;
     if (stick == LSTICK && (direction == STICK_LEFT || direction == STICK_RIGHT)) axis = 0; // Left stick, horizontal axis

@@ -482,7 +482,7 @@ void Monde::initMatrice(int zone) {
             gpJeu->ajouteEnnemi(20,26*16,77*16);mur[26*2][77*2]=2;mur[26*2+1][77*2]=2;mur[26*2][77*2+1]=2;mur[26*2+1][77*2+1]=2;
             gpJeu->ajouteEnnemi(20,28*16,82*16);mur[28*2][82*2]=2;mur[28*2+1][82*2]=2;mur[28*2][82*2+1]=2;mur[28*2+1][82*2+1]=2;
             gpJeu->ajouteEnnemi(20,46*16,82*16);mur[46*2][82*2]=2;mur[46*2+1][82*2]=2;mur[46*2][82*2+1]=2;mur[46*2+1][82*2+1]=2;
-            //pièges
+            //piï¿½ges
             gpJeu->ajouteEnnemi(17,72*16,22*16); gpJeu->ajouteEnnemi(17,70*16,26*16); 
             gpJeu->ajouteEnnemi(17,68*16,30*16); gpJeu->ajouteEnnemi(17,66*16,34*16);
             //ennemis
@@ -591,7 +591,7 @@ void Monde::initMatrice(int zone) {
             gpJeu->ajouteEnnemi(30,29*16,52*16-8); gpJeu->ajouteEnnemi(30,149*16,52*16-8);
             gpJeu->ajouteEnnemi(30,151*16,50*16-8); gpJeu->ajouteEnnemi(30,147*16,54*16-8);
             gpJeu->ajouteEnnemi(30,169*16+8,22*16-8);
-            //pièges
+            //piï¿½ges
             gpJeu->ajouteEnnemi(17,25*16,2*16); gpJeu->ajouteEnnemi(17,35*16,2*16);
             gpJeu->ajouteEnnemi(17,45*16,2*16); gpJeu->ajouteEnnemi(17,55*16,2*16);
             gpJeu->ajouteEnnemi(17,65*16,2*16); gpJeu->ajouteEnnemi(17,75*16,2*16);
@@ -637,7 +637,7 @@ void Monde::initMatrice(int zone) {
             gpJeu->ajouteObjet(4,16*122,16*41-4,0,1); gpJeu->ajouteObjet(4,16*42,16*2-4,0,1);
             break;
         case 17 :
-            //pièges
+            //piï¿½ges
             gpJeu->ajouteEnnemi(17,16*16,117*16);
             gpJeu->ajouteEnnemi(36,69*16+8,37*16);mur[69*2+1][37*2]=2;mur[69*2+2][37*2]=2;mur[69*2+1][37*2+1]=2;mur[69*2+2][37*2+1]=2;
             gpJeu->ajouteEnnemi(36,62*16,17*16);mur[62*2][17*2]=2;mur[62*2+1][17*2]=2;mur[62*2][17*2+1]=2;mur[62*2+1][17*2+1]=2;
@@ -1141,7 +1141,7 @@ void Monde::detRegion(int newZone) {
     }
 }
 
-//replace crânes
+//replace crï¿½nes
 void Monde::replace() {
     switch (gpJeu->getZone()) {
         case 12:
@@ -1589,7 +1589,7 @@ void Monde::chargeMap(int zone) {
             
     std::ostringstream oss;
     oss << zone;
-#ifdef __PSP2__
+#ifdef __vita__
     std::string result = "app0:data/map/carte" + oss.str() + ".map";
 #else
     std::string result = "data/map/carte" + oss.str() + ".map";
@@ -1651,7 +1651,7 @@ void Monde::transitSalle(Direction dir) {
         case E : animtransX=328; gpJoueur->setX(gpJoueur->getX()+20); break;
     }
     
-    //changement de sous zone par défaut
+    //changement de sous zone par dï¿½faut
     switch (dir) {
         case N : region[0]=((int)(gpJoueur->getX()/320))*320; region[1]-=15*16; break;
         case S : region[0]=((int)(gpJoueur->getX()/320))*320; region[1]=region[3]; break;

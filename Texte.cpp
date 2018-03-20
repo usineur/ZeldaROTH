@@ -347,6 +347,427 @@ void Texte::affiche(SDL_Surface* gpScreen, std::string s, int a, int b) {
     }
 }
 
+void Texte::afficheTexteAvecId(SDL_Surface* gpScreen, int id, std::string s, int a, int b) {
+    std::string texte = "";
+    switch(id) {
+        // 0 -> 99 : Carte
+        case 0 : 
+            texte = "Temple de la forêt"; 
+            break;
+        case 1 : 
+            texte = "Temple de l'eau"; 
+            break;
+        case 2 : 
+            texte = "Temple de la montagne";
+            break;
+        case 3 : 
+            texte = "Temple du désert"; 
+            break;
+        case 4 : 
+            texte = "Temple de l'ombre"; 
+            break;
+        case 5 : 
+            texte = "Temple du feu"; 
+            break;
+        case 6 : 
+            texte = "Temple de la glace"; 
+            break;
+        case 7 : 
+            texte = "Temple secret"; 
+            break;
+        case 8 : 
+            texte = "Château d'Hyrule"; 
+            break;
+
+        // 100 -> 199 : Encyclopedie
+        case 100 : 
+            texte = "MONSTRES " + s;
+            break;
+            
+        // 200 -> 299 : Generique
+        case 200 :
+            texte = "ECRAN DE SELECTION";
+            break;
+        case 201 : 
+            texte = "1.";
+            break;
+        case 202 :
+            texte = "2.";
+            break;
+        case 203 : 
+            texte = "3.";
+            break;
+        case 204 :
+            texte = "OPTIONS";
+            break;
+        case 205 :
+            texte = "RECORDS";
+            break;
+        case 206 :
+            texte = "OPTIONS";
+            break;
+        case 207 :
+            texte = "MUSIQUE";
+            break;
+        case 208 :
+            texte = "SON";
+            break;
+        case 209 :
+            texte = "RETOUR";
+            break;
+        case 210 :
+            texte = "RECORDS";
+            break;
+        case 211 :
+            texte = "MEILLEUR TEMPS : " + s;
+            break;
+        case 212 :
+            texte = "RANG DES 100%";
+            break;
+        case 213 :
+            texte = "RANG ULTIME";
+            break;
+        case 214 :
+            texte = "RANG DE RAPIDITE";
+            break;
+        case 215 :
+            texte = "RETOUR";
+            break;
+        case 216 :
+            texte = "EFFACER";
+            break;
+        case 217 :
+            texte = "EFFACER ?";
+            break;
+        case 218 :
+            texte = "OUI";
+            break;
+        case 219 :
+            texte = "NON";
+            break;
+        case 220 :
+            texte = "CHARGER";
+            break;
+        case 221 :
+            texte = "EFFACER";
+            break;
+        case 222 :
+            texte = "ANNULER";
+            break;
+        case 223 :
+            texte = "AIDE 1/2";
+            break;
+        case 224 :
+#ifdef __vita__
+            texte = "Retour au jeu : Croix - Suite : Droite";
+#else
+            texte = "Retour au jeu : Entrée - Suite : Droite";
+#endif
+            break;
+        case 225 :
+#ifdef __vita__
+            texte = "Lire / Ouvrir / Parler : Rond";
+#else
+            texte = "Lire / Ouvrir / Parler : Espace";
+#endif
+            break;
+        case 226 :
+#ifdef __vita__
+            texte = "Valider / Passer texte : Croix";
+#else
+            texte = "Valider / Passer texte : Entrée";
+#endif
+            break;
+        case 227 :
+#ifdef __vita__
+            texte = "Déplacer Link : Stick Gauche";
+#else
+            texte = "Déplacer Link : Flèches de direction";
+#endif
+            break;
+        case 228 :
+#ifdef __vita__
+            texte = "Courir : L (maintenu) / R";
+#else
+            texte = "Courir : Shift maintenu ou Caps lock";
+#endif
+            break;
+        case 229 :
+#ifdef __vita__
+            texte = "Coup d'épée : Carré";
+#else
+            texte = "Coup d'épée : W ou Z";
+#endif
+            break;
+        case 230 :
+#ifdef __vita__
+            texte = "Attaque Tornade : Carré maintenu puis lâché";
+#else
+            texte = "Attaque Tornade : W ou Z maintenu puis lâché";
+#endif
+            break;
+        case 231 :
+#ifdef __vita__
+            texte = "Menu de sélection d'objet : D-Pad Droite";
+#else
+            texte = "Menu de sélection d'objet : Entrée";
+#endif
+            break;
+        case 232 :
+#ifdef __vita__
+            texte = "Utiliser l'objet sélectionné : Triangle";
+#else
+            texte = "Utiliser l'objet sélectionné : X";
+#endif
+            break;
+        case 233 :
+#ifdef __vita__
+            texte = "Porter sans équiper les gants : Croix";
+#else
+            texte = "Porter sans équiper les gants : C";
+#endif
+            break;
+        case 234 :
+#ifdef __vita__
+            texte = "Afficher la carte : D-Pad Gauche (ext/donjons)";
+#else
+            texte = "Afficher la carte : D-Pad Gauche (dans les donjons)";
+#endif
+            break;
+        case 235 :
+#ifdef __vita__
+            texte = "Afficher la carte : L (extérieur ou donjons)";
+#else
+            texte = "Afficher la carte : P (dans les donjons)";
+#endif
+            break;
+        case 236 :
+#ifdef __vita__
+            texte = "Afficher les monstres vaincus : D-Pad Haut";
+#else
+            texte = "Afficher les monstres vaincus : M";
+#endif
+            break;
+        case 237 :
+#ifdef __vita__
+            texte = "Regarder autour : Stick Droite";
+#else
+            texte = "Regarder autour : Ctrl et direction";
+#endif
+            break;
+        case 238 :
+#ifdef __vita__
+            texte = "Sauvegarder / Quitter : Start";
+#else
+            texte = "Sauvegarder / Quitter : Echap";
+#endif
+            break;
+        case 239 :
+#ifdef __vita__
+            texte = "";
+#else
+            texte = "Agrandir / Rétrécir : Ctrl et Entrée";
+#endif
+            break;
+        case 240 :
+            texte = "AIDE 2/2";
+            break;
+        case 241 :    
+#ifdef __vita__
+            texte = "Retour au jeu : Croix - Précédent : Gauche";
+#else
+            texte = "Retour au jeu : Entrée - Précédent : Gauche";
+#endif
+            break;
+        case 242 :
+#ifdef __vita__
+            texte = "Utilise objet sélectionné: Triangle";
+#else
+            texte = "Utilise objet sélectionné: X";
+#endif
+            break;
+        case 243 :
+#ifdef __vita__
+            texte = "Porter sans équiper les gants : Croix"; 
+#else
+            texte = "Porter sans équiper les gants : C"; 
+#endif
+            break;
+        case 244 :
+#ifdef __vita__
+            texte = "Afficher la carte : D-Pad Gauche (ext/donjon)";
+#else
+            texte = "Afficher la carte : P (extérieur ou donjons)";
+#endif
+            break;
+        case 245 :
+#ifdef __vita__
+            texte = "Afficher la carte : D-Pad Gauche (dans les donjons)";
+#else
+            texte = "Afficher la carte : P (dans les donjons)";
+#endif
+            break;
+        case 246 :
+            texte = "Afficher les monstres vaincus : M";
+            break;
+        case 247 :
+#ifdef __vita__
+            texte = "Regarder autour : Stick Droite";
+#else
+            texte = "Regarder autour : Ctrl et direction";
+#endif
+            break;
+        case 248 :
+#ifdef __vita__
+            texte = "Sauvegarder / Quitter : Start";
+#else
+            texte = "Sauvegarder / Quitter : Echap";
+#endif
+            break;
+        case 249 :
+#ifdef __vita__
+            texte = "";
+#else
+            texte = "Agrandir / Rétrécir : Ctrl et Entrée";
+#endif
+            break;
+
+        case 250 :
+            texte = "RANG : Héros d'Hyrule";
+            break;
+        case 251 :
+            texte = "RANG : INCONNU";
+            break;
+        case 252 :
+            texte = "Finir le jeu à 100%";
+            break;
+        case 253 :
+            texte = "RANG : Frimeur";
+            break;
+        case 254 :
+            texte = "RANG : INCONNU";
+            break;
+        case 255 :
+            texte = "Finir le jeu sans mourir,";
+            break;
+        case 256 :
+            texte = "avec 10 coeurs au maximum,";
+            break;
+        case 257 :
+            texte = "sans parler aux Grandes Fées,";
+            break;
+        case 258 :
+            texte = "sans acheter de flacons";
+            break;
+        case 259 :
+            texte = "et sans prendre le bouclier.";
+            break;
+        case 260 :
+            texte = "RANG : Marathonien d'Hyrule";
+            break;
+        case 261 :
+            texte = "RANG : INCONNU";
+            break;
+        case 262 :
+            texte = "Finir le jeu en moins de";
+            break;
+        case 263 :
+            texte = "deux heures";
+            break;
+        case 264 : 
+            texte = "SCORES :";
+            break;
+        case 265 :
+            texte = "Temps de jeu : " + s;
+            break;
+        case 266 :
+            texte = "Mort " + s + " time";
+            break;
+        case 267 :
+            texte = "Mort " + s + " times";
+            break;
+        case 268 :
+            texte = "Quarts de coeurs : " + s + " / 36";
+            break;
+        case 269 :
+            texte = "Objets : " + s + " / 56";
+            break;
+        case 270 :
+            texte = "Types d'ennemis vaincus : " + s + " / 46";
+            break;
+        case 271 :
+            texte = "Tu as fini ce jeu à " + s + "%, félicitation !";
+            break;
+        case 272 :
+            texte = "RANG : ";
+            break;
+        case 273 :
+            texte = " - Frimeur";
+            break;
+        case 274 :
+            texte = " - Héros d'Hyrule";
+            break;
+        case 275 :
+            texte = " - Perfectionniste";
+            break;
+        case 276 :
+            texte = " - Fan de Zelda";
+            break;
+        case 277 :
+#ifdef __vita__
+            texte = " - Pro du pad";
+#else
+            texte = " - Pro du clavier";
+#endif
+            break;
+        case 278 :
+            texte = " - Confirmé";
+            break;
+        case 279 :
+            texte = " - Débutant";
+            break;
+        case 280 :
+            texte = " - Mort-vivant";
+            break;
+        case 281 : 
+            texte = " - Kamikaze";
+            break;
+        case 282 :
+            texte = " - Marathonien d'Hyrule";
+            break;
+
+        // 300 -> 399 : Menu
+        case 300 :
+            texte = "X";
+            break;
+        case 301 :
+            texte = "STATUT :";
+            break;
+        case 302 :
+            texte = "VIE       : " + s;
+            break;
+        case 303 :
+            texte = "MAGIE     : " + s;
+            break;
+        case 304 :
+            texte = "FORCE     : " + s;
+            break;
+        case 305 :
+            texte = "DEFENSE   : " + s;
+            break;
+        case 306 :
+            texte = "TEMPS     : " + s;
+            break;
+        case 307 :
+            texte = "CRISTAUX :";
+            break;
+        default : 
+            texte = "[ERREUR TEXTE]";
+    }
+
+    affiche(gpScreen, texte, a, b);
+}
+
 void Texte::draw(SDL_Surface* gpScreen) {
     
     if (cadre) drawCadre(gpScreen);
@@ -511,82 +932,100 @@ void Texte::afficheLettre(SDL_Surface* gpScreen, char c, int vx, int vy) {
     
     if(val==32) return;
     
-    // /
-    if(val==47) {src.x=52;src.y=151;}
-    
-    // @ hylien
-    if(val==64) {src.x=4;src.y=151;}
-            
-    // + hylien
-    if(val==43) {src.x=20;src.y=151;}
-            
-    // = hylien
-    if(val==61) {src.x=36;src.y=151;}
-            
     //minuscules a-z
-    if(val>=97 && val<=122) {src.x=4+16*((val-97)%10); src.y=52+16*((val-97)/10);}
-            
-    //majuscules A-Z
-    if(val>=65 && val<=90) {src.x=6+16*((val-65)%10); src.y=2+16*((val-65)/10);}   
-    // ç
-    if(val==-25) {src.x=148;src.y=34;}
-    // é
-    if(val==-23) {src.x=100;src.y=84;}
-    // ê
-    if(val==-22) {src.x=116;src.y=84;}
-    // è
-    if(val==-24) {src.x=132;src.y=84;}
-    // ë
-    if(val==-21) {src.x=132;src.y=151;}
-    // à
-    if(val==-32) {src.x=148;src.y=84;}
-    // â
-    if(val==-30) {src.x=148;src.y=103;}
-    // ä
-    if(val==-28) {src.x=148;src.y=135;}
-    // î
-    if(val==-18) {src.x=84;src.y=119;}
-    // ï
-    if(val==-17) {src.x=116;src.y=151;}
-    // û
-    if(val==-5) {src.x=84;src.y=103;}
-    // ù
-    if(val==-7) {src.x=148;src.y=151;}
-    // ü
-    if(val==-4) {src.x=116;src.y=135;}
-    // ö
-    if(val==-10) {src.x=132;src.y=135;}
-    // ô
-    if(val==-12) {src.x=148;src.y=119;}
-            
-    //ponctuation
-    // -
-    if(val==45) {src.x=102;src.y=34;}
-    // .
-    if(val==46) {src.x=118;src.y=34;}
-    // ,
-    if(val==44) {src.x=134;src.y=34;}
-    // !
-    if(val==33) {src.x=3;src.y=135;}
-    // ?
-    if(val==63) {src.x=19;src.y=135;}
-    // (
-    if(val==40) {src.x=35;src.y=135;}
-    // )
-    if(val==41) {src.x=51;src.y=135;}            
-    // ' ( avec @ )
-    if(val==39) {src.x=67;src.y=135;}
-    // :
-    if(val==58) {src.x=83;src.y=135;}
-    // ... ( avec % )
-    if(val==37) {src.x=101;src.y=135;}
-    // >
-    if(val==62) {src.x=100;src.y=151;}
-    // <
-    if(val==60) {src.x=84;src.y=151;}
-            
-    //chiffres            
-    if(val>=48 && val<=57) {src.x=3+16*((val-48)%5); src.y=103+16*((val-48)/5);}
+    if(val>=97 && val<=122) {
+		src.x=4+16*((val-97)%10); 
+		src.y=52+16*((val-97)/10);
+	}
+	//majuscules A-Z
+	else if(val>=65 && val<=90) {src.x=6+16*((val-65)%10); src.y=2+16*((val-65)/10);}
+	//chiffres
+    else if(val>=48 && val<=57) {src.x=3+16*((val-48)%5); src.y=103+16*((val-48)/5);}
+	else {
+		switch(val){
+			// Caractères spéciaux
+			// /
+			case 47: src.x=52;src.y=151;break;
+			// @ hylien
+			case 64: src.x=4;src.y=151;break;
+            // + hylien
+			case 43: src.x=20;src.y=151;break;
+            // = hylien
+			case 61: src.x=36;src.y=151;break;
+			// ç
+			case -25:
+			case 231: src.x=148;src.y=34;break;
+			// é
+			case -23: 
+			case 233: src.x=100;src.y=84;break;
+			// ê
+			case -22:
+			case 234: src.x=116;src.y=84;break;
+			// è
+			case -24:
+			case 232: src.x=132;src.y=84;break;
+			// ë
+			case -21:
+			case 235: src.x=132;src.y=151;break;
+			// à
+			case -32:
+			case 224: src.x=148;src.y=84;break;
+			// â
+			case -30:
+			case 226: src.x=148;src.y=103;break;
+			// ä
+			case -28:
+			case 228: src.x=148;src.y=135;break;
+			// î
+			case -18:
+			case 238: src.x=84;src.y=119;break;
+			// ï
+			case -17:
+			case 239: src.x=116;src.y=151;break;
+			// û
+			case -5:
+			case 251: src.x=84;src.y=103;break;
+			// ù
+			case -7:
+			case 249: src.x=148;src.y=151;break;
+			// ü
+			case -4:
+			case 252: src.x=116;src.y=135;break;
+			// ö
+			case -10:
+			case 246: src.x=132;src.y=135;break;
+			// ô
+			case -12:
+			case 244: src.x=148;src.y=119;break;
+			
+			// Ponctuation
+			//ponctuation
+			// -
+			case 45: src.x=102;src.y=34;break;
+			// .
+			case 46: src.x=118;src.y=34;break;
+			// ,
+			case 44: src.x=134;src.y=34;break;
+			// !
+			case 33: src.x=3;src.y=135;break;
+			// ?
+			case 63: src.x=19;src.y=135;break;
+			// (
+			case 40: src.x=35;src.y=135;break;
+			// )
+			case 41: src.x=51;src.y=135;break;            
+			// ' ( avec @ )
+			case 39: src.x=67;src.y=135;break;
+			// :
+			case 58: src.x=83;src.y=135;break;
+			// ... ( avec % )
+			case 37: src.x=101;src.y=135;break;
+			// >
+			case 62: src.x=100;src.y=151;break;
+			// <
+			case 60: src.x=84;src.y=151;break;
+		}
+	}
     
     SDL_BlitSurface(imageFont, &src, gpScreen, &dst);
 }

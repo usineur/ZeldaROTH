@@ -18,7 +18,7 @@ project(${VITA_APPNAME})
 include("${VITASDK}/share/vita.cmake" REQUIRED)
 
 # Flags and includes
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__PSP2__ -fno-exceptions")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-exceptions")
 
 link_directories(
   ${CMAKE_CURRENT_BINARY_DIR}
@@ -68,6 +68,7 @@ target_link_libraries(${VITA_APPNAME}
   SceCommonDialog_stub 
   SceDisplay_stub
   SceGxm_stub
+  SceHid_stub
   ScePower_stub
   SceSysmodule_stub
   SceTouch_stub
@@ -84,8 +85,8 @@ FOREACH(ITEM ${ASSETS})
 ENDFOREACH()
 
 # Create Vita artifacts
-vita_create_self(${VITA_APPNAME}.self ${VITA_APPNAME} SAFE)
-vita_create_vpk(${VITA_APPNAME}.vpk ${VITA_TITLEID} ${VITA_APPNAME}.self
+vita_create_self(eboot.bin ${VITA_APPNAME} UNSAFE)
+vita_create_vpk(${VITA_APPNAME}.vpk ${VITA_TITLEID} eboot.bin
   VERSION ${VITA_VERSION}
   NAME ${VITA_APPNAME}
   FILE res/icon0.png sce_sys/icon0.png

@@ -17,7 +17,7 @@
 #include "Keyboard.h"
 #include "Generique.h"
 
-#ifdef __PSP2__
+#ifdef __vita__
 #include <psp2/power.h>
 #include <psp2/kernel/processmgr.h>
 #include <psp2/io/fcntl.h>
@@ -32,7 +32,7 @@ SDL_Surface* init() {             // initialise SDL
     atexit(SDL_Quit);
     //if(SDL_InitSubSystem(SDL_INIT_AUDIO) == -1) *SOUND = false;
 
-#ifndef __PSP2__
+#ifndef __vita__
     SDL_WM_SetCaption("Return of the Hylian",NULL);
     SDL_Surface* icon = SDL_LoadBMP("data/images/logos/triforce.ico");
     SDL_SetColorKey(icon,SDL_SRCCOLORKEY,SDL_MapRGB(icon->format,0,0,0));
@@ -41,7 +41,7 @@ SDL_Surface* init() {             // initialise SDL
 
     SDL_ShowCursor(SDL_DISABLE);
 
-#ifdef __PSP2__
+#ifdef __vita__
     return SDL_SetVideoMode(640, 480, 16, SDL_HWSURFACE|SDL_DOUBLEBUF);
 #else
     return SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE|SDL_DOUBLEBUF|SDL_FULLSCREEN);
@@ -49,7 +49,7 @@ SDL_Surface* init() {             // initialise SDL
 }
 
 int main(int argc, char** argv) {
-#ifdef __PSP2__
+#ifdef __vita__
     sceKernelPowerTick(SCE_KERNEL_POWER_TICK_DISABLE_AUTO_SUSPEND);
     scePowerSetArmClockFrequency(444);
 
@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
     sceIoMkdir("ux0:data/zroth/save", 0777);
 #endif
 
-    if (argc && argv); //pour éviter un warning.....
+    if (argc && argv); //pour ï¿½viter un warning.....
 
     std::srand(std::time(NULL));
 
@@ -70,7 +70,7 @@ int main(int argc, char** argv) {
     int mode = 2; //mode=0;
 
     gpScreen = init();
-#ifdef __PSP2__
+#ifdef __vita__
     int sh = 544;
     int sw = (float)gpScreen->w*((float)sh/(float)gpScreen->h);
     int x = (960 - sw)/2;
@@ -109,7 +109,7 @@ int main(int argc, char** argv) {
             case 1 : //disclamer
             case 2 : //logo
             case 3 : //titre
-            case 14 : //générique score
+            case 14 : //gï¿½nï¿½rique score
             case 17 : //menu d'aide 1
             case 18 : //menu d'aide 2
                 gpGenerique->draw(gpScreen2); break;
@@ -122,23 +122,23 @@ int main(int argc, char** argv) {
             case 7 : //charger partie
                 gpGenerique->drawCharger(gpScreen2, gpKeyboard->getLigne(),
                     gpKeyboard->getLigneVal()); break;
-            case 8 : //générique intro
+            case 8 : //gï¿½nï¿½rique intro
                 gpGenerique->drawIntro(gpScreen2, gpKeyboard->getIntro()); break;
             case 9 : //effacer partie
                 gpGenerique->drawEffacerSave(gpScreen2, gpKeyboard->getLigne(),
                     gpKeyboard->getLigneVal()); break;
-            case 10 : //générique début chez link
+            case 10 : //gï¿½nï¿½rique dï¿½but chez link
                 gpGenerique->drawDebut(gpScreen2); break;
-            case 11 : //générique fin
+            case 11 : //gï¿½nï¿½rique fin
                 gpGenerique->drawFin(gpScreen2); break;
             case 12 : //carte
                 gpCarte->draw(gpScreen2); break;
-            case 13 : //encyclopédie des monstres
+            case 13 : //encyclopï¿½die des monstres
                 gpEncyclopedie->draw(gpScreen2); break;
             case 15 : //records
             case 19 : //rang 100%
             case 20 : //rang ultime
-            case 21 : //rang de rapidité
+            case 21 : //rang de rapiditï¿½
                 gpGenerique->drawRecord(gpScreen2, gpKeyboard->getLigneRecord(),
                     gpKeyboard->getColonneRecord()); break;
             case 16 : //effacer record
@@ -146,7 +146,7 @@ int main(int argc, char** argv) {
             default : break;
         }
 
-#ifdef __PSP2__
+#ifdef __vita__
         SDL_BlitSurface(gpScreen2, &src, gpScreen, &dst);
 #else
         SDL_FreeSurface(gpScreen3);

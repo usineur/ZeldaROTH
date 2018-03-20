@@ -117,12 +117,12 @@ void Generique::initSelection() {
     cadre(16,192,136,32);
     cadre(168,192,136,32);
     
-    gpJeu->affiche(image, "ECRAN DE SELECTION", 40, 16);
-    gpJeu->affiche(image, "1.", 44, 56);
-    gpJeu->affiche(image, "2.", 44, 104);
-    gpJeu->affiche(image, "3.", 44, 152);
-    gpJeu->affiche(image, "OPTIONS", 63, 200);
-    gpJeu->affiche(image, "RECORDS", 215, 200);
+    gpJeu->afficheTexteAvecId(image, 200, 40, 16);
+    gpJeu->afficheTexteAvecId(image, 201, 44, 56);
+    gpJeu->afficheTexteAvecId(image, 202, 44, 104);
+    gpJeu->afficheTexteAvecId(image, 203, 44, 152);
+    gpJeu->afficheTexteAvecId(image, 204, 63, 200);
+    gpJeu->afficheTexteAvecId(image, 205, 215, 200);
     
     //stats :
     SDL_Surface* imageStat = gpJeu->loadImg("data/images/statut/statut.png");
@@ -205,10 +205,10 @@ void Generique::initOption() {
     cadre(16,128,288,32);
     cadre(16,192,136,32);
     
-    gpJeu->affiche(image, "OPTIONS", 40, 16);
-    gpJeu->affiche(image, "MUSIQUE", 60, 72);
-    gpJeu->affiche(image, "SON", 60, 136);
-    gpJeu->affiche(image, "RETOUR", 63, 200);
+    gpJeu->afficheTexteAvecId(image, 206, 40, 16);
+    gpJeu->afficheTexteAvecId(image, 207, 60, 72);
+    gpJeu->afficheTexteAvecId(image, 208, 60, 136);
+    gpJeu->afficheTexteAvecId(image, 209, 63, 200);
     
     src.x = 0; src.y = 96; dst.x = 128; dst.y = 72; 
     SDL_BlitSurface(imageCadre, &src, image, &dst);
@@ -280,13 +280,13 @@ void Generique::initRecord() {
     if (s < 10) oss<<"0"; oss << s;
     
     
-    gpJeu->affiche(image, "RECORDS", 40, 16);
-    gpJeu->affiche(image, "MEILLEUR TEMPS : " + oss.str(), 140, 16);
-    gpJeu->affiche(image, "RANG DES 100%", 44, 56);
-    gpJeu->affiche(image, "RANG ULTIME", 44, 104);
-    gpJeu->affiche(image, "RANG DE RAPIDITE", 44, 152);
-    gpJeu->affiche(image, "RETOUR", 63, 200);
-    gpJeu->affiche(image, "EFFACER", 215, 200);
+    gpJeu->afficheTexteAvecId(image, 210, 40, 16);
+    gpJeu->afficheTexteAvecId(image, 211, oss.str(), 140, 16);
+    gpJeu->afficheTexteAvecId(image, 212, 44, 56);
+    gpJeu->afficheTexteAvecId(image, 213, 44, 104);
+    gpJeu->afficheTexteAvecId(image, 214, 44, 152);
+    gpJeu->afficheTexteAvecId(image, 215, 63, 200);
+    gpJeu->afficheTexteAvecId(image, 216, 215, 200);
     
     SDL_Surface* objets = gpJeu->loadImg("data/images/statut/objets.png");
     
@@ -303,16 +303,16 @@ void Generique::initRecord() {
 
 void Generique::initEffacer() {
     cadre(104,84,112,72);
-    gpJeu->affiche(image, "EFFACER ?", 133, 93);
-    gpJeu->affiche(image, "OUI", 151, 113);
-    gpJeu->affiche(image, "NON", 151, 133);
+    gpJeu->afficheTexteAvecId(image, 217, 133, 93);
+    gpJeu->afficheTexteAvecId(image, 218, 151, 113);
+    gpJeu->afficheTexteAvecId(image, 219, 151, 133);
 }
 
 void Generique::initCharger() {
     cadre(104,84,112,72);
-    gpJeu->affiche(image, "CHARGER", 139, 93);
-    gpJeu->affiche(image, "EFFACER", 139, 113);
-    gpJeu->affiche(image, "ANNULER", 139, 133);
+    gpJeu->afficheTexteAvecId(image, 220, 139, 93);
+    gpJeu->afficheTexteAvecId(image, 221, 139, 113);
+    gpJeu->afficheTexteAvecId(image, 222, 139, 133);
 }
 
 void Generique::initIntro() {
@@ -374,90 +374,51 @@ void Generique::initAide1() {
     
     cadre(16,192+8,288,32);
     
-    gpJeu->affiche(image, "AIDE 1/2", 40, 16);
-    
-#ifdef __PSP2__
-    gpJeu->affiche(image, "Retour au jeu : Croix - Suite : Droite", 24, 208);
-#else
-    gpJeu->affiche(image, "Retour au jeu : Entrée - Suite : Droite", 24, 208);
-#endif
+    gpJeu->afficheTexteAvecId(image, 223, 40, 16);
+    gpJeu->afficheTexteAvecId(image, 224, 24, 208);
     
     int ligne = 64;
     Joueur* gpJoueur = gpJeu->getJoueur();
     
-#ifdef __PSP2__
-    gpJeu->affiche(image, "Lire / Ouvrir / Parler : Rond", 24, ligne); ligne+=16;
-    gpJeu->affiche(image, "Valider / Passer texte : Croix", 24, ligne); ligne+=16;
-	gpJeu->affiche(image, "Déplacer Link : Stick Gauche", 24, ligne); ligne+=16;
-#else
-    gpJeu->affiche(image, "Lire / Ouvrir / Parler : Espace", 24, ligne); ligne+=16;
-    gpJeu->affiche(image, "Valider / Passer texte : Entrée", 24, ligne); ligne+=16;
-	gpJeu->affiche(image, "Déplacer Link : Flèches de direction", 24, ligne); ligne+=16;
-#endif
+    gpJeu->afficheTexteAvecId(image, 225, 24, ligne); ligne+=16;
+    gpJeu->afficheTexteAvecId(image, 226, 24, ligne); ligne+=16;
+	gpJeu->afficheTexteAvecId(image, 227, 24, ligne); ligne+=16;
+
     if (gpJoueur->hasObjet(O_BOTTES)) {
-#ifdef __PSP2__
-        gpJeu->affiche(image, "Courir : L (maintenu) / R", 24, ligne);
-#else
-        gpJeu->affiche(image, "Courir : Shift maintenu ou Caps lock", 24, ligne); 
-#endif
-        ligne+=16;}
+        gpJeu->afficheTexteAvecId(image, 228, 24, ligne);
+        ligne+=16;
+    }
     if (gpJoueur->getEpee()) {
-#ifdef __PSP2__
-        gpJeu->affiche(image, "Coup d'épée : Carré", 24, ligne); ligne+=16;
-        gpJeu->affiche(image, "Attaque Tornade : Carré maintenu puis lâché", 24, ligne); 
-#else
-        gpJeu->affiche(image, "Coup d'épée : W ou Z", 24, ligne); ligne+=16;
-        gpJeu->affiche(image, "Attaque Tornade : W ou Z maintenu puis lâché", 24, ligne); 
-#endif
-        ligne+=16;}
-#ifdef __PSP2__
-    gpJeu->affiche(image, "Menu de sélection d'objet : D-Pad Droite", 24, ligne); ligne+=16;
-#else
-    gpJeu->affiche(image, "Menu de sélection d'objet : Entrée", 24, ligne); ligne+=16;
-#endif
+        gpJeu->afficheTexteAvecId(image, 229, 24, ligne); ligne+=16;
+        gpJeu->afficheTexteAvecId(image, 230, 24, ligne); 
+        ligne+=16;
+    }
+
+    gpJeu->afficheTexteAvecId(image, 231, 24, ligne); ligne+=16;
     if (ligne >= 176) return;
-#ifdef __PSP2__
-    gpJeu->affiche(image, "Utiliser l'objet sélectionné : Triangle", 24, ligne); ligne+=16;
-#else
-    gpJeu->affiche(image, "Utiliser l'objet sélectionné : X", 24, ligne); ligne+=16;
-#endif
+    gpJeu->afficheTexteAvecId(image, 232, 24, ligne); ligne+=16;
     if (ligne >= 176) return;
     if (gpJoueur->hasObjet(O_GANTS)) {
-#ifdef __PSP2_
-        gpJeu->affiche(image, "Porter sans équiper les gants : Croix", 24, ligne); 
-#else
-        gpJeu->affiche(image, "Porter sans équiper les gants : C", 24, ligne); 
-#endif
-        ligne+=16;}
+        gpJeu->afficheTexteAvecId(image, 233, 24, ligne); 
+        ligne+=16;
+    }
     if (ligne >= 176) return;
     if (gpJoueur->hasObjet(O_CARTE))
-#ifdef __PSP2__
-        gpJeu->affiche(image, "Afficher la carte : D-Pad Gauche (extérieur ou donjons)", 24, ligne);
-    else gpJeu->affiche(image, "Afficher la carte : D-Pad Gauche (dans les donjons)", 24, ligne);
-#else
-        gpJeu->affiche(image, "Afficher la carte : P (extérieur ou donjons)", 24, ligne);
-    else gpJeu->affiche(image, "Afficher la carte : P (dans les donjons)", 24, ligne);
-#endif
+        gpJeu->afficheTexteAvecId(image, 234, 24, ligne);
+    else gpJeu->afficheTexteAvecId(image, 235, 24, ligne);
     ligne+=16;
     if (ligne >= 176) return;
     if (gpJoueur->hasObjet(O_ENCYCL)) {
-#ifdef __PSP2__
-        gpJeu->affiche(image, "Afficher les monstres vaincus : D-Pad Haut", 24, ligne);
-#else
-        gpJeu->affiche(image, "Afficher les monstres vaincus : M", 24, ligne);
-#endif
-        ligne+=16;}
+        gpJeu->afficheTexteAvecId(image, 236, 24, ligne);
+        ligne+=16;
+    }
     if (ligne >= 176) return;
-#ifdef __PSP2__
-    gpJeu->affiche(image, "Regarder autour : Stick Droite", 24, ligne); ligne+=16;
+    gpJeu->afficheTexteAvecId(image, 237, 24, ligne); ligne+=16;
     if (ligne >= 176) return;
-    gpJeu->affiche(image, "Sauvegarder / Quitter : Start", 24, ligne); ligne+=16;
-#else
-    gpJeu->affiche(image, "Regarder autour : Ctrl et direction", 24, ligne); ligne+=16;
+    gpJeu->afficheTexteAvecId(image, 238, 24, ligne); ligne+=16;
+#ifndef __vita__
     if (ligne >= 176) return;
-    gpJeu->affiche(image, "Agrandir / Rétrécir : Ctrl et Entrée", 24, ligne); ligne+=16;
-    if (ligne >= 176) return;
-    gpJeu->affiche(image, "Sauvegarder / Quitter : Echap", 24, ligne); ligne+=16;
+    gpJeu->afficheTexteAvecId(image, 239, 24, ligne); ligne+=16;
 #endif
 }
 
@@ -498,13 +459,8 @@ void Generique::initAide2() {
     
     cadre(16,192+8,288,32);
     
-    gpJeu->affiche(image, "AIDE 2/2", 40, 16);
-    
-#ifdef __PSP2__
-    gpJeu->affiche(image, "Retour au jeu : Croix - Précédent : Gauche", 24, 208);
-#else
-    gpJeu->affiche(image, "Retour au jeu : Entrée - Précédent : Gauche", 24, 208);
-#endif
+    gpJeu->afficheTexteAvecId(image, 240, 40, 16);
+    gpJeu->afficheTexteAvecId(image, 241, 24, 208);
     
     int ligne = 64-112;
     Joueur* gpJoueur = gpJeu->getJoueur();
@@ -512,45 +468,30 @@ void Generique::initAide2() {
     ligne+=64;
     if (gpJoueur->hasObjet(O_BOTTES)) ligne+=16;
     if (gpJoueur->getEpee()) ligne+=32;
-    if (ligne >= 64) 
-#ifdef __PSP2__
-    gpJeu->affiche(image, "Use selected object: Triangle", 24, ligne); ligne+=16;
-#else
-    gpJeu->affiche(image, "Use selected object: X", 24, ligne); ligne+=16;
-#endif
+    if (ligne >= 64)
+        gpJeu->afficheTexteAvecId(image, 242, 24, ligne); ligne+=16;
     if (ligne >= 64) 
     if (gpJoueur->hasObjet(O_GANTS)) {
-#ifdef __PSP2__
-        gpJeu->affiche(image, "Porter sans équiper les gants : Croix", 24, ligne); 
-#else
-        gpJeu->affiche(image, "Porter sans équiper les gants : C", 24, ligne); 
-#endif
-        ligne+=16;}
+        gpJeu->afficheTexteAvecId(image, 243, 24, ligne); 
+        ligne+=16;
+    }
     if (ligne >= 64) {
     if (gpJoueur->hasObjet(O_CARTE))
-#ifdef __PSP2__
-        gpJeu->affiche(image, "Afficher la carte : D-Pad Gauche (extérieur ou donjons)", 24, ligne);
-    else gpJeu->affiche(image, "Afficher la carte : D-Pad Gauche (dans les donjons)", 24, ligne);}
-#else
-        gpJeu->affiche(image, "Afficher la carte : P (extérieur ou donjons)", 24, ligne);
-    else gpJeu->affiche(image, "Afficher la carte : P (dans les donjons)", 24, ligne);}
-#endif
+        gpJeu->afficheTexteAvecId(image, 244, 24, ligne);
+    else gpJeu->afficheTexteAvecId(image, 245, 24, ligne);}
     ligne+=16;
     if (ligne >= 64) 
     if (gpJoueur->hasObjet(O_ENCYCL)) {
-        gpJeu->affiche(image, "Afficher les monstres vaincus : M", 24, ligne); 
-        ligne+=16;}
+        gpJeu->afficheTexteAvecId(image, 246, 24, ligne); 
+        ligne+=16;
+    }
     if (ligne >= 64) 
-#ifdef __PSP2__
-    gpJeu->affiche(image, "Regarder autour : Stick Droite", 24, ligne); ligne+=16;
+        gpJeu->afficheTexteAvecId(image, 247, 24, ligne); ligne+=16;
     if (ligne >= 64) 
-    gpJeu->affiche(image, "Sauvegarder / Quitter : Start", 24, ligne); ligne+=16;
-#else
-    gpJeu->affiche(image, "Regarder autour : Ctrl et direction", 24, ligne); ligne+=16;
+        gpJeu->afficheTexteAvecId(image, 248, 24, ligne); ligne+=16;
+#ifndef __vita__
     if (ligne >= 64) 
-    gpJeu->affiche(image, "Agrandir / Rétrécir : Ctrl et Entrée", 24, ligne); ligne+=16;
-    if (ligne >= 64) 
-    gpJeu->affiche(image, "Sauvegarder / Quitter : Echap", 24, ligne); ligne+=16;
+        gpJeu->afficheTexteAvecId(image, 249, 24, ligne); ligne+=16;
 #endif
 }
 
@@ -560,30 +501,30 @@ void Generique::initRang(int i) {
         case 0 :
             cadre(88,96,144,48);
             if (gpJeu->getKeyboard()->getRang(i)) 
-                gpJeu->affiche(image, "RANG : Héros d'Hyrule", 96, 104);
-            else gpJeu->affiche(image, "RANG : INCONNU", 96, 104);
-            gpJeu->affiche(image, "Finir le jeu à 100%", 96, 120);
+                gpJeu->afficheTexteAvecId(image, 250, 96, 104);
+            else gpJeu->afficheTexteAvecId(image, 251, 96, 104);
+            gpJeu->afficheTexteAvecId(image, 252, 96, 120);
             break;
         case 1 :
             cadre(64,64,192,112);
             int l; l=72;
             if (gpJeu->getKeyboard()->getRang(i)) 
-                gpJeu->affiche(image, "RANG : Frimeur", 72, l);
-            else gpJeu->affiche(image, "RANG : INCONNU", 72, l);
+                gpJeu->afficheTexteAvecId(image, 253, 72, l);
+            else gpJeu->afficheTexteAvecId(image, 254, 72, l);
             l+=16;
-            gpJeu->affiche(image, "Finir le jeu sans mourir,", 72, l);l+=16;
-            gpJeu->affiche(image, "avec 10 coeurs au maximum,", 72, l);l+=16;
-            gpJeu->affiche(image, "sans parler aux Grandes Fées,", 72, l);l+=16;
-            gpJeu->affiche(image, "sans acheter de flacons", 72, l);l+=16;
-            gpJeu->affiche(image, "et sans prendre le bouclier.", 72, l);l+=16;
+            gpJeu->afficheTexteAvecId(image, 255, 72, l);l+=16;
+            gpJeu->afficheTexteAvecId(image, 256, 72, l);l+=16;
+            gpJeu->afficheTexteAvecId(image, 257, 72, l);l+=16;
+            gpJeu->afficheTexteAvecId(image, 258, 72, l);l+=16;
+            gpJeu->afficheTexteAvecId(image, 259, 72, l);l+=16;
             break;
         case 2 :
             cadre(71,88,178,64);
             if (gpJeu->getKeyboard()->getRang(i)) 
-                gpJeu->affiche(image, "RANG : Marathonien d'Hyrule", 78, 96);
-            else gpJeu->affiche(image, "RANG : INCONNU", 78, 96);
-            gpJeu->affiche(image, "Finir le jeu en moins de", 78, 112);
-            gpJeu->affiche(image, "deux heures", 78, 128);
+                gpJeu->afficheTexteAvecId(image, 260, 78, 96);
+            else gpJeu->afficheTexteAvecId(image, 261, 78, 96);
+            gpJeu->afficheTexteAvecId(image, 262, 78, 112);
+            gpJeu->afficheTexteAvecId(image, 263, 78, 128);
             break;
     }
 }
@@ -650,7 +591,7 @@ void Generique::initScore() {
     
     ostringstream oss;
     int pctg = 0;
-    gpJeu->affiche(image, "SCORES :", 136, 10);
+    gpJeu->afficheTexteAvecId(image, 264, 136, 10);
     
     int temps = gpJoueur->getTemps(0)+gpJoueur->getTemps(1)*60+gpJoueur->getTemps(2)*3600;
     if (temps < gpJeu->getKeyboard()->getTemps() || gpJeu->getKeyboard()->getTemps()==0) {
@@ -660,16 +601,16 @@ void Generique::initScore() {
     if (gpJoueur->getTemps(2)<10)oss<<"0";oss << gpJoueur->getTemps(2) << ":";
     if (gpJoueur->getTemps(1)<10)oss<<"0";oss << gpJoueur->getTemps(1) << ":";
     if (gpJoueur->getTemps(0)<10)oss<<"0";oss << gpJoueur->getTemps(0);
-    gpJeu->affiche(image, ("Temps de jeu : " + oss.str()).c_str(), 10, 30);
+    gpJeu->afficheTexteAvecId(image, 265, oss.str(), 10, 30);
     
     int tmp=gpJoueur->getMort();
     oss.str(""); oss << tmp;
-    if (tmp==1) gpJeu->affiche(image, ("Mort " + oss.str() + " time").c_str(), 10, 50);
-    else gpJeu->affiche(image, ("Mort " + oss.str() + " times").c_str(), 10, 50);
+    if (tmp==1) gpJeu->afficheTexteAvecId(image, 266, oss.str(), 10, 50);
+    else gpJeu->afficheTexteAvecId(image, 267, oss.str(), 10, 50);
     
     tmp=gpJoueur->nbQuarts();
     oss.str(""); oss << tmp; pctg+=tmp;
-    gpJeu->affiche(image, ("Quarts de coeurs : " + oss.str() + " / 36").c_str(), 10, 70);
+    gpJeu->afficheTexteAvecId(image, 268, oss.str(), 10, 70);
 
     tmp=0;
     for (int i = 0; i < 10; i++) if (i != O_SAC_BOMBES) if (gpJoueur->hasObjet(i)) tmp++;
@@ -685,49 +626,49 @@ void Generique::initScore() {
     for (int i = 0; i < 7; i++) if (gpJoueur->hasCristal(i)) tmp++;
     for (int j = 0; j < 9; j++) for (int i = 0; i < 3; i++) if (gpJoueur->getCle(j,i)) tmp++;
     oss.str(""); oss << tmp; pctg+=tmp;
-    gpJeu->affiche(image, ("Objets : " + oss.str() + " / 56").c_str(), 10, 90);
+    gpJeu->afficheTexteAvecId(image, 269, oss.str(), 10, 90);
     
     tmp=gpJoueur->nbEnnemis();
     oss.str(""); oss << tmp; pctg+=tmp;
-    gpJeu->affiche(image, ("Types d'ennemis vaincus : " + oss.str() + " / 46").c_str(), 10, 110);
+    gpJeu->afficheTexteAvecId(image, 270, oss.str(), 10, 110);
     
     pctg=(int)((pctg*100)/138);
     oss.str(""); oss << pctg;
-    gpJeu->affiche(image, ("Tu as fini ce jeu à " + oss.str() + "%, félicitation !").c_str(), 
+    gpJeu->afficheTexteAvecId(image, 271, oss.str(), 
         10, 130);
     
-    string result;
+    int result;
     int ligne = 170;
-    gpJeu->affiche(image, "RANG : ", 10, ligne);
+    gpJeu->afficheTexteAvecId(image, 272, 10, ligne);
     
     if (gpJoueur->getMort()==0 && gpJoueur->hasBouteille(0)==0
         && gpJoueur->hasBouteille(1)==0 && gpJoueur->hasBouteille(2)==0
         && gpJoueur->hasMedaillon(0)==0 && gpJoueur->hasMedaillon(1)==0
         && gpJoueur->hasMedaillon(2)==0 && gpJoueur->getVieMax()==20
         && gpJoueur->getMagieMax()==32 && gpJoueur->getBouclier()==0) {
-        result="Frimeur"; gpJeu->affiche(image, " - "+result, 52, ligne); ligne+=20;
+        gpJeu->afficheTexteAvecId(image, 273, 52, ligne); ligne+=20;
         gpJeu->getKeyboard()->setRang(1); gpJeu->getKeyboard()->saveP();}
     else {
-        if (pctg==100) {result="Héros d'Hyrule"; 
+        if (pctg==100) {result=274; 
             gpJeu->getKeyboard()->setRang(0); gpJeu->getKeyboard()->saveP();}
-        if (pctg<100) result="Perfectionniste";
-        if (pctg<95) result="Fan de Zelda";
-        if (pctg<90) result="Pro du clavier";
-        if (pctg<85) result="Confirmé";
-        if (pctg<80) result="Débutant";
-        gpJeu->affiche(image, " - "+result, 52, ligne);
+        if (pctg<100) result=275;
+        if (pctg<95) result=276;
+        if (pctg<90) result=277;
+        if (pctg<85) result=278;
+        if (pctg<80) result=279;
+        gpJeu->afficheTexteAvecId(image, result, 52, ligne);
         ligne+=20;
     }
     
     if (gpJoueur->getMort()>=50) {
-        result="Mort-vivant"; gpJeu->affiche(image, " - "+result, 52, ligne); ligne+=20;}
+        result=280; gpJeu->afficheTexteAvecId(image, result, 52, ligne); ligne+=20;}
     else if (gpJoueur->getMort()>=20) {
-        result="Kamikaze"; gpJeu->affiche(image, " - "+result, 52, ligne); ligne+=20;}
+        result=281; gpJeu->afficheTexteAvecId(image, result, 52, ligne); ligne+=20;}
         
     if (temps<=7200) {
-        result="Marathonien d'Hyrule"; 
+        result=282; 
         gpJeu->getKeyboard()->setRang(2); gpJeu->getKeyboard()->saveP();
-        gpJeu->affiche(image, " - "+result, 52, ligne); ligne+=20;}
+        gpJeu->afficheTexteAvecId(image, result, 52, ligne); ligne+=20;}
 }
 
 void Generique::draw(SDL_Surface* gpScreen) {
