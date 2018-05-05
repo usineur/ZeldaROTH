@@ -12,7 +12,6 @@ endif()
 # Project start
 set(VITA_APPNAME ZeldaROTH)
 set(VITA_TITLEID "ZERO00001")
-set(VITA_VERSION "01.00")
 
 project(${VITA_APPNAME})
 include("${VITASDK}/share/vita.cmake" REQUIRED)
@@ -60,8 +59,8 @@ target_link_libraries(${VITA_APPNAME}
   ogg
   jpeg
   png
-  mikmod
-  vita2d
+  vitaGL
+  imgui
   z
   SceAudio_stub
   SceCtrl_stub
@@ -87,7 +86,6 @@ ENDFOREACH()
 # Create Vita artifacts
 vita_create_self(eboot.bin ${VITA_APPNAME} UNSAFE)
 vita_create_vpk(${VITA_APPNAME}.vpk ${VITA_TITLEID} eboot.bin
-  VERSION ${VITA_VERSION}
   NAME ${VITA_APPNAME}
   FILE res/icon0.png sce_sys/icon0.png
   FILE res/bg.png sce_sys/livearea/contents/bg.png
