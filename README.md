@@ -48,6 +48,7 @@ Vincent Jouillat - Original game (http://www.zeldaroth.fr/us/zroth.php)
 - Add "Fullscreen" option
 - Add "Auto-hide menu bar" option
 - Imgui settings can now be saved and reloaded.
+
 1.2:
 - SDL 1.2 (vitaGL) + imgui support (thx to @Rinnegatamante)
 
