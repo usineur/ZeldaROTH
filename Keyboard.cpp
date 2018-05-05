@@ -11,6 +11,7 @@
 #include <iostream>
 
 #include <SDL/SDL.h>
+#include "vita/os_vita.h"
 
 /*#include "Menu.h"
 #include "Texte.h"
@@ -44,9 +45,9 @@ Keyboard::Keyboard(Jeu* jeu, Carte* carte, Encyclopedie* encycl, SDL_Surface* sc
     gpJeu(jeu), gpCarte(carte), gpEncyclopedie(encycl), mode(m), gFullScreen(1), 
     gpScreen(screen), tmp(0), tmpx(0), tmpc(0), tmpw(0), tmpt(0), tmpp(0), tmpm(0),
 #ifdef __vita__
-    ligne(0), colonne(0), ligneOption(2), volume(MIX_MAX_VOLUME), volson(32), ligneRecord(3), verrRun(0),
+    ligne(0), colonne(0), ligneOption(3), volume(MIX_MAX_VOLUME), volson(32), ligneRecord(3), verrRun(0),
 #else
-    ligne(0), colonne(0), ligneOption(2), volume(32), volson(32), ligneRecord(3), verrRun(0),
+    ligne(0), colonne(0), ligneOption(3), volume(32), volson(32), ligneRecord(3), verrRun(0),
 #endif
     colonneRecord(0), temps(0), ligneVal(0), intro(0) {
     for (int i = 0; i < 3; i++) save[i]=0;
@@ -61,6 +62,7 @@ Keyboard::Keyboard(Jeu* jeu, Carte* carte, Encyclopedie* encycl, SDL_Surface* sc
 }
 
 void Keyboard::saveP() {
+    int languageID = getLanguage();
 #ifdef __vita__
     ofstream f("ux0:data/zroth/save/system.dat",ios::out | ios::binary);
 #else
@@ -70,10 +72,12 @@ void Keyboard::saveP() {
     f.write((char *)&volson,sizeof(int));
     f.write((char *)&temps,sizeof(int));
     for (int i = 0; i < 3; i++) f.write((char *)&rang[i],sizeof(int));
+    f.write((char *)&languageID,sizeof(int));
     f.close();
 }
 
 void Keyboard::loadP() {
+    int languageID = 1;
 #ifdef __vita__
     ifstream f("ux0:data/zroth/save/system.dat",ios::in | ios::binary);
 #else
@@ -84,6 +88,10 @@ void Keyboard::loadP() {
     f.read((char *)&volson,sizeof(int));
     f.read((char *)&temps,sizeof(int));
     for (int i = 0; i < 3; i++) f.read((char *)&rang[i],sizeof(int));
+    if(!f.eof()){ //for retro compatibility
+		 f.read((char *)&languageID,sizeof(int));
+		 setLanguage(gpJeu, languageID);  
+ 	}
     f.close();
 }
 
@@ -548,7 +556,7 @@ void Keyboard::pollKeys(Uint8* keys) {
                     }
                 }
                 if (ligne == 3 && colonne == 0) {
-                    mode = 6; ligneOption=2;
+                    mode = 6; ligneOption=3;
                     gpJeu->getGenerique()->initOption();
                 }
                 if (ligne == 3 && colonne == 1) {
@@ -577,7 +585,7 @@ void Keyboard::pollKeys(Uint8* keys) {
                 && !(keys[SDLK_LEFT] || buttonPressed(BTN_LEFT)) && !(keys[SDLK_RIGHT] || buttonPressed(BTN_RIGHT)) && tmp) tmp=0;
             break;
         case 6 :
-            if ((keys[SDLK_RETURN] || buttonPressed(BTN_CROSS)) && tmp == 0 && ligneOption == 2) {
+            if ((keys[SDLK_RETURN] || buttonPressed(BTN_CROSS)) && tmp == 0 && ligneOption == 3) {
                 mode = 4;
                 gpJeu->getGenerique()->initSelection();
                 gpJeu->getAudio()->playSound(2);
@@ -586,10 +594,10 @@ void Keyboard::pollKeys(Uint8* keys) {
             }
             
             if ((keys[SDLK_UP] || buttonPressed(BTN_UP)) && !tmp) {
-                ligneOption--; if (ligneOption<0) ligneOption=2; tmp=1; 
+                ligneOption--; if (ligneOption<0) ligneOption=3; tmp=1; 
                 gpJeu->getAudio()->playSound(3);}
             if ((keys[SDLK_DOWN] || buttonPressed(BTN_DOWN)) && !tmp) {
-                ligneOption++; if (ligneOption>2) ligneOption=0; tmp=1;
+                ligneOption++; if (ligneOption>3) ligneOption=0; tmp=1;
                 gpJeu->getAudio()->playSound(3);}
             if ((keys[SDLK_LEFT] || buttonPressed(BTN_LEFT)) && !tmp) {
                 if (ligneOption == 0) {
@@ -597,14 +605,24 @@ void Keyboard::pollKeys(Uint8* keys) {
                     gpJeu->getAudio()->setVolume(volume); gpJeu->getAudio()->playSound(3);}
                 if (ligneOption == 1) {
                     volson-=8; if (volson < 0) volson = 0; tmp=1;
-                    gpJeu->getAudio()->setVolson(volson); gpJeu->getAudio()->playSound(3);}}
+                    gpJeu->getAudio()->setVolson(volson); gpJeu->getAudio()->playSound(3);}
+                if (ligneOption == 2) {
+                    if (getLanguage()==1) setLanguage(gpJeu, 2); 
+					else setLanguage(gpJeu, getLanguage()-1);
+					tmp=1;
+                    gpJeu->getAudio()->playSound(3);}}
             if ((keys[SDLK_RIGHT] || buttonPressed(BTN_RIGHT)) && !tmp) {
                 if (ligneOption == 0) {
                     volume+=8; if (volume > 64) volume = 64; tmp=1;
                     gpJeu->getAudio()->setVolume(volume);gpJeu->getAudio()->playSound(3);}
                 if (ligneOption == 1) {
                     volson+=8; if (volson > 64) volson = 64; tmp=1;
-                    gpJeu->getAudio()->setVolson(volson);gpJeu->getAudio()->playSound(3);}}
+                    gpJeu->getAudio()->setVolson(volson);gpJeu->getAudio()->playSound(3);}
+                if (ligneOption == 2) {
+					if (getLanguage()==2) setLanguage(gpJeu, 1); 
+					else setLanguage(gpJeu, getLanguage()+1);
+					tmp=1;
+                    gpJeu->getAudio()->playSound(3);}}
             
             if (!(keys[SDLK_RETURN] || buttonPressed(BTN_CROSS)) && !(keys[SDLK_UP] || buttonPressed(BTN_UP)) && !(keys[SDLK_DOWN] || buttonPressed(BTN_DOWN)) 
                 && !(keys[SDLK_LEFT] || buttonPressed(BTN_LEFT)) && !(keys[SDLK_RIGHT] || buttonPressed(BTN_RIGHT)) && tmp) tmp=0;

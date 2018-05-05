@@ -125,6 +125,10 @@ void Jeu::videListes() {
     gpPnj = new Pnj(this, 0, 0, 0, 0);
 }
 
+void Jeu::setTextLanguage(int id) {
+    gpTexte->setTextLanguage(id);
+}
+
 void Jeu::scrolling() {
     phg[0] = gpJoueur->getX() - 320/2 + 8 + vueHorz;
     phg[1] = gpJoueur->getY() - 240/2 + 16 + vueVert;

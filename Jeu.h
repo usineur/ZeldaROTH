@@ -54,6 +54,7 @@ class Jeu {
         bool getMenu();
         void setMenu(bool b);
         void setStop(bool b);
+        void setTextLanguage(int id);
         void setTransition(bool b);
         void setText(bool b);
         void ecrit(int id, bool cadre=true, bool anim=true, int x=8, int y=152, int w=304, int h=80);

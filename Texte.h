@@ -16,6 +16,8 @@
 class Jeu;
 
 class Texte {
+    typedef std::string ( Texte::*LANGFUNC ) ( int, std::string );
+
     public :
         Texte(Jeu* jeu);
         ~Texte();
@@ -26,12 +28,16 @@ class Texte {
         void afficheTexteAvecId(SDL_Surface* gpScreen, int id, std::string s, int a, int b);
         bool isFinished();
         void changeId(int i);
+        void setTextLanguage(int id);
         int getId();
     private :
         bool hasNext();
         void drawCadre(SDL_Surface* gpScreen);
         void chercheText();
         void decoupeText();
+        std::string getTexteEN(int id, std::string s);
+        std::string getTexteFR(int id, std::string s);
+        void processConditionalText(std::string getTextFunc(int), int id);
         int tailleMot(int deb);
         void afficheLettre(SDL_Surface* gpScreen, char c, int vx, int vy);
         
@@ -51,6 +57,7 @@ class Texte {
         Uint32 lastAnimTime;
         SDL_Surface* imageFont;
         SDL_Surface* imageCoeur;
+        LANGFUNC getTextByLangFunc;
 };
 
 #endif  // Texte.h

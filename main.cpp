@@ -10,6 +10,7 @@
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_rotozoom.h>
+#include "vita/os_vita.h"
 
 #include <iostream>
 #include <ctime>
@@ -18,6 +19,7 @@
 #include "Generique.h"
 
 #ifdef __vita__
+#include <psp2/apputil.h> 
 #include <psp2/power.h>
 #include <psp2/kernel/processmgr.h>
 #include <psp2/io/fcntl.h>
@@ -25,6 +27,7 @@
 #include <vitaGL.h>
 #include <imgui_vita.h>
 
+uint8_t language = 1;
 int _newlib_heap_size_user = 192 * 1024 * 1024;
 bool autohide = false;
 bool visible = false;
@@ -53,16 +56,31 @@ SDL_Surface* init() {             // initialise SDL
     SDL_WM_SetCaption("Return of the Hylian",NULL);
     SDL_Surface* icon = SDL_LoadBMP("data/images/logos/triforce.ico");
     SDL_SetColorKey(icon,SDL_SRCCOLORKEY,SDL_MapRGB(icon->format,0,0,0));
-    SDL_WM_SetIcon(icon,NULL);
+    SDL_WM_SetIcon(icon,NULL);    
 #endif
 
     SDL_ShowCursor(SDL_DISABLE);
 
+    language = 1;
+	
 #ifdef __vita__
+
     return SDL_SetVideoMode(320, 240, 16, SDL_HWSURFACE|SDL_DOUBLEBUF);
 #else
     return SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE|SDL_DOUBLEBUF|SDL_FULLSCREEN);
 #endif
+}
+
+int getLanguage(void)
+{    
+	return language;
+}
+
+void setLanguage(Jeu* gpJeu, int languageID)
+{
+	if (languageID>2 || languageID<1) language = 1;
+	else language = languageID;
+    gpJeu->setTextLanguage(language);
 }
 
 #ifdef __vita__
@@ -312,6 +330,39 @@ int main(int argc, char** argv) {
 
     Audio* gpAudio = new Audio();
     Jeu* gpJeu = new Jeu(gpAudio);
+
+
+    // Init SceAppUtil
+	SceAppUtilInitParam init_param;
+	SceAppUtilBootParam boot_param;
+	memset(&init_param, 0, sizeof(SceAppUtilInitParam));
+	memset(&boot_param, 0, sizeof(SceAppUtilBootParam));
+	sceAppUtilInit(&init_param, &boot_param);
+
+#ifdef __vita__
+    // Getting system language
+    int lang = 0;
+    sceAppUtilSystemParamGetInt(SCE_SYSTEM_PARAM_ID_LANG, &lang);
+	switch (lang){
+		case SCE_SYSTEM_PARAM_LANG_FRENCH:
+			language = 2;
+			break;
+		case SCE_SYSTEM_PARAM_LANG_SPANISH:
+			language = 5;
+			break;
+		case SCE_SYSTEM_PARAM_LANG_ITALIAN:
+			language = 4;
+			break;
+		default:
+			language = 1;
+			break;
+	}
+
+    setLanguage(gpJeu, language);
+#else
+    setLanguage(gpJeu, 1);
+#endif
+
     Carte* gpCarte = new Carte(gpJeu);
     Encyclopedie* gpEncyclopedie = new Encyclopedie(gpJeu);
     Keyboard* gpKeyboard = new Keyboard(gpJeu, gpCarte, gpEncyclopedie, gpScreen, mode);
