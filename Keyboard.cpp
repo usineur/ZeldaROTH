@@ -607,7 +607,7 @@ void Keyboard::pollKeys(Uint8* keys) {
                     volson-=8; if (volson < 0) volson = 0; tmp=1;
                     gpJeu->getAudio()->setVolson(volson); gpJeu->getAudio()->playSound(3);}
                 if (ligneOption == 2) {
-                    if (getLanguage()==1) setLanguage(gpJeu, 2); 
+                    if (getLanguage()==MIN_LANG) setLanguage(gpJeu, MAX_LANG); 
 					else setLanguage(gpJeu, getLanguage()-1);
 					tmp=1;
                     gpJeu->getAudio()->playSound(3);}}
@@ -619,7 +619,7 @@ void Keyboard::pollKeys(Uint8* keys) {
                     volson+=8; if (volson > 64) volson = 64; tmp=1;
                     gpJeu->getAudio()->setVolson(volson);gpJeu->getAudio()->playSound(3);}
                 if (ligneOption == 2) {
-					if (getLanguage()==2) setLanguage(gpJeu, 1); 
+					if (getLanguage()==MAX_LANG) setLanguage(gpJeu, MIN_LANG); 
 					else setLanguage(gpJeu, getLanguage()+1);
 					tmp=1;
                     gpJeu->getAudio()->playSound(3);}}

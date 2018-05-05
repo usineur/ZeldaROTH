@@ -37,7 +37,6 @@ class Texte {
         void decoupeText();
         std::string getTexteEN(int id, std::string s);
         std::string getTexteFR(int id, std::string s);
-        void processConditionalText(std::string getTextFunc(int), int id);
         int tailleMot(int deb);
         void afficheLettre(SDL_Surface* gpScreen, char c, int vx, int vy);
         

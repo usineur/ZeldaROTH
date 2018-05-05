@@ -501,35 +501,55 @@ void Generique::initAide2() {
 }
 
 void Generique::initRang(int i) {
-    
+    int languageId = getLanguage();
+    int paddingX = 0;
+    int paddingY = 0;
     switch (i) {
         case 0 :
-            cadre(88,96,144,48);
+            paddingX = 2+16;
+            paddingY = 4+32;
+            if (languageId == LANG_FR){
+                paddingX = 0;
+                paddingY = 0;
+            }
+            cadre(88-paddingX,96,144+paddingY,48);
             if (gpJeu->getKeyboard()->getRang(i)) 
-                gpJeu->afficheTexteAvecId(image, 250, 96, 104);
-            else gpJeu->afficheTexteAvecId(image, 251, 96, 104);
-            gpJeu->afficheTexteAvecId(image, 252, 96, 120);
+                gpJeu->afficheTexteAvecId(image, 250, 96-paddingX, 104);
+            else gpJeu->afficheTexteAvecId(image, 251, 96-paddingX, 104);
+            gpJeu->afficheTexteAvecId(image, 252, 96-paddingX, 120);
             break;
         case 1 :
-            cadre(64,64,192,112);
+            paddingX = 8+16;
+            paddingY = 16+32;
+            if (languageId == LANG_FR){
+                paddingX = 0;
+                paddingY = 0;
+            }
+            cadre(64-paddingX,64,192+paddingY,112);
             int l; l=72;
             if (gpJeu->getKeyboard()->getRang(i)) 
-                gpJeu->afficheTexteAvecId(image, 253, 72, l);
-            else gpJeu->afficheTexteAvecId(image, 254, 72, l);
+                gpJeu->afficheTexteAvecId(image, 253, 72-paddingX, l);
+            else gpJeu->afficheTexteAvecId(image, 254, 72-paddingX, l);
             l+=16;
-            gpJeu->afficheTexteAvecId(image, 255, 72, l);l+=16;
-            gpJeu->afficheTexteAvecId(image, 256, 72, l);l+=16;
-            gpJeu->afficheTexteAvecId(image, 257, 72, l);l+=16;
-            gpJeu->afficheTexteAvecId(image, 258, 72, l);l+=16;
-            gpJeu->afficheTexteAvecId(image, 259, 72, l);l+=16;
+            gpJeu->afficheTexteAvecId(image, 255, 72-paddingX, l);l+=16;
+            gpJeu->afficheTexteAvecId(image, 256, 72-paddingX, l);l+=16;
+            gpJeu->afficheTexteAvecId(image, 257, 72-paddingX, l);l+=16;
+            gpJeu->afficheTexteAvecId(image, 258, 72-paddingX, l);l+=16;
+            gpJeu->afficheTexteAvecId(image, 259, 72-paddingX, l);l+=16;
             break;
         case 2 :
-            cadre(71,88,178,64);
+            paddingX = 10;
+            paddingY = 20;
+            if (languageId == LANG_FR){
+                paddingX = 0;
+                paddingY = 0;
+            }
+            cadre(71-paddingX,88,178+paddingY,64);
             if (gpJeu->getKeyboard()->getRang(i)) 
-                gpJeu->afficheTexteAvecId(image, 260, 78, 96);
-            else gpJeu->afficheTexteAvecId(image, 261, 78, 96);
-            gpJeu->afficheTexteAvecId(image, 262, 78, 112);
-            gpJeu->afficheTexteAvecId(image, 263, 78, 128);
+                gpJeu->afficheTexteAvecId(image, 260, 78-paddingX, 96);
+            else gpJeu->afficheTexteAvecId(image, 261, 78-paddingX, 96);
+            gpJeu->afficheTexteAvecId(image, 262, 78-paddingX, 112);
+            gpJeu->afficheTexteAvecId(image, 263, 78-paddingX, 128);
             break;
     }
 }

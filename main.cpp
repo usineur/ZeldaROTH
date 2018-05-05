@@ -78,7 +78,7 @@ int getLanguage(void)
 
 void setLanguage(Jeu* gpJeu, int languageID)
 {
-	if (languageID>2 || languageID<1) language = 1;
+	if (languageID>MAX_LANG || languageID<MIN_LANG) language = DEFAULT_LANG;
 	else language = languageID;
     gpJeu->setTextLanguage(language);
 }
@@ -360,7 +360,7 @@ int main(int argc, char** argv) {
 
     setLanguage(gpJeu, language);
 #else
-    setLanguage(gpJeu, 1);
+    setLanguage(gpJeu, DEFAULT_LANG);
 #endif
 
     Carte* gpCarte = new Carte(gpJeu);
