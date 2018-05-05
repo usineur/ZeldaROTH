@@ -23,6 +23,13 @@ ID 	Description
 11 	TW 
 */
 
+enum Languages { 
+    LANG_EN = 1,
+    LANG_FR = 2
+};
+
+const int MIN_LANG = LANG_EN, MAX_LANG = LANG_FR, DEFAULT_LANG = LANG_EN;
+
 int getLanguage(void);
 void setLanguage(Jeu* gpJeu, int languageID);
 int SDL_GetKeyStateVita(void* p);

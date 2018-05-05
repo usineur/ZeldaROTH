@@ -78,7 +78,7 @@ int getLanguage(void)
 
 void setLanguage(Jeu* gpJeu, int languageID)
 {
-	if (languageID>2 || languageID<1) language = 1;
+	if (languageID>MAX_LANG || languageID<MIN_LANG) language = DEFAULT_LANG;
 	else language = languageID;
     gpJeu->setTextLanguage(language);
 }
@@ -216,7 +216,7 @@ void ImGui_callback() {
 
         if (credits_window) {
             ImGui::Begin("Credits", &credits_window);
-            ImGui::TextColored(ImVec4(255, 255, 0, 255), "Zelda: Return of the Hylian v1.2.1");
+            ImGui::TextColored(ImVec4(255, 255, 0, 255), "Zelda: Return of the Hylian v1.2.2");
             ImGui::Text("Game Creator: Vincent Jouillat");
             ImGui::Text("Port Author: usineur");
             ImGui::Text("Added french translation: NicolasR");
@@ -360,7 +360,7 @@ int main(int argc, char** argv) {
 
     setLanguage(gpJeu, language);
 #else
-    setLanguage(gpJeu, 1);
+    setLanguage(gpJeu, DEFAULT_LANG);
 #endif
 
     Carte* gpCarte = new Carte(gpJeu);

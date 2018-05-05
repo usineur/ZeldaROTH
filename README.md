@@ -44,6 +44,11 @@ Vincent Jouillat - Original game (http://www.zeldaroth.fr/us/zroth.php)
 
 ## Changelog:
 
+1.2.2:
+- Added missing translation
+- Added option to change language
+- Added language detection (by reading Vita system language)
+
 1.2.1:
 - Add "Fullscreen" option
 - Add "Auto-hide menu bar" option
