@@ -371,7 +371,7 @@ void Keyboard::pollKeys(Uint8* keys) {
             }
             
             
-            //�p�e
+            //épée
             if ((gpJoueur->getTypeAnim()==AUCUNE || gpJoueur->getTypeAnim()==MARCHE) 
             && !gpJoueur->getCharge() && gpJoueur->getEpee() && !gpJeu->getStop()
             && !gpJoueur->isLapin() && !gpJoueur->getImmo()) {
@@ -502,7 +502,7 @@ void Keyboard::pollKeys(Uint8* keys) {
             
             if (!(keys[SDLK_p] || buttonPressed(BTN_LEFT)) && tmpp) tmpp=0;
             
-            if ((keys[SDLK_m] || keys[SDLK_SEMICOLON] || buttonPressed(BTN_UP)) && gpJoueur->hasObjet(O_ENCYCL) // Entrer menu encyclop�die
+            if ((keys[SDLK_m] || keys[SDLK_SEMICOLON] || buttonPressed(BTN_UP)) && gpJoueur->hasObjet(O_ENCYCL) // Entrer menu encyclopédie
             && !gpJeu->getStop() && gpJoueur->getVie()>0 && !tmpm) {
                 mode = 13;
                 gpJeu->getAudio()->playSound(1);

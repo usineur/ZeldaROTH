@@ -101,7 +101,7 @@ class Jeu {
         void setVueHorz(int i);
         void setVueVert(int i);
         void replace(); //replace les ennemis, pnj, etc.
-        void poule(); //�nerve les poules
+        void poule(); //énerve les poules
         void permuteBloc(int val);
         void setKeyboard(Keyboard* kb);
         void setGenerique(Generique* gen);

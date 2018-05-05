@@ -42,14 +42,14 @@ class Texte {
         
         Jeu* gpJeu;
         int vitesse; // millisecondes entre 2 lettres
-        int av; //avancement du d�filement
+        int av; //avancement du défilement
         int x;
         int y;
         int w;
         int h;
         int id;
         int idsuiv;
-        bool def; //si le texte doit d�filer
+        bool def; //si le texte doit défiler
         bool cadre; //si on doit dessiner un cadre
         std::string texte;
         std::string buffer;

@@ -65,7 +65,7 @@ oldxg(0), oldyg(0), immo(false), loader(false) {
     objets[O_BOTTES]=1;
     objets[O_CARTE]=1;
     
-    //� virer
+    //à virer
     /*bombe=10;
     setEpee(1);
     setBouclier(1);
@@ -246,7 +246,7 @@ void Joueur::draw(SDL_Surface* gpScreen) {
     // chute
     if (typeanim == CHUTE) drawChute(gpScreen);
     
-    // coup d'�p�e
+    // coup d'épée
     if (typeanim == EPEE) drawEpee(gpScreen);
     
     // attaque spin
@@ -267,7 +267,7 @@ void Joueur::draw(SDL_Surface* gpScreen) {
     // fotte
     if (typeanim == FLOTTE || typeanim == NAGE) drawFlotte(gpScreen);
     
-    // soul�ve
+    // soulève
     if (typeanim == LOURD || typeanim == SOULEVE || typeanim == PORTE 
     || typeanim == EMMENE || typeanim == LANCE) drawSouleve(gpScreen);
     
@@ -620,7 +620,7 @@ int Joueur::getFlecheMax() { return flechemax;}
 int Joueur::getBombeMax() { return bombemax;}
 int Joueur::getMagie() { return magie;}
 int Joueur::getMagieMax() { return magiemax;}
-int Joueur::getForce() { if (!oni) return epee; else return epee+1;} //peut �tre diff�rent si en Oni Link
+int Joueur::getForce() { if (!oni) return epee; else return epee+1;} //peut être différent si en Oni Link
 int Joueur::getEpee() { return epee;}
 int Joueur::getDefense() { return defense;}
 int Joueur::getBouclier() { return bouclier;}
@@ -961,7 +961,7 @@ void Joueur::drawCharge(SDL_Surface* gpScreen) {
         dst.x+phg[0], dst.y+phg[1], src.w, src.h, COUP_EPEE, epee, direction)) 
         dechargeSpin();
     
-    // �toile
+    // étoile
     if (charge < 20) {
         src.x = 18; src.y = 14; src.w = 7; src.h = 7;
         switch (direction) {
@@ -1104,7 +1104,7 @@ void Joueur::drawSpin(SDL_Surface* gpScreen) {
     src.w = w; src.h = h;
     dst.x = x - phg[0]; dst.y = y - phg[1];
     
-    src2.w = 12; src2.h = 12; //�p�e
+    src2.w = 12; src2.h = 12; //épée
     if (epee > 3) { src2.w+=2; src2.h+=2;}
     
     int anim2;
@@ -1123,7 +1123,7 @@ void Joueur::drawSpin(SDL_Surface* gpScreen) {
             if (anim > 26) {anim2=anim; anim=0; drawImmoMarche(gpScreen); anim=anim2;}
             else {
             
-                //Ep�e
+                //Epée
                 if (anim==0 || anim==5 || (anim>=21 && anim<=26)) { 
                     dst2.x=dst.x-4; dst2.y=dst.y+17;src2.x = 68; src2.y = 12;
                     if (epee > 3) {dst2.x--; src2.x = 94; src2.y = 14;}
@@ -1184,7 +1184,7 @@ void Joueur::drawSpin(SDL_Surface* gpScreen) {
             if (anim > 26) {anim2=anim; anim=0; drawImmoMarche(gpScreen); anim=anim2;}
             else {
             
-                //Ep�e
+                //Epée
                 if (anim==0 || anim==5 || (anim>=21 && anim<=26)) { 
                     dst2.x=dst.x+13; dst2.y=dst.y-2;src2.x = 56; src2.y = 0;
                     if (epee > 3) {dst2.y-=2; src2.x = 80; src2.y = 0;}
@@ -1245,7 +1245,7 @@ void Joueur::drawSpin(SDL_Surface* gpScreen) {
             if (anim > 26) {anim2=anim; anim=0; drawImmoMarche(gpScreen); anim=anim2;}
             else {
             
-                //Ep�e
+                //Epée
                 if (anim==0 || anim==5 || (anim>=21 && anim<=26)) { 
                     dst2.x=dst.x+11; dst2.y=dst.y+16;src2.x = 68; src2.y = 24;
                     if (epee > 3) {src2.x = 94; src2.y = 28;}
@@ -1307,7 +1307,7 @@ void Joueur::drawSpin(SDL_Surface* gpScreen) {
             if (anim > 26) {anim2=anim; anim=0; drawImmoMarche(gpScreen); anim=anim2;}
             else {
             
-                //Ep�e
+                //Epée
                 if (anim==0 || anim==5 || (anim>=21 && anim<=26)) { 
                     dst2.x=dst.x-8; dst2.y=dst.y+6;src2.x = 56; src2.y = 36;
                     if (epee > 3) {dst2.x-=2; dst2.y--; src2.x = 80; src2.y = 42;}
@@ -1360,7 +1360,7 @@ void Joueur::drawSpin(SDL_Surface* gpScreen) {
             break;
     }
     
-    // lumi�re
+    // lumière
     switch (anim) {
         case 0 :
             src.x = 5; src.y = 16; src.w = 5; src.h = 5;
@@ -2607,7 +2607,7 @@ void Joueur::drawTrouve(SDL_Surface* gpScreen) {
         boucl->draw(gpScreen, 16, 0, new ZoneRect(bcl), O);
     }
     
-    //objet trouv�
+    //objet trouvé
     switch (trouve) {
         case C_BOUCLIER : src.w = 8; src.h = 10; src.x=16; src.y=75; dst.x+=4; break;
         case C_EPEE : src.w = 6; src.h = 13; src.x=9; src.y=72; dst.x+=11; break;

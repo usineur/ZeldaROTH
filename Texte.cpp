@@ -1330,7 +1330,11 @@ std::string Texte::getTexteFR(int id, std::string s){
         case 693 : texte = "L'ennui c'est que je suis bien trop peureux pour aller à leur rencontre, alors j'ai besoin de ton aide."; break;
         case 694 : texte = "Il faut que tu battes chaque type de monstre et que tu viennes me faire ton rapport."; break;
         case 695 : texte = "Je te récompenserai tous les 7 nouveaux types d'ennemis vaincus."; break;
+#ifdef __vita__
+        case 696 : texte = "Si tu veux savoir quels ennemis tu as déjà vaincu, appuye sur Stick Haut."; break;
+#else
         case 696 : texte = "Si tu veux savoir quels ennemis tu as déjà vaincu, appuye sur M."; break;
+#endif
         case 697 : texte = "Encore "+s+" ennemis différents avant la prochaine récompense."; break;
         case 698 : texte = "Plus qu'un nouvel ennemi avant la prochaine récompense!!!"; break;
         case 699 : texte = "Accepte ce cadeau pour ta contribution à mon projet :"; break;

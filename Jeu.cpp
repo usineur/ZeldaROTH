@@ -514,7 +514,7 @@ bool Jeu::finTexte(int id) {
                     gpJoueur->setBoostRubis(-160);
                     return true; break;
             }break;
-        case 129 : //ach�te objet
+        case 129 : //achète objet
             Objet* obj;
             obj = NULL;
             switch(gpMonde->contenuValue(gpJoueur->getX()+8, gpJoueur->getY()+7-2)) {
@@ -872,7 +872,7 @@ bool Jeu::exploseMur(int i, int j) {
         gpAudio->playSound(9);
         return true;
     }
-    //sol fissur�
+    //sol fissuré
     if (val==1894) {
         if (zone == 18) gpJoueur->setCoffre(7,4);
         int x1, y1;
@@ -993,7 +993,7 @@ void Jeu::donneObjet(Ennemi* ennemi) {
         ) obj = 0;
     }
     
-    //sp�cial
+    //spécial
     if (zone==20 && gpMonde->regionValue(0)==140*16 
     && gpMonde->regionValue(1)==30*16 && gpJoueur->getCoffre(9,9)==0) obj=I_PETITE_CLE;
     
@@ -1097,7 +1097,7 @@ void Jeu::ouvrePorteDonjon(int x, int y) {
         }
         gpMonde->passage(x1,y1,0);
     }
-    //porte v�rouill�e h b
+    //porte vérouillée h b
     if ((val==1132 || val==1133 || val==1134 || val==1135 || val==1265 || val==1266 
     || val==1267 || val==1268 || val==1425 || val==1426 || val==1427 || val==1428
     || val==1571 || val==1572 || val==1573 || val==1574 || val==1959 || val==1960 
@@ -1137,7 +1137,7 @@ void Jeu::ouvrePorteDonjon(int x, int y) {
         gpMonde->passage(x1,y1,0);
         gpJoueur->setCle(zone-12, 3, gpJoueur->getCle(zone-12, 3)-1);
     }
-    //porte v�rouill�e g d
+    //porte vérouillée g d
     if ((val==1141 || val==1146 || val==1274 || val==1279
     || val==1434 || val==1439 || val==1580 || val==1585
     || val==1689 || val==1694 || val==1837 || val==1842
@@ -1276,7 +1276,7 @@ bool Jeu::verifZoneJoueur(int x, int y, int w, int h, int nbdir) {
     //ouvre porte
     ouvrePorteMaison(x+8, y);
     
-    //portes verrouill�es
+    //portes verrouillées
     ouvrePorteDonjon(x/*+8*/, y/*-2*/);
     
     testInterrupteur(x+8, y+4);
@@ -1347,7 +1347,7 @@ bool Jeu::isNotFull(int x, int y, int w, int h) {
     return true;
 }
 
-//cas g�n�ral
+//cas général
 bool Jeu::isNotFull(int x, int y, int w, int h, int vol, int nage, int spectre) {
     for (int i = x; i < x + w; i++)
         for (int j = y; j < y + h; j++) {
@@ -1378,7 +1378,7 @@ bool Jeu::isVide(int x, int y, int w, int h) {
     return true;
 }
 
-//renvoit vrai pr�sence de glace
+//renvoit vrai présence de glace
 bool Jeu::isGlace(int x, int y, int w, int h) {
     for (int i = x; i < x + w; i++)
         for (int j = y; j < y + h; j++) {
@@ -1400,7 +1400,7 @@ bool Jeu::isMarchable(int i, int j, int vol, int nage, int spectre) {
     if (i < gpMonde->regionValue(0) || i>= gpMonde->regionValue(2) 
     || j < gpMonde->regionValue(1) || j>= gpMonde->regionValue(3)) return false;
     if (spectre) return true;
-    //v�rif caisses
+    //vérif caisses
     Caisse* gpCaisse2 = gpCaisse->getSuivant();
     while (gpCaisse2!=NULL) {
         if (abs(i-gpCaisse2->getX()<16) || abs(j-gpCaisse2->getY()<16)) {

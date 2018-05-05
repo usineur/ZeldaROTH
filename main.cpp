@@ -276,7 +276,7 @@ int main(int argc, char** argv) {
     sceIoMkdir("ux0:data/zroth/save", 0777);
 #endif
 
-    if (argc && argv); //pour �viter un warning.....
+    if (argc && argv); //pour éviter un warning.....
 
     std::srand(std::time(NULL));
 
@@ -345,7 +345,7 @@ int main(int argc, char** argv) {
     sceAppUtilSystemParamGetInt(SCE_SYSTEM_PARAM_ID_LANG, &lang);
 	switch (lang){
 		case SCE_SYSTEM_PARAM_LANG_FRENCH:
-			language = 2;
+			language = LANG_FR;
 			break;
 		case SCE_SYSTEM_PARAM_LANG_SPANISH:
 			language = 5;
@@ -354,7 +354,7 @@ int main(int argc, char** argv) {
 			language = 4;
 			break;
 		default:
-			language = 1;
+			language = LANG_EN;
 			break;
 	}
 
@@ -388,7 +388,7 @@ int main(int argc, char** argv) {
             case 1 : //disclamer
             case 2 : //logo
             case 3 : //titre
-            case 14 : //g�n�rique score
+            case 14 : //générique score
             case 17 : //menu d'aide 1
             case 18 : //menu d'aide 2
                 gpGenerique->draw(gpScreen2); break;
@@ -401,23 +401,23 @@ int main(int argc, char** argv) {
             case 7 : //charger partie
                 gpGenerique->drawCharger(gpScreen2, gpKeyboard->getLigne(),
                     gpKeyboard->getLigneVal()); break;
-            case 8 : //g�n�rique intro
+            case 8 : //générique intro
                 gpGenerique->drawIntro(gpScreen2, gpKeyboard->getIntro()); break;
             case 9 : //effacer partie
                 gpGenerique->drawEffacerSave(gpScreen2, gpKeyboard->getLigne(),
                     gpKeyboard->getLigneVal()); break;
-            case 10 : //g�n�rique d�but chez link
+            case 10 : //générique début chez link
                 gpGenerique->drawDebut(gpScreen2); break;
-            case 11 : //g�n�rique fin
+            case 11 : //générique fin
                 gpGenerique->drawFin(gpScreen2); break;
             case 12 : //carte
                 gpCarte->draw(gpScreen2); break;
-            case 13 : //encyclop�die des monstres
+            case 13 : //encyclopédie des monstres
                 gpEncyclopedie->draw(gpScreen2); break;
             case 15 : //records
             case 19 : //rang 100%
             case 20 : //rang ultime
-            case 21 : //rang de rapidit�
+            case 21 : //rang de rapidité
                 gpGenerique->drawRecord(gpScreen2, gpKeyboard->getLigneRecord(),
                     gpKeyboard->getColonneRecord()); break;
             case 16 : //effacer record

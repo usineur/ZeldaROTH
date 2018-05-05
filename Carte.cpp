@@ -110,7 +110,7 @@ void Carte::initEtage() {
     SDL_BlitSurface(tmp, &src, image, &dst);
     SDL_FreeSurface(tmp);
     
-    //�tage de link
+    //étage de link
     tmp = gpJeu->loadImg("data/images/carte/link.png");
     SDL_SetColorKey(tmp,SDL_SRCCOLORKEY,SDL_MapRGB(tmp->format,0,0,255));
     src.h = 12; src.w = 14;src.x = 0;src.y=0;
@@ -183,7 +183,7 @@ void Carte::initCarte() {
     
     if (gpJoueur->getCle(zone-12,1)) initBoussole();
     
-    //�tage de link
+    //étage de link
     if (gpJeu->getMonde()->etage() == levely) {
         tmp = gpJeu->loadImg("data/images/carte/link.png");
         SDL_SetColorKey(tmp,SDL_SRCCOLORKEY,SDL_MapRGB(tmp->format,0,0,255));
