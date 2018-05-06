@@ -11,7 +11,7 @@
 #include "Generique.h"
 #include "Jeu.h"
 #include "Keyboard.h"
-#include "vita/os_vita.h"
+#include "Lang.h"
 
 Generique::Generique(Jeu* jeu) : gpJeu(jeu), anim(0) {
     imageFin = NULL;
@@ -64,7 +64,7 @@ void Generique::initDisclamer() {
 
 void Generique::initLogo() {
     SDL_Rect dst;
-    SDL_Surface* logo = gpJeu->loadImg("data/images/logos/logo.png");
+    SDL_Surface* logo = gpJeu->loadImg(getLanguage() == LANG_FR ? "data/images/logos/logo_FR.png" : "data/images/logos/logo.png");
     dst.x = 0; dst.y = 0; SDL_BlitSurface(logo, NULL, image, &dst);
     SDL_FreeSurface(logo);
 }

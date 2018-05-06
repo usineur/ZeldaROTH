@@ -43,6 +43,8 @@ Note: saves can be found in `ux0:data/zroth/save` directory.
 Vincent Jouillat - Original game (http://www.zeldaroth.fr/us/zroth.php)
 
 ## Changelog:
+1.2.3:
+- Added German translation
 
 1.2.2:
 - Added missing translation

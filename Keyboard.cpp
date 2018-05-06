@@ -11,14 +11,7 @@
 #include <iostream>
 
 #include <SDL/SDL.h>
-#include "vita/os_vita.h"
-
-/*#include "Menu.h"
-#include "Texte.h"
-#include "Joueur.h"
-#include "Monde.h"
-#include "Projectile.h"
-#include "Jeu.h"*/
+#include "Lang.h"
 #include "Keyboard.h"
 
 #define BTN_TRIANGLE 0

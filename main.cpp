@@ -10,16 +10,16 @@
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_rotozoom.h>
-#include "vita/os_vita.h"
 
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
 #include "Keyboard.h"
 #include "Generique.h"
+#include "Lang.h"
 
 #ifdef __vita__
-#include <psp2/apputil.h> 
+#include <psp2/apputil.h>
 #include <psp2/power.h>
 #include <psp2/kernel/processmgr.h>
 #include <psp2/io/fcntl.h>
@@ -27,7 +27,6 @@
 #include <vitaGL.h>
 #include <imgui_vita.h>
 
-uint8_t language = 1;
 int _newlib_heap_size_user = 192 * 1024 * 1024;
 bool autohide = false;
 bool visible = false;
@@ -43,6 +42,8 @@ float *vertices;
 uint64_t tick;
 SDL_Shader shader = SDL_SHADER_NONE;
 #endif
+
+uint8_t language = LANG_EN;
 
 SDL_Surface* init() {             // initialise SDL
     if(SDL_Init(SDL_INIT_VIDEO) == -1) {
@@ -62,7 +63,6 @@ SDL_Surface* init() {             // initialise SDL
     SDL_ShowCursor(SDL_DISABLE);
 
     language = 1;
-	
 #ifdef __vita__
 
     return SDL_SetVideoMode(320, 240, 16, SDL_HWSURFACE|SDL_DOUBLEBUF);
@@ -72,14 +72,14 @@ SDL_Surface* init() {             // initialise SDL
 }
 
 int getLanguage(void)
-{    
-	return language;
+{
+    return language;
 }
 
 void setLanguage(Jeu* gpJeu, int languageID)
 {
-	if (languageID>MAX_LANG || languageID<MIN_LANG) language = DEFAULT_LANG;
-	else language = languageID;
+    if (languageID>MAX_LANG || languageID<MIN_LANG) language = DEFAULT_LANG;
+    else language = languageID;
     gpJeu->setTextLanguage(language);
 }
 
@@ -216,10 +216,13 @@ void ImGui_callback() {
 
         if (credits_window) {
             ImGui::Begin("Credits", &credits_window);
-            ImGui::TextColored(ImVec4(255, 255, 0, 255), "Zelda: Return of the Hylian v1.2.2");
+            ImGui::TextColored(ImVec4(255, 255, 0, 255), "Zelda: Return of the Hylian v1.2.3");
             ImGui::Text("Game Creator: Vincent Jouillat");
             ImGui::Text("Port Author: usineur");
             ImGui::Text("Added french translation: NicolasR");
+            ImGui::Separator();
+            ImGui::TextColored(ImVec4(255, 255, 0, 255), "Multilingual support");
+            ImGui::Text("French translation: NicolasR");
             ImGui::Separator();
             ImGui::TextColored(ImVec4(255, 255, 0, 255), "Special thanks to:");
             ImGui::Text("Rinnegatamante: SDL 1.2 and imgui Vita ports");
@@ -324,6 +327,7 @@ int main(int argc, char** argv) {
     ImGui_ImplVitaGL_UseIndirectFrontTouch(true);
     ImGui::StyleColorsDark();
     ImGui::GetIO().MouseDrawCursor = false;
+    ImGui::GetIO().IniFilename = "ux0:data/zroth/imgui.ini";
 
     SDL_SetVideoCallback(reinterpret_cast<void(*)(...)>(ImGui_callback));
 #endif
@@ -331,32 +335,31 @@ int main(int argc, char** argv) {
     Audio* gpAudio = new Audio();
     Jeu* gpJeu = new Jeu(gpAudio);
 
-
-    // Init SceAppUtil
-	SceAppUtilInitParam init_param;
-	SceAppUtilBootParam boot_param;
-	memset(&init_param, 0, sizeof(SceAppUtilInitParam));
-	memset(&boot_param, 0, sizeof(SceAppUtilBootParam));
-	sceAppUtilInit(&init_param, &boot_param);
-
 #ifdef __vita__
+    // Init SceAppUtil
+    SceAppUtilInitParam init_param;
+    SceAppUtilBootParam boot_param;
+    memset(&init_param, 0, sizeof(SceAppUtilInitParam));
+    memset(&boot_param, 0, sizeof(SceAppUtilBootParam));
+    sceAppUtilInit(&init_param, &boot_param);
+
     // Getting system language
     int lang = 0;
     sceAppUtilSystemParamGetInt(SCE_SYSTEM_PARAM_ID_LANG, &lang);
-	switch (lang){
-		case SCE_SYSTEM_PARAM_LANG_FRENCH:
-			language = LANG_FR;
-			break;
-		case SCE_SYSTEM_PARAM_LANG_SPANISH:
-			language = 5;
-			break;
-		case SCE_SYSTEM_PARAM_LANG_ITALIAN:
-			language = 4;
-			break;
-		default:
-			language = LANG_EN;
-			break;
-	}
+    switch (lang){
+        case SCE_SYSTEM_PARAM_LANG_FRENCH:
+            language = LANG_FR;
+            break;
+        case SCE_SYSTEM_PARAM_LANG_SPANISH:
+            language = 5;
+            break;
+        case SCE_SYSTEM_PARAM_LANG_ITALIAN:
+            language = 4;
+            break;
+        default:
+            language = LANG_EN;
+            break;
+    }
 
     setLanguage(gpJeu, language);
 #else
