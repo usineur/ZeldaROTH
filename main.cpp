@@ -350,11 +350,11 @@ int main(int argc, char** argv) {
         case SCE_SYSTEM_PARAM_LANG_FRENCH:
             language = LANG_FR;
             break;
-        case SCE_SYSTEM_PARAM_LANG_SPANISH:
-            language = 5;
+        case SCE_SYSTEM_PARAM_LANG_GERMAN:
+            language = LANG_DE;
             break;
-        case SCE_SYSTEM_PARAM_LANG_ITALIAN:
-            language = 4;
+        case SCE_SYSTEM_PARAM_LANG_SPANISH:
+            language = LANG_ES;
             break;
         default:
             language = LANG_EN;

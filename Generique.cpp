@@ -64,7 +64,17 @@ void Generique::initDisclamer() {
 
 void Generique::initLogo() {
     SDL_Rect dst;
-    SDL_Surface* logo = gpJeu->loadImg(getLanguage() == LANG_FR ? "data/images/logos/logo_FR.png" : "data/images/logos/logo.png");
+    SDL_Surface* logo;
+    switch(getLanguage()){
+        case LANG_FR:
+            logo = gpJeu->loadImg("data/images/logos/logo_FR.png");
+            break;
+        case LANG_ES:
+            logo = gpJeu->loadImg("data/images/logos/logo_ES.png");
+            break;
+        default:
+            logo = gpJeu->loadImg("data/images/logos/logo.png");
+    }
     dst.x = 0; dst.y = 0; SDL_BlitSurface(logo, NULL, image, &dst);
     SDL_FreeSurface(logo);
 }
@@ -84,13 +94,14 @@ void Generique::initTitre() {
 void Generique::initSelection() {
     SDL_Rect src; src.w = 16; src.h = 16;
     SDL_Rect dst;
+    int language = getLanguage();  
     
     src.x = 16; src.y = 16;
     for (int j = 0; j < 240; j+=16)
         for (int i = 0; i < 320; i+=16) {
             dst.x = i; dst.y = j; SDL_BlitSurface(imageCadre, &src, image, &dst);
         }
-            
+
     src.x = 0; src.y = 0; dst.x = 16; dst.y = 0; 
     SDL_BlitSurface(imageCadre, &src, image, &dst);
     src.x = 0; src.y = 16; dst.x = 16; dst.y = 16; 
@@ -98,7 +109,25 @@ void Generique::initSelection() {
     src.x = 0; src.y = 32; dst.x = 16; dst.y = 32; 
     SDL_BlitSurface(imageCadre, &src, image, &dst);
     
-    for (int i = 0; i < 8; i++) {
+    int widthSelectCadre = 0;
+    int paddingSelectCadre = 0;
+    switch(language) {
+        case LANG_ES:
+            widthSelectCadre = 9;
+            paddingSelectCadre = 48;
+            break;
+        case LANG_FR:
+            widthSelectCadre = 8;
+            paddingSelectCadre = 32;
+            break;
+        case LANG_EN:
+        case LANG_DE:
+        default:
+            widthSelectCadre = 7;
+            paddingSelectCadre = 0;
+    }
+
+    for (int i = 0; i < widthSelectCadre; i++) {
         src.x = 16; src.y = 0; dst.x = 32+16*i; dst.y = 0; 
         SDL_BlitSurface(imageCadre, &src, image, &dst);
         src.x = 16; src.y = 64; dst.x = 32+16*i; dst.y = 16; 
@@ -106,12 +135,12 @@ void Generique::initSelection() {
         src.x = 16; src.y = 32; dst.x = 32+16*i; dst.y = 32; 
         SDL_BlitSurface(imageCadre, &src, image, &dst);
     }
-    
-    src.x = 32; src.y = 0; dst.x = 160; dst.y = 0; 
+
+    src.x = 32; src.y = 0; dst.x = 128 + paddingSelectCadre; dst.y = 0; 
     SDL_BlitSurface(imageCadre, &src, image, &dst);
-    src.x = 32; src.y = 16; dst.x = 160; dst.y = 16; 
+    src.x = 32; src.y = 16; dst.x = 128 + paddingSelectCadre; dst.y = 16; 
     SDL_BlitSurface(imageCadre, &src, image, &dst);
-    src.x = 32; src.y = 32; dst.x = 160; dst.y = 32; 
+    src.x = 32; src.y = 32; dst.x = 128 + paddingSelectCadre; dst.y = 32; 
     SDL_BlitSurface(imageCadre, &src, image, &dst);
     
     cadre(16,48,288,32);
@@ -345,7 +374,8 @@ void Generique::initNuit() {
 void Generique::initAide1() {
     SDL_Rect src; src.w = 16; src.h = 16;
     SDL_Rect dst;
-    
+    int language = getLanguage();
+
     src.x = 16; src.y = 16;
     for (int j = 0; j < 240; j+=16)
         for (int i = 0; i < 320; i+=16) {
@@ -378,8 +408,17 @@ void Generique::initAide1() {
     cadre(16,64-8,288,128);
     
     cadre(16,192+8,288,32);
-    
-    gpJeu->afficheTexteAvecId(image, 223, 40, 16);
+    int paddingTitle = 0;
+    switch(language){
+        case LANG_DE:
+        case LANG_ES:
+            paddingTitle = -3;
+            break;
+        default:
+            paddingTitle = 0;
+    }
+
+    gpJeu->afficheTexteAvecId(image, 223, 40 + paddingTitle, 16);
     gpJeu->afficheTexteAvecId(image, 224, 24, 208);
     
     int ligne = 64;
@@ -430,7 +469,8 @@ void Generique::initAide1() {
 void Generique::initAide2() {
     SDL_Rect src; src.w = 16; src.h = 16;
     SDL_Rect dst;
-    
+    int language = getLanguage();
+
     src.x = 16; src.y = 16;
     for (int j = 0; j < 240; j+=16)
         for (int i = 0; i < 320; i+=16) {
@@ -464,7 +504,17 @@ void Generique::initAide2() {
     
     cadre(16,192+8,288,32);
     
-    gpJeu->afficheTexteAvecId(image, 240, 40, 16);
+    int paddingTitle = 0;
+    switch(language){
+        case LANG_DE:
+        case LANG_ES:
+            paddingTitle = -3;
+            break;
+        default:
+            paddingTitle = 0;
+    }
+
+    gpJeu->afficheTexteAvecId(image, 240, 40 + paddingTitle, 16);
     gpJeu->afficheTexteAvecId(image, 241, 24, 208);
     
     int ligne = 64-112;
@@ -506,8 +556,25 @@ void Generique::initRang(int i) {
     int paddingY = 0;
     switch (i) {
         case 0 :
-            paddingX = 2+16;
-            paddingY = 4+32;
+            paddingX = 0;
+            paddingY = 0;
+            switch(languageId){
+                case LANG_FR:
+                    paddingX = 0;
+                    paddingY = 0;
+                    break;
+                case LANG_ES:
+                    paddingX = 8;
+                    paddingY = 16;
+                    break;
+                case LANG_DE:
+                    paddingX = 2+16+8;
+                    paddingY = 4+32+16;
+                    break;
+                default:
+                    paddingX = 2+16;
+                    paddingY = 4+32;
+            }
             if (languageId == LANG_FR){
                 paddingX = 0;
                 paddingY = 0;
@@ -519,11 +586,21 @@ void Generique::initRang(int i) {
             gpJeu->afficheTexteAvecId(image, 252, 96-paddingX, 120);
             break;
         case 1 :
-            paddingX = 8+16;
-            paddingY = 16+32;
-            if (languageId == LANG_FR){
-                paddingX = 0;
-                paddingY = 0;
+            paddingX = 0;
+            paddingY = 0;
+            switch(languageId){
+                case LANG_FR:
+                    paddingX = 0;
+                    paddingY = 0;
+                    break;
+                case LANG_DE:
+                case LANG_ES:
+                    paddingX = 8;
+                    paddingY = 16;
+                    break;
+                default:
+                    paddingX = 8+16;
+                    paddingY = 16+32;
             }
             cadre(64-paddingX,64,192+paddingY,112);
             int l; l=72;
@@ -540,9 +617,15 @@ void Generique::initRang(int i) {
         case 2 :
             paddingX = 10;
             paddingY = 20;
-            if (languageId == LANG_FR){
-                paddingX = 0;
-                paddingY = 0;
+            switch(languageId){
+                case LANG_FR:
+                case LANG_ES:
+                    paddingX = 0;
+                    paddingY = 0;
+                    break;
+                default:
+                    paddingX = 10;
+                    paddingY = 20;
             }
             cadre(71-paddingX,88,178+paddingY,64);
             if (gpJeu->getKeyboard()->getRang(i)) 

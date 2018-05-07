@@ -35,16 +35,26 @@ Texte::~Texte() {
 }
 
 void Texte::setTextLanguage(int id){
+    SDL_FreeSurface(imageFont);
     switch(id){
         case LANG_FR:
             getTextByLangFunc = &Texte::getTexteFR;
+            imageFont = gpJeu->loadImg("data/images/texte/font.png");
             break;
         case LANG_DE:
             getTextByLangFunc = &Texte::getTexteDE;
+            imageFont = gpJeu->loadImg("data/images/texte/font.png");
+            break;
+        case LANG_ES:
+            getTextByLangFunc = &Texte::getTexteES;
+            imageFont = gpJeu->loadImg("data/images/texte/font_ES.png");
             break;
         default:
             getTextByLangFunc = &Texte::getTexteEN;
+            imageFont = gpJeu->loadImg("data/images/texte/font.png");
     }
+
+    SDL_SetColorKey(imageFont,SDL_SRCCOLORKEY,SDL_MapRGB(imageFont->format,0,0,255));
 }
 
 std::string Texte::getTexteEN(int id, std::string s){
@@ -159,7 +169,7 @@ std::string Texte::getTexteEN(int id, std::string s){
             break;
         case 224 :
 #ifdef __vita__
-            texte = "Return to the game: Cross - Next: <";
+            texte = "Return to the game: Cross - Next: >";
 #else
             texte = "Return to the game: Enter - Next: Right";
 #endif
@@ -274,7 +284,7 @@ std::string Texte::getTexteEN(int id, std::string s){
             break;
         case 241 :    
 #ifdef __vita__
-            texte = "Return to the game: Cross - Previous: >";
+            texte = "Return to the game: Cross - Previous: <";
 #else
             texte = "Return to the game: Enter - Previous: Left";
 #endif
@@ -897,12 +907,12 @@ std::string Texte::getTexteFR(int id, std::string s){
 #ifdef __vita__
             texte = "Afficher la carte : D-Pad Gauche (ext/donjons)";
 #else
-            texte = "Afficher la carte : D-Pad Gauche (dans les donjons)";
+            texte = "Afficher la carte : P (dans les donjons)";
 #endif
             break;
         case 235 :
 #ifdef __vita__
-            texte = "Afficher la carte : L (extérieur ou donjons)";
+            texte = "Afficher la carte : L (ext/donjons)";
 #else
             texte = "Afficher la carte : P (dans les donjons)";
 #endif
@@ -1495,9 +1505,9 @@ std::string Texte::getTexteDE(int id, std::string s){
             break;
         case 224 :
 #ifdef __vita__
-            texte = "Zurück zum Spiel: Enter - Nächste S.: >";
+            texte = "Zurück zum Spiel: Kreutz - Nächste S.: >";
 #else
-            texte = "Zurück zum Spiel: Enter - Nächste S.: Rechts";
+            texte = "Zurück zum Spiel: Enter - Nächste S.: Links";
 #endif
             break;
         case 225 :
@@ -1610,9 +1620,9 @@ std::string Texte::getTexteDE(int id, std::string s){
             break;
         case 241 :    
 #ifdef __vita__
-            texte = "Zurück zum Spiel: Enter - Vorige S.: <";
+            texte = "Zurück zum Spiel: Kreutz - Vorige S.: <";
 #else
-            texte = "Zurück zum Spiel: Enter - Vorige S.: Links";
+            texte = "Zurück zum Spiel: Enter - Vorige S.: Rechts";
 #endif
             break;
         case 242 :
@@ -1631,7 +1641,7 @@ std::string Texte::getTexteDE(int id, std::string s){
             break;
         case 244 :
 #ifdef __vita__
-            texte = "Plan ansehen: D-Pad Links (außen oder im Tempel)";
+            texte = "Plan ansehen: D-Pad Links (außen / im Tempel)";
 #else
             texte = "Plan ansehen: P (außen oder im Tempel)";
 #endif
@@ -1688,19 +1698,19 @@ std::string Texte::getTexteDE(int id, std::string s){
             texte = "TITEL: -nicht geschafft-";
             break;
         case 255 :
-            texte = "Hyrule gerettet, ohne jemals zu sterben,";
+            texte = "Hyrule gerettet, ohne jemals zu";
             break;
         case 256 :
-            texte = "höchstens 10 Leben besitzend,";
+            texte = "sterben, kein Schild genommen,";
             break;
         case 257 :
-            texte = "mit keiner Fee gesprochen,";
+            texte = "höchstens 10 Leben besitzend,";
             break;
         case 258 :
-            texte = "keine Flaschen gekauft";
+            texte = "mit keiner Fee gesprochen";
             break;
         case 259 :
-            texte = "un kein Schild genommen";
+            texte = "und keine Flaschen gekauft";
             break;
         case 260 :
             texte = "TITEL: Turbozocker";
@@ -2053,6 +2063,676 @@ std::string Texte::getTexteDE(int id, std::string s){
 #endif
         default : 
             texte = "FALSH TEXT";
+    }
+
+    return texte;
+}
+
+std::string Texte::getTexteES(int id, std::string s){
+    std::string texte = "";
+    switch(id) {
+        // 0 -> 99 : Carte
+        case 0 : 
+            texte = "Templo del Bosque"; 
+            break;
+        case 1 : 
+            texte = "Templo del Agua"; 
+            break;
+        case 2 : 
+            texte = "Templo de la Montaña";
+            break;
+        case 3 : 
+            texte = "Templo del Desierto"; 
+            break;
+        case 4 : 
+            texte = "Templo de las Tinieblas"; 
+            break;
+        case 5 : 
+            texte = "Templo del Fuego"; 
+            break;
+        case 6 : 
+            texte = "Templo de Hielo"; 
+            break;
+        case 7 : 
+            texte = "Templo Oscuro"; 
+            break;
+        case 8 : 
+            texte = "Castillo de Hyrule"; 
+            break;
+
+        // 100 -> 199 : Encyclopedie
+        case 100 : 
+            texte = "MONSTRUOS " + s;
+            break;
+            
+        // 200 -> 299 : Generique
+        case 200 :
+            texte = "PANTALLA DE SELECCION";
+            break;
+        case 201 : 
+            texte = "1.";
+            break;
+        case 202 :
+            texte = "2.";
+            break;
+        case 203 : 
+            texte = "3.";
+            break;
+        case 204 :
+            texte = "OPCIONES";
+            break;
+        case 205 :
+            texte = "RECORDS";
+            break;
+        case 206 :
+            texte = "OPCIONES";
+            break;
+        case 207 :
+            texte = "MUSICA";
+            break;
+        case 208 :
+            texte = "SONIDOS";
+            break;
+        case 209 :
+            texte = "ANTERIOR";
+            break;
+        case 210 :
+            texte = "RECORDS";
+            break;
+        case 211 :
+            texte = "MEJOR TIEMPO : " + s;
+            break;
+        case 212 :
+            texte = "RANGO DE LOS 100%";
+            break;
+        case 213 :
+            texte = "RANGO ULTIMO";
+            break;
+        case 214 :
+            texte = "RANGO DE RAPIDEZ";
+            break;
+        case 215 :
+            texte = "ANTERIOR";
+            break;
+        case 216 :
+            texte = "BORRAR";
+            break;
+        case 217 :
+            texte = "BORRAR ?";
+            break;
+        case 218 :
+            texte = "SI";
+            break;
+        case 219 :
+            texte = "NO";
+            break;
+        case 220 :
+            texte = "CARGAR";
+            break;
+        case 221 :
+            texte = "BORRAR";
+            break;
+        case 222 :
+            texte = "ANULAR";
+            break;
+        case 223 :
+            texte = "AYUDA 1/2";
+            break;
+        case 224 :
+#ifdef __vita__
+            texte = "Volver al juego : Cruz - Siguiente : >";
+#else
+            texte = "Volver al juego : Enter - Siguiente : Derecha";
+#endif
+            break;
+        case 225 :
+#ifdef __vita__
+            texte = "Leer / Abrir / Hablar : Círculo";
+#else
+            texte = "Leer / Abrir / Hablar : Espacio: Espace";
+#endif
+            break;
+        case 226 :
+#ifdef __vita__
+            texte = "Validar / Pasar texto : Cruz";
+#else
+            texte = "Validar / Pasar texto : Enter";
+#endif
+            break;
+        case 227 :
+#ifdef __vita__
+            texte = "Mover a Link : Joystick Izquierda";
+#else
+            texte = "Mover a Link : Flechas de dirección";
+#endif
+            break;
+        case 228 :
+#ifdef __vita__
+            texte = "Correr : L (mantenido) / R";
+#else
+            texte = "Correr : Mayus mantenido o Capslock";
+#endif
+            break;
+        case 229 :
+#ifdef __vita__
+            texte = "Golpe de espada : Cuadrado";
+#else
+            texte = "Golpe de espada : Z o W";
+#endif
+            break;
+        case 230 :
+#ifdef __vita__
+            texte = "Giratorio : Cuadrado mantenido luego soltado";
+#else
+            texte = "Giratorio : Z o W mantenido luego soltado";
+#endif
+            break;
+        case 231 :
+#ifdef __vita__
+            texte = "Menu de selección del objeto : D-Pad Derecha";
+#else
+            texte = "Menu de selección del objeto : Enter";
+#endif
+            break;
+        case 232 :
+#ifdef __vita__
+            texte = "Utilizar el objeto seleccionnado : Triángulo";
+#else
+            texte = "Utilizar el objeto seleccionnado : X";
+#endif
+            break;
+        case 233 :
+#ifdef __vita__
+            texte = "Levantar sin equipar los guantes : Cruz";
+#else
+            texte = "Levantar sin equipar los guantes : C";
+#endif
+            break;
+        case 234 :
+#ifdef __vita__
+            texte = "AVer el mapa : D-Pad Izquierda (exterior/templos)";
+#else
+            texte = "AVer el mapa : P (exterior/templos)";
+#endif
+            break;
+        case 235 :
+#ifdef __vita__
+            texte = "Ver el mapa : L (en los templos)";
+#else
+            texte = "Ver el mapa : P (en los templos)";
+#endif
+            break;
+        case 236 :
+#ifdef __vita__
+            texte = "Ver los monstros vencidos : D-Pad Superior";
+#else
+            texte = "Ver los monstros vencidos : M";
+#endif
+            break;
+        case 237 :
+#ifdef __vita__
+            texte = "Mirar alrededor : Joystick Derecha";
+#else
+            texte = "Mirar alrededor : Ctrl y dirección";
+#endif
+            break;
+        case 238 :
+#ifdef __vita__
+            texte = "Grabar / Quitar : Start";
+#else
+            texte = "Grabar / Quitar : Esc";
+#endif
+            break;
+        case 239 :
+#ifdef __vita__
+            texte = "";
+#else
+            texte = "Agrandar / Encoger : Ctrl y Enter";
+#endif
+            break;
+        case 240 :
+            texte = "AYUDA 2/2";
+            break;
+        case 241 :    
+#ifdef __vita__
+            texte = "Volver al juego : Cruz - Anterior : <";
+#else
+            texte = "Volver al juego : Enter - Anterior : Izquierda";
+#endif
+            break;
+        case 242 :
+#ifdef __vita__
+            texte = "Utilizar el objeto seleccionnado : Triángulo";
+#else
+            texte = "Utilizar el objeto seleccionnado : X";
+#endif
+            break;
+        case 243 :
+#ifdef __vita__
+            texte = "Levantar sin equipar los guantes : Cruz"; 
+#else
+            texte = "Levantar sin equipar los guantes : C"; 
+#endif
+            break;
+        case 244 :
+#ifdef __vita__
+            texte = "Ver el mapa : D-Pad Izquierda (exterior/templos)";
+#else
+            texte = "Ver el mapa : P (exterior o templos)";
+#endif
+            break;
+        case 245 :
+#ifdef __vita__
+            texte = "Ver el mapa : D-Pad Izquierda (en los templos)";
+#else
+            texte = "Ver el mapa : P (en los templos)";
+#endif
+            break;
+        case 246 :
+#ifdef __vita__
+            texte = "Ver los monstruos vencidos : D-Pad Superior";
+#else
+            texte = "Ver los monstruos vencidos : M";
+#endif
+            break;
+        case 247 :
+#ifdef __vita__
+            texte = "Mirar alrededor : Joystick Derecha";
+#else
+            texte = "Mirar alrededor : Ctrl y dirección";
+#endif
+            break;
+        case 248 :
+#ifdef __vita__
+            texte = "Grabar / Quitar : Start";
+#else
+            texte = "Grabar / Quitar : Esc";
+#endif
+            break;
+        case 249 :
+#ifdef __vita__
+            texte = "";
+#else
+            texte = "Agrandar / Encoger : Ctrl y Enter";
+#endif
+            break;
+
+        case 250 :
+            texte = "RANGO : Héroe de Hyrule";
+            break;
+        case 251 :
+            texte = "RANGO : DESCONOCIDO";
+            break;
+        case 252 :
+            texte = "Acabar el juego a 100%";
+            break;
+        case 253 :
+            texte = "RANGO : Chulo";
+            break;
+        case 254 :
+            texte = "RANGO : DESCONOCIDO";
+            break;
+        case 255 :
+            texte = "Acabar el juego sin morir,";
+            break;
+        case 256 :
+            texte = "con 10 corazones como máximo,";
+            break;
+        case 257 :
+            texte = "sin hablar a las Grandes Hadas,";
+            break;
+        case 258 :
+            texte = "sin comprar botellas";
+            break;
+        case 259 :
+            texte = "y sin coger el escudo.";
+            break;
+        case 260 :
+            texte = "RANGO : Corredor de Hyrule";
+            break;
+        case 261 :
+            texte = "RANGO : DESCONOCIDO";
+            break;
+        case 262 :
+            texte = "Acabar el juego en menos de";
+            break;
+        case 263 :
+            texte = "dos horas";
+            break;
+        case 264 : 
+            texte = "RESULTADOS :";
+            break;
+        case 265 :
+            texte = "Tiempo jugando : " + s;
+            break;
+        case 266 :
+            texte = "Muerto " + s + " veces";
+            break;
+        case 267 :
+            texte = "Muerto " + s + " veces";
+            break;
+        case 268 :
+            texte = "Cuarto de corazón : " + s + " / 36";
+            break;
+        case 269 :
+            texte = "Objetos : " + s + " / 56";
+            break;
+        case 270 :
+            texte = "Tipos de enemigos vencidos : " + s + " / 46";
+            break;
+        case 271 :
+            texte = "Has acabado este juego al " + s + "%, felicitaciones !";
+            break;
+        case 272 :
+            texte = "RANGO : ";
+            break;
+        case 273 :
+            texte = " - Chulo";
+            break;
+        case 274 :
+            texte = " - Héroe de Hyrule";
+            break;
+        case 275 :
+            texte = " - Perfeccionista";
+            break;
+        case 276 :
+            texte = " - Fan de Zelda";
+            break;
+        case 277 :
+#ifdef __vita__
+            texte = " - Genio del teclado";
+#else
+            texte = " - Genio del teclado";
+#endif
+            break;
+        case 278 :
+            texte = " - Veterano";
+            break;
+        case 279 :
+            texte = " - Principiante";
+            break;
+        case 280 :
+            texte = " - Muerto en vida";
+            break;
+        case 281 : 
+            texte = " - Kamikaze";
+            break;
+        case 282 :
+            texte = " - Corredor de Hyrule";
+            break;
+        case 283 :
+            texte = "IDIOMA";
+            break;
+        case 284 :
+            texte = "Español";
+            break;
+
+        // 300 -> 399 : Menu
+        case 300 :
+            texte = "X";
+            break;
+        case 301 :
+            texte = "ESTATUTO :";
+            break;
+        case 302 :
+            texte = "VIDA       : " + s;
+            break;
+        case 303 :
+            texte = "MAGIA     : " + s;
+            break;
+        case 304 :
+            texte = "FUERZA     : " + s;
+            break;
+        case 305 :
+            texte = "DEFENSA   : " + s;
+            break;
+        case 306 :
+            texte = "TIEMPO     : " + s;
+            break;
+        case 307 :
+            texte = "CRISTALES :";
+            break;
+
+        // 500 -> ?? : Texte
+        case 501 : texte = "Has encontrado un escudo !!!**Tu defensa aumenta de un punto!"; break;
+#ifdef __vita__
+        case 502 : texte = "Has encontrado una espada !!!**Ahora puedes defenderte contra los monstros con la tecla Cuadrado !!!*Manten Cuadrado para descargar el giratorio !"; break;
+#else
+        case 502 : texte = "Has encontrado una espada !!!**Ahora puedes defenderte contra los monstros con la tecla Z (o W) !!!*Manten Z para descargar el giratorio !"; break;
+#endif
+        case 503 : texte = "Has encontrado un cuarto de corazón !!!"; break;
+        case 504 : texte = "Con "+s+" mas obtendras un corazón adicional !!!"; break;
+        case 505 : texte = "Tu numero de corazónes acaba de aumentar !!!"; break;
+        case 511 : texte = "N : Casa de Link*O : Finca de Hyrule*E : Templo del Bosque"; break;
+        case 512 : texte = "Templo de la Montaña**No aconsejado para cardiacos, miedosos, y emotivos en general."; break;
+        case 513 : texte = "O : Entrada del desierto*N : Templo de la Montaña"; break;
+        case 514 : texte = "N : Templo de la Montaña*S : Finca de Hyrule"; break;
+        case 515 : texte = "N : Montaña de la Muerte"; break;
+        case 516 : texte = "E : Entrada del Bosque"; break;
+        case 517 : texte = "S : Lago de Hylia*E : Cementerio de los Espíritus"; break;
+        case 518 : texte = "S : Hacia el pueblo Kakariko"; break;
+        case 519 : texte = "N : Pueblo Kakariko"; break;
+        case 520 : texte = "N : Finca de Hyrule"; break;
+        case 521 : texte = "O : Tierras de Fuego"; break;
+        case 522 : texte = "E : Pueblo de la Sombra*- Prohibido a los seres vivos -"; break;
+        case 523 : texte = "Templo de las tinieblas**Si eres un fantasma y que buscas un trabajo, más bien vente a estar parado aquí."; break;
+        case 524 : texte = "N : Pueblo de la Sombra*O : Lago de Hylia"; break;
+        case 525 : texte = "N : Cementerio de los Espíritus**Entrada prohibida"; break;
+        case 526 : texte = "Pueblo de la Sombra"; break;
+        case 527 : texte = "Vendo una botella por 100 rupias, quieres ?*              SI ?            no  "; break;
+        case 528 : texte = "Vendo una botella por 100 rupias, quieres ?*              si              NO ?"; break;
+        case 529 : texte = "Lo siento, pero no tienes bastantes rupias."; break;
+        case 530 : texte = "Muchas gracias, he aquí tu botella."; break;
+        case 531 : texte = "Vuelve si cambias de opinión."; break;
+        case 532 : texte = "Lo siento, no tengo más botellas."; break;
+        case 533 : texte = "Has encontrado una botella vacía !!!**Podrás utilizarla para almacenar pozimas !!!"; break;
+        case 535 : texte = "Los habitantes de este pueblo tienen un dialecto muy especial, no entiendo nada..."; break;
+        case 536 : texte = "@+@+@+@+@+@+@@@+*@=++=@=+@=+@=+=@*+@+@+@+=+="; break;
+        case 537 : texte = "Obten una autorization del jefe si quieres pasar de verdad !!!"; break;
+        case 538 : texte = "El jefe te autorizó ??? Grrrr... Pues apartate!!!"; break;
+        case 539 : texte = "Fuera de aquí !!!"; break;
+        case 540 : texte = "No solemos ver muchos visitantes por aquí..."; break;
+        case 541 : texte = "Los monstruos de aquí no temen muchas cosas, por suerte atacan solo los humanos."; break;
+        case 542 : texte = "De verdad ?*Entiendes lo que digo ?"; break;
+        case 543 : texte = "N : Desierto y Pueblo Gerudo"; break;
+        case 544 : texte = "S : Lago de Hylia*O : Castillo de Hyrule"; break;
+        case 545 : texte = "Pueblo Kakariko"; break;
+        case 546 : texte = "O : Castillo de Hyrule"; break;
+        case 547 : texte = "Que día tan bueno !!!"; break;
+        case 548 : texte = "Pero porque acepté cuidar estos bichos ???*Odio las gallinas !!!"; break;
+        case 549 : texte = "Se encuentran muchas cosas en las tiendas de este pueblo."; break;
+        case 550 : texte = "S : Pueblo Kakariko*O : Desierto*E : Montaña de la Muerte"; break;
+        case 551 : texte = "Pueblo Gerudo"; break;
+        case 552 : texte = "Perdido en el desierto ?*Estas aquí :*                        X"; break;
+        case 554 : texte = "S : Hacia el Castillo de Hyrule"; break;
+        case 555 : texte = "Templo del Desierto**Ven a probar nuestros baños.*(agua no potable)"; break;
+        case 556 : texte = "Templo del Bosque**Salve los árboles, coma castor!!!"; break;
+        case 557 : texte = "Templo del Lago**Gorro de baño obligatorio."; break;
+        case 558 : texte = "Templo de Hielo**El personal insiste en recordar que un calabozo no es una pista de patinaje."; break;
+        case 559 : texte = "Has visto el herrero del pueblo ?*Dicen que es muy avispado para mejorar el equipo de los aventureros, mucha gente le visita."; break;
+        case 560 : texte = "El templo esta en el fondo del desierto, en puesto de una antigua oasis."; break;
+        case 561 : texte = "S : Tierras de Fuego*E : Pueblo Kakariko"; break;
+        case 562 : texte = "Castillo de Hyrule"; break;
+        case 563 : texte = "E : Pueblo Kakariko"; break;
+        case 564 : texte = "O : Tortuga de Roca*E : Lago de Hylia"; break;
+        case 565 : texte = "Templo Oculto**Aquí descansa la Espada del Golpe Contra el Mal, la Espada Maestra."; break;
+        case 566 : texte = "N : Hacia el Cimenterio encantado"; break;
+#ifdef __vita__
+        case 567 : texte = "Has encontrado el mapa del calabozo !!!*Pulsa D-Pad Izquierda para verlo."; break;
+#else
+        case 567 : texte = "Has encontrado el mapa del calabozo !!!*Pulsa P para verlo."; break;
+#endif
+        case 568 : texte = "Has encontrado la brújula !!!*Puedes localizar el jefe y las arcas sobre el mapa."; break;
+        case 569 : texte = "Has encontrado la llave del jefe !!!"; break;
+        case 570 : texte = "Has encontrado una llave pequeña !!!*Acercate de una puerta para abrirla."; break;
+#ifdef __vita__
+        case 571 : texte = "Has encontrado los Guantes !!!*Utilizalos para levantar objetos equipandolos o pulsando Cruz."; break;
+#else        
+        case 571 : texte = "Has encontrado los Guantes !!!*Utilizalos para levantar objetos equipandolos o pulsando C."; break;
+#endif        
+        case 572 : texte = "Has encontrado un cristal magico !!!"; break;
+        case 573 : texte = "Cómo podría ser útil... ?"; break;
+        case 574 : texte = "Te quedan aún "+s+" por encontrar !!!"; break;
+        case 575 : texte = "Solo 2 que encontrar !!!"; break;
+        case 576 : texte = "Te falta solo uno !!!"; break;
+        case 577 : texte = "Tienes todo los cristales, corre hasta el castillo a salvar a Zelda !!!"; break;
+        case 580 : texte = "Has encontrado el lanzagarfios !!! *Utilizalo para atravesar obstáculos."; break;
+        case 581 : texte = "Has encontrado la lampara !!! *Utilizala para hacer surgir llamas."; break;
+        case 582 : texte = "Has encontrado las aletas !!! *Equipalas para ir en el agua."; break;
+        case 583 : texte = "Has encontrado el martillo mágico !!! *Utilizalo para hundir obstáculos."; break;
+        case 584 : texte = "Has encontrado la varilla de fuego !!! *De ahora en adelante puedes lanzar potentes llamas remotas"; break;
+        case 585 : texte = "Has encontrado la varilla de hielo !!! *Utilizala para congelar todo a distancia."; break;
+        case 586 : texte = "Has encontrado la Espada Maestra !!! *Incluso Ganon no debería ser capaz de resistir a su potencia !!! (en teoría)"; break;
+        case 587 : texte = "Felicitaciones Link, has conseguido venir a liberarme!!!***Vamonos de prisa a encontrar a Ganon, tenemos que retomar la Trifuerza a toda costa !"; break;
+        case 589 : texte = "El paso secreto detrás de la sala del trono lleva a Ganon. Vamos rapido !"; break;
+        case 590 : texte = "Casi hemos llegado, sigueme !"; break;
+        case 591 : texte = "Tengo miedo que no puedas nunca vencer a Ganon con tus armas actuales...*Ve a hablar con el jefe del pueblo Kakariko, estoy segura que él va a encontrar una solución."; break;
+        case 592 : texte = "Ganon esta ya detrás de esta puerta, voy a curarte las heridas."; break;
+        case 593 : texte = "Ganon todavía esta en algún sitio del castillo."; break;
+        case 594 : texte = "Tendrías que esperar a la princesa Zelda !!!"; break;
+        case 595 : texte = "No tienes la extraña impresión de olvidar a alguien por casualidad ???"; break;
+        case 596 : texte = "Zelda te esta esperando!!!"; break;
+        case 597 : texte = "Has encontrado la Trifuerza!!!"; break;
+        case 598 : texte = "Has encontrado el libro de Mudora!!! **Ahora entiendes el hyliano antiguo!!!"; break;
+        case 599 : texte = "Felicitaciones Link, has conseguido encontrarme. En recompensa, te ofrezco el pendiente de Din, aumenta tu defensa de un punto."; break;
+        case 600 : texte = "Felicitaciones Link, has conseguido encontrarme. En recompensa, te ofrezco el pendiente de Nayru, aumenta tu defensa de dos puntos!!!"; break;
+        case 601 : texte = "..."; break;
+        case 602 : texte = "Has obtenido un pendiente mágico !!!**Tu defensa acaba de aumentar!!!"; break;
+        case 603 : texte = "Felicitaciones Link, has conseguido encontrarme. Para recompensarte, voy a doblar la capacidad de tu reserva de magia!!!"; break;
+        case 604 : texte = "Tu reserva de magia ha doblado!!!"; break;
+        case 605 : texte = "Vuelve cuando tengas una botella vacía  y te venderé una pozima roja que te devuelve la energia."; break;
+        case 606 : texte = "Una pozima roja por 60 rupias, la quieres ?*              SI ?            no  "; break;
+        case 607 : texte = "Una pozima roja para 60 rupias, la quieres ?*              si              NO ?"; break;
+        case 608 : texte = "Gracias, toma tu pozima.";break;
+        case 609 : texte = "Has obtenido una pozima roja !!!*Bebela para renovar tu energia!!!"; break;
+        case 610 : texte = "Has obtenido una pozima verde !!!*Bebela para renovar tu magia!!!"; break;
+        case 611 : texte = "Has obtenido una pozima azul !!!*Bebela para renovar tu energia y tu magia!!!"; break;
+        case 612 : texte = "Ola, en que puedo ayudarle ?"; break;
+        case 613 : texte = "Hic! Dicen que una hada daría objetos encantados... Hic! ...a los aventureros que la encuentran... Hic!!!"; break;
+        case 614 : texte = "Un corazón por 10 rupias, vale ?**              SI ?            no  "; break;
+        case 615 : texte = "Un corazón por 10 rupias, vale ?**             si              NO ?"; break;
+        case 616 : texte = "Un poco de magia por 20 rupias, vale ?**              SI ?            no  "; break;
+        case 617 : texte = "Un poco de magia por 20 rupias, vale ?**              si              NO ?"; break;
+        case 618 : texte = "Mucho magia por 30 rupias, vale ?**              SI ?            no  "; break;
+        case 619 : texte = "Mucho magia por 30 rupias, vale ?**              si              NO ?"; break;
+        case 620 : texte = "5 flechas por 30 rupias, vale ?**              SI ?            no  "; break;
+        case 621 : texte = "5 flechas por 30 rupias, vale ?**              si              NO ?"; break;
+        case 622 : texte = "Una bomba por 30 rupias, vale ?**              SI ?            no  "; break;
+        case 623 : texte = "Una bomba por 30 rupias, vale ?**              si              NO ?"; break;
+        case 624 : texte = "Un arco por 1000 rupias, vale ?**              SI ?            no  "; break;
+        case 625 : texte = "Un arco por 1000 rupias, vale ?**              si              NO ?"; break;
+        case 626 : texte = "Un arco por 50 rupias, vale ?**              SI ?            no  "; break;
+        case 627 : texte = "Un arco por 50 rupias, vale ?**              si              NO ?"; break;
+        case 628 : texte = "No necesitas eso ahora."; break;
+        case 629 : texte = "Gracias."; break;
+        case 630 : texte = "Has obtenido el arco !!!*Utilizalo para alcanzar objetivos alejados."; break;
+        case 631 : texte = "Elige lo que quieras."; break;
+        case 632 : texte = "Que ???*Estas en contratado por el jefe ???*Pues vale, te hago une reducción sobre el arco..."; break;
+        case 633 : texte = "Buenos días Link, soy el jefe de este pueblo, me figuraba que vendriás."; break;
+        case 634 : texte = "Desde esta mañana monstruos aparecen en muchas partes de Hyrule, he intentado ir a hablar de eso con la princesa Zelda, pero como quizás ya lo has notado, un poderoso hechizo bloquea el acceso al castillo..."; break;
+        case 636 : texte = "Dices que Ganon es responsable de todo esto ? Que ha robado la Trifuerza y que encarcela la princesa Zelda en el castillo ?"; break;
+        case 637 : texte = "Pues... la situación es mucho más grave que lo que creía..."; break;
+        case 638 : texte = "Tenemos que obrar rapidamente, debes enfrentar a Ganon de nuevo!"; break;
+        case 639 : texte = "Cómo entrar en el castillo ? Quizás tenga una idea..."; break;
+        case 640 : texte = "Como lo sabes, el poder de los 7 Hombres Sabios fue encerrado en 7 cristales por el mago Aghanim mientras intentaba quitar el hechizo que confinaba Ganon en el Dark World."; break;
+        case 641 : texte = "Ahora bien, aunque resucitaste las descendientes de los hombres sabios despues de vencer a Ganon y de encontrar la Trifuerza, estos cristales conservaron sus potencia."; break;
+        case 642 : texte = "Estan escondidos en los 7 templos, reúnelos todos y podrás ir más allá del sortilego de Ganon."; break;
+        case 643 : texte = "Sin embargo, será una tarea muy dura, Ganon sin duda ha debido de enviar sus mejores unidades a proteger esos cristales..."; break;
+        case 644 : texte = "Una ultima cosa, no irás muy lejos con tu equipo actual. Ve a ver al vendedor de armas y dile que vienes de mi parte. Seguro que tu ayudará."; break;
+        case 645 : texte = "Ve a ver el vendedor de armas y dile que vienes de mi parte. Seguro que tu ayudará."; break;
+        case 646 : texte = "Tienes que reunir los 7 cristales si quieres tener una posibilidad de salvar a Zelda y Hyrule..."; break;
+        case 647 : texte = "Has encontrado los 7 cristales ?  Ve al castillo, primero debes liberar a la princesa, ella sabrá mejor que yo cómo salvar Hyrule."; break;
+        case 648 : texte = "Tus armas no tienen efecto sobre Ganon ? En este caso tienes que encontrar la Espada Maestra. Se dice que fue disimulada en un templo secreto.*Se dice tambien que el camino que conduce a la Espada del Golpe Contra el Mal pasa por un pueblo lleno de monstros...*Me pregunto si tal pueblo existe..."; break;
+        case 650 : texte = "No obstante tengo miedo que tu equipo actual sea insuficiente para acceder a este templo, a lo mejor deberías ir a ver al herrero del pueblo Gerudo..."; break;
+        case 651 : texte = "Ya es hora de enfrentarse a Ganon y de recuperar la Trifuerza!"; break;
+        case 652 : texte = "Hey! Hay que pagar para abrir una de mis arcas!!!"; break;
+        case 653 : texte = "Una de estas arcas contiene un cuarto de corazón, quieres probar tu fortuna por 10 rupias ? Podrás abrir solo una, vale ?*              SI ?            no  "; break;
+        case 654 : texte = "Una de estas arcas contiene un cuarto de corazón, quieres probar tu fortuna por 10 rupias ? Podrás abrir solo una, vale ?*              si              NO ?"; break;
+        case 655 : texte = "Elige un arca."; break;
+        case 656 : texte = "No tengo más premios que poner en juego, lo siento."; break;
+        case 657 : texte = "Has perdido! Este arca esta vacía."; break;
+        case 658 : texte = "Buenos días! Si estas aquí para ver el herrero, vive un poco más lejos."; break;
+        case 659 : texte = "Ola Link, soy el jefe de este pueblo.*Deberías ir a ver el herrero y monstrarle lo que quieres que mejore en tu equipo."; break;
+        case 660 : texte = "He sido informado de tu búsqueda, entonces me puse de acuerdo con el.*Todo será gratis para ti."; break;
+        case 661 : texte = "No necesitas beber esta pozima ahora."; break;
+        case 662 : texte = "Una pozima verde por 40 rupias, la quieres ?*              SI ?            no  "; break;
+        case 663 : texte = "Una pozima verde por 40 rupias, la quieres ?*              si              NO ?"; break;
+        case 664 : texte = "Vuelve cuando tengas una botella vacía y te venderé una pozima verde que rellena la magia."; break;
+        case 665 : texte = "Vuelve más tarde, estoy agobiado!"; break;
+        case 666 : texte = "Puedo hacer algo para ti ?"; break;
+        case 667 : texte = "Quieres que mejore tu espada ?**              SI ?            no  "; break;
+        case 668 : texte = "Quieres que mejore tu espada ?**              si              NO ?"; break;
+        case 669 : texte = "Tu espada ha triplicado de potencia y puede ahora devolver algunos ataques magicos, guay!!!"; break;
+        case 670 : texte = "Quieres que mejore tus guantes ?**              SI ?            no  "; break;
+        case 671 : texte = "Quieres que mejore tus guantes ?**              si              NO ?"; break;
+        case 672 : texte = "La potencia de tus guantes te permite ahora levantar rocas pesadas."; break;
+        case 673 : texte = "Quieres que mejore tu arco ?**              SI ?            no  "; break;
+        case 674 : texte = "Quieres que mejore tu arco ?**              si              NO ?"; break;
+        case 675 : texte = "Tu arco tira ahora flechas de plata de una potencia devastadora !!!"; break;
+        case 676 : texte = "Vuelve cuando tengas una botella vacía y te venderé una pozima azul que rellena la energia y la magia."; break;
+        case 677 : texte = "Una pozima azul por 160 rupias, la quieres ?*              SI ?            no  "; break;
+        case 678 : texte = "Una pozima azul por 160 rupias, la quieres ?*              si              NO ?"; break;
+        case 679 : texte = "Nuestro pueblo fue fundado para impedir a los aventureros imprudentes que tengan acceso al templo, no da el permiso para pasar a cualquiera."; break;
+        case 680 : texte = "Mmmm... Ya has encontrado 4 cristales ?*Tengo que confesar que me impresionas..."; break;
+        case 681 : texte = "Pues entendido, tienes el permiso para pasar por el cementerio, por tu cuenta y riesgo."; break;
+        case 682 : texte = "Ve a hablar al guardia al norte del pueblo, te dejará pasar."; break;
+        case 683 : texte = "Veo que siempre estas vivo...*Sorprendente."; break;
+        case 684 : texte = "El templo de las tinieblas es el punto de partida del camino que conduce a un objeto de leyenda. Este pueblo solo sirve para disuadir a los aventureros de acercarse demasiado."; break;
+        case 685 : texte = "Has encontrado la Espada ?*Pero no creas que es tuya por eso."; break;
+        case 686 : texte = "La Espada Maestra forma parte del patrimonio el más valioso de Hyrule con la Trifuerza, tendrás que devolverla en su santuario en cuanto acabes tu misión."; break;
+        case 687 : texte = "Los habitantes de este pueblo son todos espíritus que han contestado a la llamada de la princesa Zelda."; break;
+        case 688 : texte = "Cuando devolviste la paz sobre Hyrule y reunificaste el Light World con el Golden Land, Zelda preguntó en secreto a los espíritus voluntarios que crean este pueblo para bloquear"; break;
+        case 689 : texte = "el acceso a un objeto muy valioso."; break;        
+        case 690 : texte = "Bienvenido Link!*Dejame explicarte lo que hago aquí."; break;
+        case 691 : texte = "Como ya lo has notado sin duda, monstruos han aparecido por todas partes en Hyrule. Es la primera vez que veo monstruos despues que venciste a Ganon."; break;
+        case 692 : texte = "Pues he decidido catalogarlos todos."; break;
+        case 693 : texte = "El problema es que soy demasiado miedoso para ir al encuentro de ellos, necesito tu ayuda."; break;
+        case 694 : texte = "Tienes que golpear cada tipo de monstruo y venir a hacerme tu informe."; break;
+        case 695 : texte = "Te recompensaré cada vez que mates 7 nuevos tipos de enemigo."; break;
+#ifdef __vita__
+        case 696 : texte = "Si quieres ver que enemigos ya has vencido, pulsa D-Pad Superior."; break;
+#else
+        case 696 : texte = "Si quieres ver que enemigos ya has vencido, pulsa M."; break;
+#endif
+        case 697 : texte = "Con "+s+" mas enemigos diferentes tendras la proxima recompensa."; break;
+        case 698 : texte = "Te falta solo uno nuevo enemigo antes de la proxima recompensa!!!"; break;
+        case 699 : texte = "Acepta este regalo por tu contribución en mi proyecto :"; break;
+        case 700 : texte = "Lo siento pero no tengo nada más que regalarte..."; break;
+        case 701 : texte = "No me le puedo creer, has conseguido vencer cada tipo de enemigo !!!*Felicitaciones Link !!!"; break;        
+        case 702 : texte = "                    Nivel 1 :**               Templo del Bosque"; break;
+        case 703 : texte = "                    Nivel 2 :**                Templo del Agua"; break;
+        case 704 : texte = "                    Nivel 3 :**              Templo de la Montaña"; break;
+        case 705 : texte = "                    Nivel 4 :**              Templo del Desierto"; break;
+        case 706 : texte = "                    Nivel 5 :**            Templo de las Tinieblas"; break;
+        case 707 : texte = "                    Nivel 6 :**                Templo del Fuego"; break;
+        case 708 : texte = "                    Nivel 7 :**                Templo de Hielo"; break;
+        case 709 : texte = "                    Nivel ? :**                 Templo Oscuro"; break;
+        case 710 : texte = "                  Nivel Final :**               Castillo de Hyrule"; break;        
+        case 711 :texte = "               Ya estas cansado ?               ?                   SEGUIR                  ?                  Grabar y dejar                                Dejar sin grabar              "; break;
+        case 712 :texte = "               Ya estas cansado ?                                   Seguir                     ?               GRABAR Y DEJAR              ?                 Dejar sin grabar              "; break;
+        case 713 :texte = "               Ya estas cansado ?                                   Seguir                                     Grabar y dejar                 ?              DEJAR SIN GRABAR             ?"; break;
+        case 714 : texte = "En el momento en que Link tocó la Trifuerza, los monstruos desaparecieron y la paz volvió.**La princesa Zelda tomó entonces una gran decisión: tocó a su vez la Trifuerza para formular su deseo...**La Trifuerza siempre fue el origen de los problemas sobrevenidos en el Reino,  tarde o temprano una otra criatura dañina habría acabado encontrandola.**Al mismo tiempo que la princesa tocó la reliquia, desapareció para siempre de Hyrule.";
+        case 715 : texte = "Desde ese día, el pueblo de Hyrule vivió en paz, sin temer nuevos desastres.**Asi se acaba la leyenda de Zelda, de la  Trifuerza y del Golden Land.**Se dice que la Espada Maestra descansa en seguridad en cualquier lugar, y que es el ultimo recuerdo de la búsqueda de Link..."; break;
+        case 716 : texte = "Felicitaciones Link, has conseguido encontrarme. En recompensa, te ofrezco el pendiente de Farore, aumenta tu defensa de un punto."; break;
+        case 717 : texte = "Quieres grabar tu juego ?**                      ? SI ?*                        no  "; break;
+        case 718 : texte = "Quieres grabar tu juego ?**                        si  *                      ? NO ?"; break;
+        case 719 : texte = "Juego grabado."; break;
+        case 720 : texte = "El Reino de Hyrule estaba en paz desde que Link, ultimo cavallero hyliano, había vencido el maléfico Ganon y había recuperado la valiosa Trifuerza."; break;
+        case 721 : texte = "Nadie sabe que deseo hizo Link tocando la Trifuerza, pero tuvo como efecto de reunificar el Light World y el Dark World, y volvió a los descendientes de los 7 Hombres Sabios a la vida."; break;
+        case 722 : texte = "Despues Link devolvió a la princesa Zelda la Trifuerza y la Espada Maestra, y el pueblo se puso a creer que la paz duraria.*Pero el pueblo se equivocaba..."; break;
+        case 723 : texte = "El deseo de Link a la Trifuerza igualmente tuvo lamentables efectos. Ganon y sus esbirros fuen asi resucitados y se dispusieron a atacar."; break;
+        case 724 : texte = "En alguna parte del bosque de Hyrule, Link duerme sin sospechar que Ganon ya ha pasado al ataque,"; break;
+        case 725 : texte ="hasta que una voz familiar le habla en su sueño..."; break;
+        case 726 : texte = "Ayuda!*Ayuda!*Soy yo! Zelda!*Te hablo por telepatía."; break;
+        case 727 : texte = "Estoy prisionera en el torreón del castillo! Necesito tu ayuda!*Ganon esta de vuelta, y sin duda ya ha encontrado la Trifuerza a estas horas..."; break;
+        case 728 : texte = "Corre al castillo Link, eres mi única esperanza..."; break;
+#ifdef __vita__
+        case 729 : texte = "AYUDA : Pulsa Select para consultar la ayuda."; break;
+#else
+        case 729 : texte = "AYUDA : Pulsa F1 para consultar la ayuda."; break;
+#endif
+        default : 
+            texte = "ERROR TEXTO";
     }
 
     return texte;
@@ -2553,7 +3233,24 @@ void Texte::afficheLettre(SDL_Surface* gpScreen, char c, int vx, int vy) {
     else if(val>=48 && val<=57) {src.x=3+16*((val-48)%5); src.y=103+16*((val-48)/5);}
 	else {
 		switch(val){
-			// Caractères spéciaux
+            // ES characters
+            // ñ
+            case 241:
+            case -15: src.x=164;src.y=68; break;
+            // ó
+            case 243:
+            case -13: src.x=164;src.y=103; break;
+            // í
+            case 237:
+            case -19: src.x=164;src.y=52; break;
+            // á
+            case 225:
+            case -31: src.x=164;src.y=84; break;
+            // ú
+            case 250:
+            case -6: src.x=164;src.y=151; break;
+			
+            // DE characters
             // ß
             case 223:
             case -33: src.x=6+16*3; src.y=167; break;
@@ -2566,7 +3263,10 @@ void Texte::afficheLettre(SDL_Surface* gpScreen, char c, int vx, int vy) {
             // Ü
             case 220:
             case -36: src.x=6+16*2; src.y=167; break;
-			// /
+			
+            
+            // Caractères spéciaux
+            // /
 			case 47: src.x=52;src.y=151;break;
 			// @ hylien
 			case 64: src.x=4;src.y=151;break;
@@ -2643,9 +3343,9 @@ void Texte::afficheLettre(SDL_Surface* gpScreen, char c, int vx, int vy) {
 			// ... ( avec % )
 			case 37: src.x=101;src.y=135;break;
 			// >
-			case 62: src.x=100;src.y=151;break;
+			case 60: src.x=100;src.y=151;break;
 			// <
-			case 60: src.x=84;src.y=151;break;
+			case 62: src.x=84;src.y=151;break;
 		}
 	}
     
