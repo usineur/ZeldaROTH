@@ -44,6 +44,9 @@ Vincent Jouillat - Original game (http://www.zeldaroth.fr/us/zroth.php)
 
 ## Changelog:
 
+1.3.1:
+- Added playstation buttons
+
 1.2.4:
 - Added Spanish translation
 - Corrected display for multilingual support

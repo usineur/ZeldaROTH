@@ -26,7 +26,7 @@ id(0), idsuiv(0), def(false), cadre(false), texte(""), buffer("") {
     SDL_SetColorKey(imageFont,SDL_SRCCOLORKEY,SDL_MapRGB(imageFont->format,0,0,255));
 #ifdef __vita__
     imageButtons = gpJeu->loadImg("data/images/texte/buttons.png");
-    SDL_SetColorKey(imageButtons,SDL_SRCCOLORKEY,SDL_MapRGB(imageFont->format,0,0,255));
+    SDL_SetColorKey(imageButtons,SDL_SRCCOLORKEY,SDL_MapRGB(imageButtons->format,0,0,255));
 #endif
     imageCoeur = gpJeu->loadImg("data/images/menu/coeur.png");
     SDL_SetColorKey(imageCoeur,SDL_SRCCOLORKEY,SDL_MapRGB(imageCoeur->format,0,0,255));
@@ -1373,7 +1373,7 @@ std::string Texte::getTexteFR(int id, std::string s){
         case 711 :texte = "                Déjà fatigué ?                  ?                CONTINUER                  ?             Sauvegarder et quitter                        Quitter sans sauvegarder           "; break;
         case 712 :texte = "                Déjà fatigué ?                                   Continuer                     ?          SAUVEGARDER ET QUITTER           ?            Quitter sans sauvegarder           "; break;
         case 713 :texte = "                Déjà fatigué ?                                   Continuer                                Sauvegarder et quitter              ?         QUITTER SANS SAUVEGARDER          ?"; break;
-        case 714 : texte = "A l'instant où Link toucha la Triforce, les monstres disparurent et la paix revint.**La princesse Zelda prit alors une grande décision: elle toucha à son tour la Triforce pour exaucer son voeu...**La Triforce fut depuis toujours à l'origine des problèmes survenus au Royaume, tôt ou tard un autre être malfaisant aurait fini par la trouver.**A la seconde où la princesse toucha la relique, elle disparue à jamais d'Hyrule.";
+        case 714 : texte = "A l'instant où Link toucha la Triforce, les monstres disparurent et la paix revint.**La princesse Zelda prit alors une grande décision: elle toucha à son tour la Triforce pour exaucer son voeu...**La Triforce fut depuis toujours à l'origine des problèmes survenus au Royaume, tôt ou tard un autre être malfaisant aurait fini par la trouver.**A la seconde où la princesse toucha la relique, elle disparue à jamais d'Hyrule."; break;
         case 715 : texte = "Depuis ce jour, le peuple d'Hyrule vécut en paix, sans craindre de nouveaux désastres.**Ainsi s'achève la légende de Zelda, celle de la  Triforce et de la Terre d'Or.**On dit que l'épée Excalibur repose en sûreté quelque part, et qu'elle constitue le dernier souvenir de la quête de Link..."; break;
         case 716 : texte = "Félicitation Link, tu as réussi à me trouver. En récompense, je t'offre le médaillon de Farore, il augmente ta défense d'un point."; break;
         case 717 : texte = "Souhaites-tu sauvegarder ta partie ?**                    ? OUI ?*                      non  "; break;
@@ -2046,7 +2046,7 @@ std::string Texte::getTexteDE(int id, std::string s){
         case 714 : texte = "Als Link das Triforce berührte, verschwanden auch alle Monster und Frieden zog ein.**"
           "Dann fasste Prinzessin Zelda einen mutigen Entschluss: Sie berührte kreisend das Triforce und wünschte sich etwas.**"
           "Das Triforce hat schon genug Probleme im Königreich verursacht. Früher oder später wird erneut ein Bösewicht das Triforce finden.**"
-          "Im gleichen Moment, als die Prinzessin die Reliquie berührte, verschwand diese für immer von Hyrule.";
+          "Im gleichen Moment, als die Prinzessin die Reliquie berührte, verschwand diese für immer von Hyrule."; break;
         case 715 : texte = "Seit diesem Tag lebten die Bewohner von Hyrule in Frieden, ohne Angst vor neuem Unheil.**"
           "Deshalb ist die Geschichte von Zelda, dem Triforce und dem Goldenen Land Hyrule hiermit beendet.**"
           "Das Schwert Excalibur gilt als sicher verwahrt (-irgendwo an einem geheimen Ort-) und ist Link's jüngstes Beutestück..."; break;
@@ -2718,7 +2718,7 @@ std::string Texte::getTexteES(int id, std::string s){
         case 711 :texte = "               Ya estas cansado ?               ?                   SEGUIR                  ?                  Grabar y dejar                                Dejar sin grabar              "; break;
         case 712 :texte = "               Ya estas cansado ?                                   Seguir                     ?               GRABAR Y DEJAR              ?                 Dejar sin grabar              "; break;
         case 713 :texte = "               Ya estas cansado ?                                   Seguir                                     Grabar y dejar                 ?              DEJAR SIN GRABAR             ?"; break;
-        case 714 : texte = "En el momento en que Link tocó la Trifuerza, los monstruos desaparecieron y la paz volvió.**La princesa Zelda tomó entonces una gran decisión: tocó a su vez la Trifuerza para formular su deseo...**La Trifuerza siempre fue el origen de los problemas sobrevenidos en el Reino,  tarde o temprano una otra criatura dañina habría acabado encontrandola.**Al mismo tiempo que la princesa tocó la reliquia, desapareció para siempre de Hyrule.";
+        case 714 : texte = "En el momento en que Link tocó la Trifuerza, los monstruos desaparecieron y la paz volvió.**La princesa Zelda tomó entonces una gran decisión: tocó a su vez la Trifuerza para formular su deseo...**La Trifuerza siempre fue el origen de los problemas sobrevenidos en el Reino,  tarde o temprano una otra criatura dañina habría acabado encontrandola.**Al mismo tiempo que la princesa tocó la reliquia, desapareció para siempre de Hyrule."; break;
         case 715 : texte = "Desde ese día, el pueblo de Hyrule vivió en paz, sin temer nuevos desastres.**Asi se acaba la leyenda de Zelda, de la  Trifuerza y del Golden Land.**Se dice que la Espada Maestra descansa en seguridad en cualquier lugar, y que es el ultimo recuerdo de la búsqueda de Link..."; break;
         case 716 : texte = "Felicitaciones Link, has conseguido encontrarme. En recompensa, te ofrezco el pendiente de Farore, aumenta tu defensa de un punto."; break;
         case 717 : texte = "Quieres grabar tu juego ?**                      ? SI ?*                        no  "; break;
@@ -3073,7 +3073,7 @@ int Texte::afficheCaractere(SDL_Surface* gpScreen, char character, int &i, std::
         int buttonIndex = 0;
         char nextCharacter;
         int nextCharacterValue;
-        do {
+        while(i+1 < stringLength) {
             i++;
             nextCharacter = s.at(i);
             nextCharacterValue = (int)nextCharacter;
@@ -3084,7 +3084,6 @@ int Texte::afficheCaractere(SDL_Surface* gpScreen, char character, int &i, std::
 
             buttonIndex+= nextCharacterValue - 48;
         }
-        while(nextCharacter < stringLength);
         affichePSBouton(gpScreen, buttonIndex, a, b);
         return 14;
     }
