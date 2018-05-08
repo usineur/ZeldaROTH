@@ -40,8 +40,10 @@ class Texte {
         std::string getTexteDE(int id, std::string s);
         std::string getTexteES(int id, std::string s);
         int tailleMot(int deb);
+        int afficheCaractere(SDL_Surface* gpScreen, char c, int &i, std::string s, int vx, int vy);
         void afficheLettre(SDL_Surface* gpScreen, char c, int vx, int vy);
-        
+        void affichePSBouton(SDL_Surface* gpScreen, int index, int vx, int vy);
+
         Jeu* gpJeu;
         int vitesse; // millisecondes entre 2 lettres
         int av; //avancement du défilement
@@ -57,6 +59,7 @@ class Texte {
         std::string buffer;
         Uint32 lastAnimTime;
         SDL_Surface* imageFont;
+        SDL_Surface* imageButtons;
         SDL_Surface* imageCoeur;
         LANGFUNC getTextByLangFunc;
 };

@@ -24,12 +24,19 @@ id(0), idsuiv(0), def(false), cadre(false), texte(""), buffer("") {
     lastAnimTime = SDL_GetTicks();
     imageFont = gpJeu->loadImg("data/images/texte/font.png");
     SDL_SetColorKey(imageFont,SDL_SRCCOLORKEY,SDL_MapRGB(imageFont->format,0,0,255));
+#ifdef __vita__
+    imageButtons = gpJeu->loadImg("data/images/texte/buttons.png");
+    SDL_SetColorKey(imageButtons,SDL_SRCCOLORKEY,SDL_MapRGB(imageFont->format,0,0,255));
+#endif
     imageCoeur = gpJeu->loadImg("data/images/menu/coeur.png");
     SDL_SetColorKey(imageCoeur,SDL_SRCCOLORKEY,SDL_MapRGB(imageCoeur->format,0,0,255));
     getTextByLangFunc = &Texte::getTexteEN;
 }
 
 Texte::~Texte() {
+#ifdef __vita__
+    SDL_FreeSurface(imageButtons);
+#endif
     SDL_FreeSurface(imageFont);
     SDL_FreeSurface(imageCoeur);
 }
@@ -169,28 +176,28 @@ std::string Texte::getTexteEN(int id, std::string s){
             break;
         case 224 :
 #ifdef __vita__
-            texte = "Return to the game: Cross - Next: >";
+            texte = "Return to the game: ¾3 - Next: ¾5";
 #else
             texte = "Return to the game: Enter - Next: Right";
 #endif
             break;
         case 225 :
 #ifdef __vita__
-            texte = "Read / Open / Speak: Circle";
+            texte = "Read / Open / Speak: ¾2";
 #else
             texte = "Read / Open / Speak: Space";
 #endif
             break;
         case 226 :
 #ifdef __vita__
-            texte = "Confirm / Pass text: Cross";
+            texte = "Confirm / Pass text: ¾3";
 #else
             texte = "Confirm / Pass text: Enter";
 #endif
             break;
         case 227 :
 #ifdef __vita__
-            texte = "Move Link: Left stick";
+            texte = "Move Link: Left ¾9";
 #else
             texte = "Move Link: Direction Arrows";
 #endif
@@ -204,42 +211,42 @@ std::string Texte::getTexteEN(int id, std::string s){
             break;
         case 229 :
 #ifdef __vita__
-            texte = "Use sword: Square";
+            texte = "Use sword: ¾4";
 #else
             texte = "Use sword: Z or W";
 #endif
             break;
         case 230 :
 #ifdef __vita__
-            texte = "Spin attack: Hold square then dropped";
+            texte = "Spin attack: Hold ¾4 then dropped";
 #else
             texte = "Spin attack: Z or W hold then dropped";
 #endif
             break;
         case 231 :
 #ifdef __vita__
-            texte = "Item selection: Right D-Pad";
+            texte = "Item selection: ¾5";
 #else
             texte = "Item selection: Enter";
 #endif
             break;
         case 232 :
 #ifdef __vita__
-            texte = "Use selected object: Triangle";
+            texte = "Use selected object: ¾1";
 #else
             texte = "Use selected object: X";
 #endif
             break;
         case 233 :
 #ifdef __vita__
-            texte = "Carry without select gloves: Cross";
+            texte = "Carry without select gloves: ¾3";
 #else
             texte = "Carry without select gloves: C";
 #endif
             break;
         case 234 :
 #ifdef __vita__
-            texte = "See the map: Left D-Pad (outside or dungeons)";
+            texte = "See the map: ¾7 (outside or dungeons)";
 #else
             texte = "See the map: P (outside or dungeons)";
 #endif
@@ -253,14 +260,14 @@ std::string Texte::getTexteEN(int id, std::string s){
             break;
         case 236 :
 #ifdef __vita__
-            texte = "See defeated monsters: Up D-Pad";
+            texte = "See defeated monsters: ¾6";
 #else
             texte = "See defeated monsters: M";
 #endif
             break;
         case 237 :
 #ifdef __vita__
-            texte = "Look around: Right stick";
+            texte = "Look around: Right ¾9";
 #else
             texte = "Look around: Ctrl and direction";
 #endif
@@ -284,49 +291,49 @@ std::string Texte::getTexteEN(int id, std::string s){
             break;
         case 241 :    
 #ifdef __vita__
-            texte = "Return to the game: Cross - Previous: <";
+            texte = "Return to the game: ¾3 - Previous: ¾7";
 #else
             texte = "Return to the game: Enter - Previous: Left";
 #endif
             break;
         case 242 :
 #ifdef __vita__
-            texte = "Use selected object: Triangle";
+            texte = "Use selected object: ¾1";
 #else
             texte = "Use selected object: X";
 #endif
             break;
         case 243 :
 #ifdef __vita__
-            texte = "Carry without select gloves: Cross"; 
+            texte = "Carry without select gloves: ¾3"; 
 #else
             texte = "Carry without select gloves: C"; 
 #endif
             break;
         case 244 :
 #ifdef __vita__
-            texte = "See the map: Left D-Pad (outside or dungeons)";
+            texte = "See the map: ¾7 (outside or dungeons)";
 #else
             texte = "See the map: P (outside or dungeons)";
 #endif
             break;
         case 245 :
 #ifdef __vita__
-            texte = "See the map: Left D-Pad (in dungeons)";
+            texte = "See the map: ¾7 (in dungeons)";
 #else
             texte = "See the map: P (in dungeons)";
 #endif
             break;
         case 246 :
 #ifdef __vita__
-            texte = "See defeated monsters: Up D-Pad";
+            texte = "See defeated monsters: ¾6";
 #else
             texte = "See defeated monsters: M";
 #endif
             break;
         case 247 :
 #ifdef __vita__
-            texte = "Look around: Right stick";
+            texte = "Look around: Right ¾9";
 #else
             texte = "Look around: Ctrl and direction";
 #endif
@@ -485,7 +492,7 @@ std::string Texte::getTexteEN(int id, std::string s){
         // 500 -> ? : Texte
         case 501 : texte = "You find a shield!!!**Your defense rises by one point!"; break;
 #ifdef __vita__
-        case 502 : texte = "You find a sword!!!**You can now fight monsters with the key Square!!!*Hold Square to charge a spin attack!!!"; break;
+        case 502 : texte = "You find a sword!!!**You can now fight monsters with the key ¾4!!!*Hold ¾4 to charge a spin attack!!!"; break;
 #else
         case 502 : texte = "You find a sword!!!**You can now fight monsters with the key Z (or W)!!!*Hold Z to charge a spin attack!!!"; break;
 #endif
@@ -547,7 +554,7 @@ std::string Texte::getTexteEN(int id, std::string s){
         case 565 : texte = "Hidden Temple**Here rests the Sword of Evils Bane, the Master Sword."; break;
         case 566 : texte = "N: To the Haunted Graveyard"; break;
 #ifdef __vita__
-        case 567 : texte = "You find the Dungeon Map!!!*Press Left to see the map."; break;
+        case 567 : texte = "You find the Dungeon Map!!!*Press ¾7 to see the map."; break;
 #else
         case 567 : texte = "You find the Dungeon Map!!!*Press P to see the map."; break;
 #endif
@@ -555,7 +562,7 @@ std::string Texte::getTexteEN(int id, std::string s){
         case 569 : texte = "You find the Boss Key!!!"; break;
         case 570 : texte = "You find a small key!!!*Go near a door to open it."; break;
 #ifdef __vita__
-        case 571 : texte = "You find the Gloves!!!*Use them to lift some object setting them up or pressing Cross."; break;
+        case 571 : texte = "You find the Gloves!!!*Use them to lift some object setting them up or pressing ¾3."; break;
 #else        
         case 571 : texte = "You find the Gloves!!!*Use them to lift some object setting them up or pressing C."; break;
 #endif
@@ -679,7 +686,7 @@ std::string Texte::getTexteEN(int id, std::string s){
         case 694 : texte = "You have to fight each kind of monster and come to give me your report."; break;
         case 695 : texte = "Each time you have defeated 7 new kinds of enemies, I will give you one piece of heart."; break;
 #ifdef __vita__
-        case 696 : texte = "If you want to see what enemies you've already defeated, press D-Pad Up."; break;
+        case 696 : texte = "If you want to see what enemies you've already defeated, press ¾6"; break;
 #else
         case 696 : texte = "If you want to see what enemies you've already defeated, press M."; break;
 #endif
@@ -835,28 +842,28 @@ std::string Texte::getTexteFR(int id, std::string s){
             break;
         case 224 :
 #ifdef __vita__
-            texte = "Retour au jeu : Croix - Suite : >";
+            texte = "Retour au jeu : ¾3 - Suite : ¾5";
 #else
             texte = "Retour au jeu : Entrée - Suite : Droite";
 #endif
             break;
         case 225 :
 #ifdef __vita__
-            texte = "Lire / Ouvrir / Parler : Rond";
+            texte = "Lire / Ouvrir / Parler : ¾2";
 #else
             texte = "Lire / Ouvrir / Parler : Espace";
 #endif
             break;
         case 226 :
 #ifdef __vita__
-            texte = "Valider / Passer texte : Croix";
+            texte = "Valider / Passer texte : ¾3";
 #else
             texte = "Valider / Passer texte : Entrée";
 #endif
             break;
         case 227 :
 #ifdef __vita__
-            texte = "Déplacer Link : Stick Gauche";
+            texte = "Déplacer Link : ¾9 Gauche";
 #else
             texte = "Déplacer Link : Flèches de direction";
 #endif
@@ -870,42 +877,42 @@ std::string Texte::getTexteFR(int id, std::string s){
             break;
         case 229 :
 #ifdef __vita__
-            texte = "Coup d'épée : Carré";
+            texte = "Coup d'épée : ¾4";
 #else
             texte = "Coup d'épée : W ou Z";
 #endif
             break;
         case 230 :
 #ifdef __vita__
-            texte = "Attaque Tornade : Carré maintenu puis lâché";
+            texte = "Attaque Tornade : ¾4 maintenu puis lâché";
 #else
             texte = "Attaque Tornade : W ou Z maintenu puis lâché";
 #endif
             break;
         case 231 :
 #ifdef __vita__
-            texte = "Menu de sélection d'objet : D-Pad Droite";
+            texte = "Menu de sélection d'objet : ¾5";
 #else
             texte = "Menu de sélection d'objet : Entrée";
 #endif
             break;
         case 232 :
 #ifdef __vita__
-            texte = "Utiliser l'objet sélectionné : Triangle";
+            texte = "Utiliser l'objet sélectionné : ¾1";
 #else
             texte = "Utiliser l'objet sélectionné : X";
 #endif
             break;
         case 233 :
 #ifdef __vita__
-            texte = "Porter sans équiper les gants : Croix";
+            texte = "Porter sans équiper les gants : ¾3";
 #else
             texte = "Porter sans équiper les gants : C";
 #endif
             break;
         case 234 :
 #ifdef __vita__
-            texte = "Afficher la carte : D-Pad Gauche (ext/donjons)";
+            texte = "Afficher la carte : ¾7 (ext/donjons)";
 #else
             texte = "Afficher la carte : P (dans les donjons)";
 #endif
@@ -919,14 +926,14 @@ std::string Texte::getTexteFR(int id, std::string s){
             break;
         case 236 :
 #ifdef __vita__
-            texte = "Afficher les monstres vaincus : D-Pad Haut";
+            texte = "Afficher les monstres vaincus : ¾6";
 #else
             texte = "Afficher les monstres vaincus : M";
 #endif
             break;
         case 237 :
 #ifdef __vita__
-            texte = "Regarder autour : Stick Droite";
+            texte = "Regarder autour : ¾9 Droite";
 #else
             texte = "Regarder autour : Ctrl et direction";
 #endif
@@ -950,49 +957,49 @@ std::string Texte::getTexteFR(int id, std::string s){
             break;
         case 241 :    
 #ifdef __vita__
-            texte = "Retour au jeu : Croix - Précédent : <";
+            texte = "Retour au jeu : ¾3 - Précédent : ¾7";
 #else
             texte = "Retour au jeu : Entrée - Précédent : Gauche";
 #endif
             break;
         case 242 :
 #ifdef __vita__
-            texte = "Utilise objet sélectionné: Triangle";
+            texte = "Utilise objet sélectionné: ¾1";
 #else
             texte = "Utilise objet sélectionné: X";
 #endif
             break;
         case 243 :
 #ifdef __vita__
-            texte = "Porter sans équiper les gants : Croix"; 
+            texte = "Porter sans équiper les gants : ¾3"; 
 #else
             texte = "Porter sans équiper les gants : C"; 
 #endif
             break;
         case 244 :
 #ifdef __vita__
-            texte = "Afficher la carte : D-Pad Gauche (ext/donjon)";
+            texte = "Afficher la carte : ¾7 (ext/donjon)";
 #else
             texte = "Afficher la carte : P (extérieur ou donjons)";
 #endif
             break;
         case 245 :
 #ifdef __vita__
-            texte = "Afficher la carte : D-Pad Gauche (dans les donjons)";
+            texte = "Afficher la carte : ¾7 (dans les donjons)";
 #else
             texte = "Afficher la carte : P (dans les donjons)";
 #endif
             break;
         case 246 :
 #ifdef __vita__
-            texte = "Afficher les monstres vaincus : D-Pad Haut";
+            texte = "Afficher les monstres vaincus : ¾6";
 #else
             texte = "Afficher les monstres vaincus : M";
 #endif
             break;
         case 247 :
 #ifdef __vita__
-            texte = "Regarder autour : Stick Droite";
+            texte = "Regarder autour : ¾9 Droite";
 #else
             texte = "Regarder autour : Ctrl et direction";
 #endif
@@ -1151,7 +1158,7 @@ std::string Texte::getTexteFR(int id, std::string s){
         // 500 -> ?? : Texte
         case 501 : texte = "Tu as trouvé un bouclier !!!**Ta défense augmente d'un point !"; break;
 #ifdef __vita__
-        case 502 : texte = "Tu as trouvé une épée !!!**Tu vas pouvoir te défendre face aux monstres avec la touche Carré !!!*Maintiens Carré enfoncé pour charger une attaque cyclone !!!"; break;
+        case 502 : texte = "Tu as trouvé une épée !!!**Tu vas pouvoir te défendre face aux monstres avec la touche ¾4 !!!*Maintiens ¾4 enfoncé pour charger une attaque cyclone !!!"; break;
 #else
         case 502 : texte = "Tu as trouvé une épée !!!**Tu vas pouvoir te défendre face aux monstres avec la touche W (ou Z) !!!*Maintiens W enfoncé pour charger une attaque cyclone !!!"; break;
 #endif
@@ -1213,7 +1220,7 @@ std::string Texte::getTexteFR(int id, std::string s){
         case 565 : texte = "Temple Caché**Ici repose la lame purificatrice, Excalibur."; break;
         case 566 : texte = "N : Vers le cimetière hanté"; break;
 #ifdef __vita__
-        case 567 : texte = "Tu as trouvé la carte du donjon !!!*Appuie sur D-Pad Gauche pour voir le plan."; break;
+        case 567 : texte = "Tu as trouvé la carte du donjon !!!*Appuie sur ¾7 pour voir le plan."; break;
 #else
         case 567 : texte = "Tu as trouvé la carte du donjon !!!*Appuie sur P pour voir le plan."; break;
 #endif
@@ -1221,7 +1228,7 @@ std::string Texte::getTexteFR(int id, std::string s){
         case 569 : texte = "Tu as trouvé la clé du boss !!!"; break;
         case 570 : texte = "Tu as trouvé une petite clé !!!*Approche une porte pour l'ouvrir."; break;
 #ifdef __vita__
-        case 571 : texte = "Tu as trouvé les gants !!!*Utilise-les pour soulever des objets en les équipant ou en appuyant sur Croix."; break;
+        case 571 : texte = "Tu as trouvé les gants !!!*Utilise-les pour soulever des objets en les équipant ou en appuyant sur ¾3."; break;
 #else        
         case 571 : texte = "Tu as trouvé les gants !!!*Utilise-les pour soulever des objets en les équipant ou en appuyant sur C."; break;
 #endif        
@@ -1345,7 +1352,7 @@ std::string Texte::getTexteFR(int id, std::string s){
         case 694 : texte = "Il faut que tu battes chaque type de monstre et que tu viennes me faire ton rapport."; break;
         case 695 : texte = "Je te récompenserai tous les 7 nouveaux types d'ennemis vaincus."; break;
 #ifdef __vita__
-        case 696 : texte = "Si tu veux savoir quels ennemis tu as déjà vaincu, appuye sur D-Pad Haut."; break;
+        case 696 : texte = "Si tu veux savoir quels ennemis tu as déjà vaincu, appuye sur ¾6"; break;
 #else
         case 696 : texte = "Si tu veux savoir quels ennemis tu as déjà vaincu, appuye sur M."; break;
 #endif
@@ -1505,28 +1512,28 @@ std::string Texte::getTexteDE(int id, std::string s){
             break;
         case 224 :
 #ifdef __vita__
-            texte = "Zurück zum Spiel: Kreutz - Nächste S.: >";
+            texte = "Zurück zum Spiel: ¾3 - Nächste S.: ¾5";
 #else
             texte = "Zurück zum Spiel: Enter - Nächste S.: Links";
 #endif
             break;
         case 225 :
 #ifdef __vita__
-            texte = "Lesen / Öffnen / Sprechen: Rund";
+            texte = "Lesen / Öffnen / Sprechen: ¾2";
 #else
             texte = "Lesen / Öffnen / Sprechen: Leertaste";
 #endif
             break;
         case 226 :
 #ifdef __vita__
-            texte = "Bestätigen / Weiter im Text: Kreuz";
+            texte = "Bestätigen / Weiter im Text: ¾3";
 #else
             texte = "Bestätigen / Weiter im Text: Enter";
 #endif
             break;
         case 227 :
 #ifdef __vita__
-            texte = "Link bewegen: Links stick";
+            texte = "Link bewegen: Links ¾9";
 #else
             texte = "Link bewegen: Cursortasten";
 #endif
@@ -1540,42 +1547,42 @@ std::string Texte::getTexteDE(int id, std::string s){
             break;
         case 229 :
 #ifdef __vita__
-            texte = "Schwert benutzen: Quadrat";
+            texte = "Schwert benutzen: ¾4";
 #else
             texte = "Schwert benutzen: Z oder W";
 #endif
             break;
         case 230 :
 #ifdef __vita__
-            texte = "Rundumschlag: Quadrat halten und loslassen";
+            texte = "Rundumschlag: ¾4 halten und loslassen";
 #else
             texte = "Rundumschlag: Z oder W halten und loslassen";
 #endif
             break;
         case 231 :
 #ifdef __vita__
-            texte = "Gegenstand wählen: D-Pad Rechts";
+            texte = "Gegenstand wählen: ¾5";
 #else
             texte = "Gegenstand wählen: Enter";
 #endif
             break;
         case 232 :
 #ifdef __vita__
-            texte = "Utiliser l'objet sélectionné : Triangle";
+            texte = "Gegenstand benutzen: ¾1";
 #else
             texte = "Gegenstand benutzen: X";
 #endif
             break;
         case 233 :
 #ifdef __vita__
-            texte = "Tragen, ohne ausgewählten Handschuh: Kreutz";
+            texte = "Tragen, ohne ausgewählten Handschuh: ¾3";
 #else
             texte = "Tragen, ohne ausgewählten Handschuh: C";
 #endif
             break;
         case 234 :
 #ifdef __vita__
-            texte = "Plan ansehen: D-Pad Links (außen / im Tempel)";
+            texte = "Plan ansehen: ¾7 (außen / im Tempel)";
 #else
             texte = "Plan ansehen: P (außen oder im Tempel)";
 #endif
@@ -1589,14 +1596,14 @@ std::string Texte::getTexteDE(int id, std::string s){
             break;
         case 236 :
 #ifdef __vita__
-            texte = "Bisher besiegte Monster: D-Pad Hoch";
+            texte = "Bisher besiegte Monster: ¾6";
 #else
             texte = "Bisher besiegte Monster: M";
 #endif
             break;
         case 237 :
 #ifdef __vita__
-            texte = "Sich umsehen: Rechts stick";
+            texte = "Sich umsehen: Rechts ¾9";
 #else
             texte = "Sich umsehen: Strg und Cursortasten";
 #endif
@@ -1620,49 +1627,49 @@ std::string Texte::getTexteDE(int id, std::string s){
             break;
         case 241 :    
 #ifdef __vita__
-            texte = "Zurück zum Spiel: Kreutz - Vorige S.: <";
+            texte = "Zurück zum Spiel: ¾3 - Vorige S.: ¾7";
 #else
             texte = "Zurück zum Spiel: Enter - Vorige S.: Rechts";
 #endif
             break;
         case 242 :
 #ifdef __vita__
-            texte = "Utilise objet sélectionné: Triangle";
+            texte = "Gegenstand benutzen: ¾1";
 #else
             texte = "Gegenstand benutzen: X";
 #endif
             break;
         case 243 :
 #ifdef __vita__
-            texte = "Tragen, ohne ausgewählten Handschuh: Kreutz"; 
+            texte = "Tragen, ohne ausgewählten Handschuh: ¾3"; 
 #else
             texte = "Tragen, ohne ausgewählten Handschuh: C"; 
 #endif
             break;
         case 244 :
 #ifdef __vita__
-            texte = "Plan ansehen: D-Pad Links (außen / im Tempel)";
+            texte = "Plan ansehen: ¾7 (außen / im Tempel)";
 #else
             texte = "Plan ansehen: P (außen oder im Tempel)";
 #endif
             break;
         case 245 :
 #ifdef __vita__
-            texte = "Plan ansehen: D-Pad Links (im Tempel)";
+            texte = "Plan ansehen: ¾7 (im Tempel)";
 #else
             texte = "Plan ansehen: P (im Tempel)";
 #endif
             break;
         case 246 :
 #ifdef __vita__
-            texte = "Bisher besiegte Monster: D-Pad Hoch";
+            texte = "Bisher besiegte Monster: ¾6";
 #else
             texte = "Bisher besiegte Monster: M";
 #endif
             break;
         case 247 :
 #ifdef __vita__
-            texte = "Sich umsehen: Rechts Stick";
+            texte = "Sich umsehen: Rechts ¾9";
 #else
             texte = "Sich umsehen: Strg und Cursortasten";
 #endif
@@ -1821,7 +1828,7 @@ std::string Texte::getTexteDE(int id, std::string s){
         // 500 -> ?? : Texte
         case 501 : texte = "Du hast ein Schild gefunden!!!**Deine Rüstung steigert sich um einen Punkt!"; break;
 #ifdef __vita__
-        case 502 : texte = "Du hast ein Schwert gefunden!!!**Du kannst jetzt Monster angreifen (Quadrat) !!!*Halte Quadrat um den Spezialhieb aufzuladen!!!"; break;
+        case 502 : texte = "Du hast ein Schwert gefunden!!!**Du kannst jetzt Monster angreifen (¾4) !!!*Halte ¾4 um den Spezialhieb aufzuladen!!!"; break;
 #else
         case 502 : texte = "Du hast ein Schwert gefunden!!!**Du kannst jetzt Monster angreifen (drück Z oder W)!!!*Halte Z um den Spezialhieb aufzuladen!!!"; break;
 #endif
@@ -1883,7 +1890,7 @@ std::string Texte::getTexteDE(int id, std::string s){
         case 565 : texte = "Geheim-Tempel**Hier ruht das Schwert Excalibur."; break;
         case 566 : texte = "N: Zum Spuk-Friedhof"; break;
 #ifdef __vita__
-        case 567 : texte = "Du hast den Tempelplan gefunden!!!*Drück D-Pad Links, um den Plan anzusehen."; break;
+        case 567 : texte = "Du hast den Tempelplan gefunden!!!*Drück ¾7, um den Plan anzusehen."; break;
 #else
         case 567 : texte = "Du hast den Tempelplan gefunden!!!*Drück P, um den Plan anzusehen."; break;
 #endif
@@ -1891,7 +1898,7 @@ std::string Texte::getTexteDE(int id, std::string s){
         case 569 : texte = "Du hast den Boss-Schlüssel gefunden!!!"; break;
         case 570 : texte = "Du hast einen Schlüssel gefunden!!!*Geh auf eine Tür zu, um diese zu öffnen."; break;
 #ifdef __vita__
-        case 571 : texte = "Du hast die magischen Handschuhe gefunden!!!*Benutz diese (oder drück Kreutz) zum Heben/Schieben schwerer Objekte."; break;
+        case 571 : texte = "Du hast die magischen Handschuhe gefunden!!!*Benutz diese (oder drück ¾3) zum Heben/Schieben schwerer Objekte."; break;
 #else        
         case 571 : texte = "Du hast die magischen Handschuhe gefunden!!!*Benutz diese (oder drück C) zum Heben/Schieben schwerer Objekte."; break;
 #endif        
@@ -2015,7 +2022,7 @@ std::string Texte::getTexteDE(int id, std::string s){
         case 694 : texte = "Du musst jede unbekannte Monster-Art besiegen und mir im Anschluss davon berichten."; break;
         case 695 : texte = "Jedes mal, wenn du 7 neue Arten von Monstern besiegt hast, gebe ich dir ein Herzfragment dafür."; break;
 #ifdef __vita__
-        case 696 : texte = "Willst du wissen, welche Monster du bereits besiegt hast, dann drück D-Pad Hoch"; break;
+        case 696 : texte = "Willst du wissen, welche Monster du bereits besiegt hast, dann drück ¾6"; break;
 #else
         case 696 : texte = "Willst du wissen, welche Monster du bereits besiegt hast, dann drück M."; break;
 #endif
@@ -2180,28 +2187,28 @@ std::string Texte::getTexteES(int id, std::string s){
             break;
         case 224 :
 #ifdef __vita__
-            texte = "Volver al juego : Cruz - Siguiente : >";
+            texte = "Volver al juego : ¾3 - Siguiente : ¾5";
 #else
             texte = "Volver al juego : Enter - Siguiente : Derecha";
 #endif
             break;
         case 225 :
 #ifdef __vita__
-            texte = "Leer / Abrir / Hablar : Círculo";
+            texte = "Leer / Abrir / Hablar : ¾2";
 #else
             texte = "Leer / Abrir / Hablar : Espacio: Espace";
 #endif
             break;
         case 226 :
 #ifdef __vita__
-            texte = "Validar / Pasar texto : Cruz";
+            texte = "Validar / Pasar texto : ¾3";
 #else
             texte = "Validar / Pasar texto : Enter";
 #endif
             break;
         case 227 :
 #ifdef __vita__
-            texte = "Mover a Link : Joystick Izquierda";
+            texte = "Mover a Link : ¾9 Izquierda";
 #else
             texte = "Mover a Link : Flechas de dirección";
 #endif
@@ -2215,42 +2222,42 @@ std::string Texte::getTexteES(int id, std::string s){
             break;
         case 229 :
 #ifdef __vita__
-            texte = "Golpe de espada : Cuadrado";
+            texte = "Golpe de espada : ¾4";
 #else
             texte = "Golpe de espada : Z o W";
 #endif
             break;
         case 230 :
 #ifdef __vita__
-            texte = "Giratorio : Cuadrado mantenido luego soltado";
+            texte = "Giratorio : ¾4 mantenido luego soltado";
 #else
             texte = "Giratorio : Z o W mantenido luego soltado";
 #endif
             break;
         case 231 :
 #ifdef __vita__
-            texte = "Menu de selección del objeto : D-Pad Derecha";
+            texte = "Menu de selección del objeto : ¾5";
 #else
             texte = "Menu de selección del objeto : Enter";
 #endif
             break;
         case 232 :
 #ifdef __vita__
-            texte = "Utilizar el objeto seleccionnado : Triángulo";
+            texte = "Utilizar el objeto seleccionnado : ¾1";
 #else
             texte = "Utilizar el objeto seleccionnado : X";
 #endif
             break;
         case 233 :
 #ifdef __vita__
-            texte = "Levantar sin equipar los guantes : Cruz";
+            texte = "Levantar sin equipar los guantes : ¾3";
 #else
             texte = "Levantar sin equipar los guantes : C";
 #endif
             break;
         case 234 :
 #ifdef __vita__
-            texte = "AVer el mapa : D-Pad Izquierda (exterior/templos)";
+            texte = "AVer el mapa : ¾7 (exterior/templos)";
 #else
             texte = "AVer el mapa : P (exterior/templos)";
 #endif
@@ -2264,14 +2271,14 @@ std::string Texte::getTexteES(int id, std::string s){
             break;
         case 236 :
 #ifdef __vita__
-            texte = "Ver los monstros vencidos : D-Pad Superior";
+            texte = "Ver los monstros vencidos : ¾6";
 #else
             texte = "Ver los monstros vencidos : M";
 #endif
             break;
         case 237 :
 #ifdef __vita__
-            texte = "Mirar alrededor : Joystick Derecha";
+            texte = "Mirar alrededor : ¾9 Derecha";
 #else
             texte = "Mirar alrededor : Ctrl y dirección";
 #endif
@@ -2295,49 +2302,49 @@ std::string Texte::getTexteES(int id, std::string s){
             break;
         case 241 :    
 #ifdef __vita__
-            texte = "Volver al juego : Cruz - Anterior : <";
+            texte = "Volver al juego : ¾3 - Anterior : ¾7";
 #else
             texte = "Volver al juego : Enter - Anterior : Izquierda";
 #endif
             break;
         case 242 :
 #ifdef __vita__
-            texte = "Utilizar el objeto seleccionnado : Triángulo";
+            texte = "Utilizar el objeto seleccionnado : ¾1";
 #else
             texte = "Utilizar el objeto seleccionnado : X";
 #endif
             break;
         case 243 :
 #ifdef __vita__
-            texte = "Levantar sin equipar los guantes : Cruz"; 
+            texte = "Levantar sin equipar los guantes : ¾3"; 
 #else
             texte = "Levantar sin equipar los guantes : C"; 
 #endif
             break;
         case 244 :
 #ifdef __vita__
-            texte = "Ver el mapa : D-Pad Izquierda (exterior/templos)";
+            texte = "Ver el mapa : ¾7 (exterior/templos)";
 #else
             texte = "Ver el mapa : P (exterior o templos)";
 #endif
             break;
         case 245 :
 #ifdef __vita__
-            texte = "Ver el mapa : D-Pad Izquierda (en los templos)";
+            texte = "Ver el mapa : ¾7 (en los templos)";
 #else
             texte = "Ver el mapa : P (en los templos)";
 #endif
             break;
         case 246 :
 #ifdef __vita__
-            texte = "Ver los monstruos vencidos : D-Pad Superior";
+            texte = "Ver los monstruos vencidos : ¾6";
 #else
             texte = "Ver los monstruos vencidos : M";
 #endif
             break;
         case 247 :
 #ifdef __vita__
-            texte = "Mirar alrededor : Joystick Derecha";
+            texte = "Mirar alrededor : ¾9 Derecha";
 #else
             texte = "Mirar alrededor : Ctrl y dirección";
 #endif
@@ -2496,7 +2503,7 @@ std::string Texte::getTexteES(int id, std::string s){
         // 500 -> ?? : Texte
         case 501 : texte = "Has encontrado un escudo !!!**Tu defensa aumenta de un punto!"; break;
 #ifdef __vita__
-        case 502 : texte = "Has encontrado una espada !!!**Ahora puedes defenderte contra los monstros con la tecla Cuadrado !!!*Manten Cuadrado para descargar el giratorio !"; break;
+        case 502 : texte = "Has encontrado una espada !!!**Ahora puedes defenderte contra los monstros con la tecla ¾4 !!!*Manten ¾4 para descargar el giratorio !"; break;
 #else
         case 502 : texte = "Has encontrado una espada !!!**Ahora puedes defenderte contra los monstros con la tecla Z (o W) !!!*Manten Z para descargar el giratorio !"; break;
 #endif
@@ -2558,7 +2565,7 @@ std::string Texte::getTexteES(int id, std::string s){
         case 565 : texte = "Templo Oculto**Aquí descansa la Espada del Golpe Contra el Mal, la Espada Maestra."; break;
         case 566 : texte = "N : Hacia el Cimenterio encantado"; break;
 #ifdef __vita__
-        case 567 : texte = "Has encontrado el mapa del calabozo !!!*Pulsa D-Pad Izquierda para verlo."; break;
+        case 567 : texte = "Has encontrado el mapa del calabozo !!!*Pulsa ¾7 para verlo."; break;
 #else
         case 567 : texte = "Has encontrado el mapa del calabozo !!!*Pulsa P para verlo."; break;
 #endif
@@ -2566,7 +2573,7 @@ std::string Texte::getTexteES(int id, std::string s){
         case 569 : texte = "Has encontrado la llave del jefe !!!"; break;
         case 570 : texte = "Has encontrado una llave pequeña !!!*Acercate de una puerta para abrirla."; break;
 #ifdef __vita__
-        case 571 : texte = "Has encontrado los Guantes !!!*Utilizalos para levantar objetos equipandolos o pulsando Cruz."; break;
+        case 571 : texte = "Has encontrado los Guantes !!!*Utilizalos para levantar objetos equipandolos o pulsando ¾3."; break;
 #else        
         case 571 : texte = "Has encontrado los Guantes !!!*Utilizalos para levantar objetos equipandolos o pulsando C."; break;
 #endif        
@@ -2690,7 +2697,7 @@ std::string Texte::getTexteES(int id, std::string s){
         case 694 : texte = "Tienes que golpear cada tipo de monstruo y venir a hacerme tu informe."; break;
         case 695 : texte = "Te recompensaré cada vez que mates 7 nuevos tipos de enemigo."; break;
 #ifdef __vita__
-        case 696 : texte = "Si quieres ver que enemigos ya has vencido, pulsa D-Pad Superior."; break;
+        case 696 : texte = "Si quieres ver que enemigos ya has vencido, pulsa ¾6"; break;
 #else
         case 696 : texte = "Si quieres ver que enemigos ya has vencido, pulsa M."; break;
 #endif
@@ -3046,10 +3053,54 @@ void Texte::chercheText() {
     
 }
 
+// Affiche un caractère, retourne la taille prise par le caractère et modifie l'index i dans la chaine de caractère.
+int Texte::afficheCaractere(SDL_Surface* gpScreen, char character, int &i, std::string s, int a, int b) {
+    int stringLength = (int)s.length();
+    int valCharacter = (int)character;
+        
+#ifdef __vita__
+    // Playstation button
+    // ¾1 => Triangle
+    // ¾2 => Rond
+    // ¾3 => Croix
+    // ¾4 => Carré
+    // ¾5 => Pad Droite
+    // ¾6 => Pad Haut
+    // ¾7 => Pad Gauche
+    // ¾8 => Pad Bas
+    // ¾9 => Stick analogique
+    if (valCharacter == 190){
+        int buttonIndex = 0;
+        char nextCharacter;
+        int nextCharacterValue;
+        do {
+            i++;
+            nextCharacter = s.at(i);
+            nextCharacterValue = (int)nextCharacter;
+            if (nextCharacterValue <48 || nextCharacterValue>57){
+                i--;
+                break;
+            }
+
+            buttonIndex+= nextCharacterValue - 48;
+        }
+        while(nextCharacter < stringLength);
+        affichePSBouton(gpScreen, buttonIndex, a, b);
+        return 14;
+    }
+    else {
+#endif
+        afficheLettre(gpScreen, character,a,b);
+        return 6;
+#ifdef __vita__
+    }
+#endif
+}
+
 void Texte::affiche(SDL_Surface* gpScreen, std::string s, int a, int b) {
-    for (int i = 0; i < (int)s.length(); i++) {
-        afficheLettre(gpScreen, s.at(i),a,b);
-        a+=6;
+    int stringLength = (int)s.length();
+    for (int i = 0; i < stringLength; i++) {
+        a+=afficheCaractere(gpScreen, s.at(i), i, s, a, b);
     }
 }
 
@@ -3062,7 +3113,7 @@ void Texte::draw(SDL_Surface* gpScreen) {
     
     if (cadre) drawCadre(gpScreen);
     
-    if (id==3 && texte == "Tu as trouvé un quart de coeur !!!") {
+    if (id==3) {
         SDL_Rect src; SDL_Rect dst;
         src.x=16*(gpJeu->getJoueur()->nbQuarts()%4);
         if(src.x==0)src.x=16*4;
@@ -3072,8 +3123,7 @@ void Texte::draw(SDL_Surface* gpScreen) {
     
     int a = x+8; int b = y+8;
     for (int i = 0; i < av; i++) {
-        afficheLettre(gpScreen, texte.at(i),a,b);
-        a+=6;
+        a+=afficheCaractere(gpScreen, texte.at(i), i, texte, a, b);;
         if (a > x+w-16) {a=x+8; b+=16;}
     }
     
@@ -3212,6 +3262,7 @@ int Texte::tailleMot(int deb) {
 }
 
 void Texte::afficheLettre(SDL_Surface* gpScreen, char c, int vx, int vy) {
+    SDL_Surface* img = imageFont;
     SDL_Rect src;
     SDL_Rect dst;
     
@@ -3349,7 +3400,88 @@ void Texte::afficheLettre(SDL_Surface* gpScreen, char c, int vx, int vy) {
 		}
 	}
     
-    SDL_BlitSurface(imageFont, &src, gpScreen, &dst);
+    SDL_BlitSurface(img, &src, gpScreen, &dst);
+}
+
+void Texte::affichePSBouton(SDL_Surface* gpScreen, int index, int vx, int vy) {
+    SDL_Surface* img = imageButtons;
+    SDL_Rect src;
+    SDL_Rect dst;
+    
+    dst.x=vx; dst.y=vy;
+    
+    // Playstation button
+    // 1 => Triangle
+    // 2 => Rond
+    // 3 => Croix
+    // 4 => Carré
+    // 5 => Pad Droite
+    // 6 => Pad Haut
+    // 7 => Pad Gauche
+    // 8 => Pad Bas
+    // 9 => Stick analogique
+	switch(index){
+        case 1: 
+            src.x=2;
+            src.y=2;
+            src.h=16;
+            src.w=16;
+            break;
+        case 2: 
+            src.x=22;
+            src.y=2;
+            src.h=16;
+            src.w=16;
+            break;
+        case 3: 
+            src.x=42;
+            src.y=2;
+            src.h=16;
+            src.w=16;
+            break;
+        case 4: 
+            src.x=62;
+            src.y=2;
+            src.h=16;
+            src.w=16;
+            break;
+        case 5:
+            src.x=2;
+            src.y=24;
+            src.h=12;
+            src.w=16;
+            dst.y+=2;
+            break;
+        case 6:
+            src.x=24;
+            src.y=22;
+            src.h=16;
+            src.w=12;
+            dst.y+=2;
+            break;
+        case 7:
+            src.x=42;
+            src.y=24;
+            src.h=12;
+            src.w=16;
+            dst.y+=2;
+            break;
+        case 8:
+            src.x=64;
+            src.y=22;
+            src.h=16;
+            src.w=12;
+            dst.y+=2;
+            break;
+        case 9:
+            src.x=2;
+            src.y=42;
+            src.h=16;
+            src.w=16;
+            break;
+	}
+    
+    SDL_BlitSurface(img, &src, gpScreen, &dst);
 }
 
 bool Texte::hasNext() {
