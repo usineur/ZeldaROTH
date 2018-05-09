@@ -216,12 +216,13 @@ void ImGui_callback() {
 
         if (credits_window) {
             ImGui::Begin("Credits", &credits_window);
-            ImGui::TextColored(ImVec4(255, 255, 0, 255), "Zelda: Return of the Hylian v1.3");
+            ImGui::TextColored(ImVec4(255, 255, 0, 255), "Zelda: Return of the Hylian v1.3.1");
             ImGui::Text("Game Creator: Vincent Jouillat");
             ImGui::Text("Port Author: usineur");
+            ImGui::Text("Added french translation: NicolasR");
             ImGui::Separator();
             ImGui::TextColored(ImVec4(255, 255, 0, 255), "Multilingual support");
-            ImGui::Text("French, German and Spanish translations: NicolasR");
+            ImGui::Text("French, German and Spanish: NicolasR");
             ImGui::Separator();
             ImGui::TextColored(ImVec4(255, 255, 0, 255), "Special thanks to:");
             ImGui::Text("Rinnegatamante: SDL 1.2 and imgui Vita ports");
