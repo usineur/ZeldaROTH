@@ -64,17 +64,23 @@ target_link_libraries(${VITA_APPNAME}
   mikmod
   jpeg
   png
-  vitaGL
+  webp
+  pthread
   imgui
+  vitaGL
+  vitashark
+  mathneon
   z
+  SceAppMgr_stub
   SceAppUtil_stub
   SceAudio_stub
   SceCtrl_stub
-  SceCommonDialog_stub 
+  SceCommonDialog_stub
   SceDisplay_stub
   SceGxm_stub
   SceHid_stub
   ScePower_stub
+  SceShaccCg_stub
   SceSysmodule_stub
   SceTouch_stub
 )
